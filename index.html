@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rodada 1 - Votação Parnaso | Acubo Studio</title>
+  <meta name="description" content="Vote na sua música favorita da Rodada 1 do álbum Parnaso (Zayre Lanay) no Acubo Studio." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #08090d;
+      --card-bg: #11131a;
+      --card-hover: #171a24;
+      --accent: #1db954;
+      --accent-glow: rgba(29, 185, 84, 0.3);
+      --purple: #8b5cf6;
+      --purple-glow: rgba(139, 92, 246, 0.25);
+      --text: #ffffff;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 60px;
+      overflow-x: hidden;
+    }
+
+    .glow-bg {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(29, 185, 84, 0.06) 45%, transparent 70%);
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header {
+      text-align: center;
+      max-width: 680px;
+      margin-bottom: 36px;
+    }
+
+    .header-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .brand-badge:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .brand-badge span {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .round-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: #c4b5fd;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #a855f7;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #a855f7;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #ffffff 40%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #e5e7eb;
+    }
+    .section-title span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 36px;
+    }
+
+    .track-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      position: relative;
+    }
+
+    .track-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .track-card.voted {
+      border-color: var(--accent);
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+
+    .track-card.voted::after {
+      content: '✓ SEU VOTO';
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
+    .track-top {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .track-cover-wrap {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #202430;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .track-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      border: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.92;
+      transition: all 0.2s;
+    }
+    .play-btn:hover {
+      background: rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+    }
+    .play-btn svg {
+      width: 30px;
+      height: 30px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));
+    }
+
+    .track-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .track-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-artist {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 2px;
+    }
+
+    .vote-results {
+      margin-top: 4px;
+      display: none;
+    }
+    .vote-results.visible {
+      display: block;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--accent));
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vote-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .track-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .btn-vote {
+      flex: 1;
+      background: #ffffff;
+      color: #000;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-vote:hover:not(:disabled) {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .btn-vote:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-spotify {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-spotify:hover {
+      background: rgba(29, 185, 84, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .share-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 30px;
+      display: none;
+    }
+    .share-section.visible {
+      display: block;
+      animation: fadeIn 0.4s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .btn-share-wpp {
+      background: #25d366;
+      color: #000;
+      font-weight: 700;
+      padding: 11px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-weight: 600;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .round2-teaser {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+    .teaser-pill {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .round2-teaser h3 {
+      font-size: 1.3rem;
+      color: #e5e7eb;
+    }
+    .round2-teaser p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      max-width: 520px;
+    }
+
+    .vip-form {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      max-width: 440px;
+      margin-top: 8px;
+    }
+    .vip-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .vip-input:focus {
+      border-color: var(--purple);
+    }
+    .vip-submit {
+      background: var(--purple);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <header>
+    <div class="header-badges">
+      <a href="https://acubostudio.com" class="brand-badge" target="_blank" rel="noopener">
+        <span>ACUBO STUDIO</span> • acubostudio.com ↗
+      </a>
+      <div class="round-badge">
+        <div class="pulse-dot"></div>
+        RODADA 1 ATIVA
+      </div>
+    </div>
+    <h1>Qual a sua faixa favorita?</h1>
+    <p class="subtitle">
+      Nesta <strong>Rodada 1</strong>, ouça e vote na sua preferida entre as 4 primeiras músicas do álbum <strong>Parnaso</strong>. Na próxima rodada, chegam mais 4 faixas!
+    </p>
+  </header>
+
+  <div class="section-title">
+    <span>4 FAIXAS LIBERADAS</span>
+    <span>VOTO ÚNICO</span>
+  </div>
+
+  <main class="tracks-grid" id="tracksGrid"></main>
+
+  <section class="share-section" id="shareSection">
+    <h3>🎉 Voto computado na Rodada 1!</h3>
+    <p style="color: var(--text-muted); margin-top: 6px; font-size: 0.95rem;" id="shareMsg"></p>
+    <div class="share-buttons">
+      <a href="#" class="btn-share-wpp" id="wppBtn" target="_blank">
+        📲 Convidar amigos no WhatsApp
+      </a>
+      <button class="btn-copy" onclick="copyLink()">📋 Copiar Link</button>
+    </div>
+  </section>
+
+  <section class="round2-teaser">
+    <div class="teaser-pill">🔒 EM BREVE</div>
+    <h3>Rodada 2: Mais 4 Músicas Inéditas</h3>
+    <p>Cadastre seu WhatsApp ou e-mail para ouvir as 4 próximas faixas de Zayre Lanay antes do lançamento e votar na Rodada 2.</p>
+    <form class="vip-form" onsubmit="handleVipSubmit(event)">
+      <input type="text" class="vip-input" placeholder="Seu WhatsApp ou E-mail" required id="vipContact" />
+      <button type="submit" class="vip-submit">Avise-me</button>
+    </form>
+    <div id="vipFeedback" style="margin-top: 6px; font-size: 0.85rem; color: var(--accent); display: none;">
+      ✓ Cadastrado com sucesso! Você será avisado na abertura da Rodada 2.
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 <a href="https://acubostudio.com">Acubo Studio</a> • Produção & Lançamento Musical</p>
+  </footer>
+
+  <script>
+    const CURRENT_ROUND = 1;
+
+    const SONGS_DATA = [
+      {
+        id: "eu-te-reconheci",
+        title: "Eu Te Reconheci",
+        artist: "Zayre Lanay",
+        round: 1,
+        cover: "capas/1.jpeg",
+        preview: "https://p.scdn.co/mp3-preview/97b2c83e05181552318847d7f0e405b9f857c3b7",
+        spotify: "https://open.spotify.com/intl-pt/track/4JDbY2damQy30O0u7q77Nk",
+        initialVotes: 42
+      },
+      {
+        id: "fogo-interno",
+        title: "Fogo Interno",
+        artist: "Zayre Lanay",
+        round: 1,
+        cover: "capas/2.jpeg",
+        preview: "https://p.scdn.co/mp3-preview/ddf17f9bd87bfd11c0fe632b4eb8fe1059fc1e63",
+        spotify: "https://open.spotify.com/intl-pt/track/1TNKcgelbKQkkrgdpKo7I4",
+        initialVotes: 38
+      },
+      {
+        id: "frequencia-unica",
+        title: "Frequência Única",
+        artist: "Zayre Lanay",
+        round: 1,
+        cover: "capas/3.jpeg",
+        preview: "https://p.scdn.co/mp3-preview/29ac46ebb3a1e4e3ca183476518d0cdbf397f668",
+        spotify: "https://open.spotify.com/intl-pt/track/78DeL2owD4j7nO0rLwGqlr",
+        initialVotes: 51
+      },
+      {
+        id: "decorar-do-avesso",
+        title: "Decorar do Avesso",
+        artist: "Zayre Lanay",
+        round: 1,
+        cover: "capas/4.jpeg",
+        preview: "https://p.scdn.co/mp3-preview/a6516918a53c01690022c237bb2e3c7aa898b051",
+        spotify: "https://open.spotify.com/intl-pt/track/3Bg1tlSicr75GlBOTWluj4",
+        initialVotes: 35
+      }
+    ];
+
+    let currentAudio = null;
+    let currentBtn = null;
+
+    function toggleAudio(previewUrl, btnElement) {
+      if (!previewUrl) return;
+
+      if (currentAudio && currentAudio.src === previewUrl) {
+        if (!currentAudio.paused) {
+          currentAudio.pause();
+          setPlayIcon(btnElement, false);
+          return;
+        } else {
+          currentAudio.play();
+          setPlayIcon(btnElement, true);
+          return;
+        }
+      }
+
+      if (currentAudio) {
+        currentAudio.pause();
+        if (currentBtn) setPlayIcon(currentBtn, false);
+      }
+
+      currentAudio = new Audio(previewUrl);
+      currentBtn = btnElement;
+      setPlayIcon(btnElement, true);
+
+      currentAudio.play();
+      currentAudio.onended = () => setPlayIcon(btnElement, false);
+    }
+
+    function setPlayIcon(btn, isPlaying) {
+      btn.innerHTML = isPlaying
+        ? `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`
+        : `<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+    }
+
+    const STORAGE_KEY_VOTE = `acubo_voted_round_${CURRENT_ROUND}`;
+    const STORAGE_KEY_COUNTS = `acubo_votes_counts_round_${CURRENT_ROUND}`;
+
+    function getVotesMap() {
+      const saved = localStorage.getItem(STORAGE_KEY_COUNTS);
+      if (saved) return JSON.parse(saved);
+      const initial = {};
+      SONGS_DATA.filter(s => s.round === CURRENT_ROUND).forEach(s => initial[s.id] = s.initialVotes);
+      return initial;
+    }
+
+    function saveVotesMap(map) {
+      localStorage.setItem(STORAGE_KEY_COUNTS, JSON.stringify(map));
+    }
+
+    function renderGrid() {
+      const container = document.getElementById("tracksGrid");
+      const userVote = localStorage.getItem(STORAGE_KEY_VOTE);
+      const votesMap = getVotesMap();
+      const hasVoted = Boolean(userVote);
+
+      const activeTracks = SONGS_DATA.filter(s => s.round === CURRENT_ROUND);
+      const totalVotes = Object.values(votesMap).reduce((a, b) => a + b, 0);
+
+      container.innerHTML = activeTracks.map(song => {
+        const votes = votesMap[song.id] || 0;
+        const pct = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
+        const isSelected = userVote === song.id;
+
+        return `
+          <div class="track-card ${isSelected ? 'voted' : ''}">
+            <div class="track-top">
+              <div class="track-cover-wrap">
+                <img src="${song.cover}" alt="${song.title}" class="track-cover" />
+                <button class="play-btn" title="Ouvir prévia" onclick="toggleAudio('${song.preview}', this)">
+                  <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+              </div>
+              <div class="track-meta">
+                <h4 class="track-title">${song.title}</h4>
+                <p class="track-artist">${song.artist}</p>
+              </div>
+            </div>
+
+            <div class="vote-results ${hasVoted ? 'visible' : ''}">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" style="width: ${hasVoted ? pct : 0}%"></div>
+              </div>
+              <div class="vote-stats">
+                <span>${votes} votos</span>
+                <span>${pct}%</span>
+              </div>
+            </div>
+
+            <div class="track-actions">
+              <button 
+                class="btn-vote" 
+                onclick="castVote('${song.id}')"
+                ${hasVoted ? 'disabled' : ''}
+              >
+                ${isSelected ? '✓ Votado' : (hasVoted ? 'Computado' : 'Votar nesta')}
+              </button>
+              <a href="${song.spotify}" class="btn-spotify" target="_blank" rel="noopener" title="Abrir no Spotify">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.494 17.306c-.216.353-.674.464-1.027.248-2.812-1.718-6.352-2.106-10.523-1.153-.404.092-.806-.162-.898-.566-.092-.404.162-.806.566-.898 4.568-1.044 8.487-.601 11.634 1.342.353.216.464.674.248 1.027zm1.467-3.26c-.272.443-.852.584-1.295.312-3.22-1.979-8.127-2.551-11.936-1.394-.499.151-1.026-.134-1.177-.633-.151-.499.134-1.026.633-1.177 4.354-1.321 9.773-.682 13.463 1.587.443.272.584.852.312 1.295zm.126-3.41c-3.86-2.293-10.229-2.504-13.899-1.39-.592.18-1.222-.156-1.402-.748-.18-.592.156-1.222.748-1.402 4.227-1.283 11.261-1.037 15.694 1.595.534.316.708 1.009.392 1.543-.316.534-1.009.708-1.543.392z"/></svg>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (hasVoted) {
+        showShareSection(userVote);
+      }
+    }
+
+    function castVote(songId) {
+      if (localStorage.getItem(STORAGE_KEY_VOTE)) return;
+
+      const votesMap = getVotesMap();
+      votesMap[songId] = (votesMap[songId] || 0) + 1;
+      saveVotesMap(votesMap);
+      localStorage.setItem(STORAGE_KEY_VOTE, songId);
+
+      renderGrid();
+      showShareSection(songId);
+    }
+
+    function showShareSection(songId) {
+      const song = SONGS_DATA.find(s => s.id === songId);
+      if (!song) return;
+
+      const section = document.getElementById("shareSection");
+      const msg = document.getElementById("shareMsg");
+      const wpp = document.getElementById("wppBtn");
+
+      msg.innerText = `Você votou em "${song.title}" na Rodada 1!`;
+
+      const text = encodeURIComponent(`Acabei de votar na música "${song.title}" de Zayre Lanay na Rodada 1 no Acubo Studio! Ouça e vote também: ${window.location.href}`);
+      wpp.href = `https://api.whatsapp.com/send?text=${text}`;
+
+      section.classList.add("visible");
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Link copiado!");
+    }
+
+    function handleVipSubmit(e) {
+      e.preventDefault();
+      const val = document.getElementById("vipContact").value;
+      if (!val) return;
+      document.getElementById("vipFeedback").style.display = "block";
+      document.getElementById("vipContact").value = "";
+    }
+
+    renderGrid();
+  </script>
+</body>
+</html>
