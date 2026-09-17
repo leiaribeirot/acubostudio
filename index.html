@@ -237,6 +237,121 @@
       flex-shrink: 0;
     }
 
+    /* ─── Ranking ao vivo, público ─── */
+    .ranking {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 40px;
+    }
+
+    .ranking-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid transparent;
+      border-image: linear-gradient(90deg, var(--border-warm), transparent) 1;
+    }
+    .pulse-ponto {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 10px var(--amber-glow);
+      animation: pulsa 1.8s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulsa { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+    .ranking-titulo {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .ranking-total {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ranking-linha {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr) 84px;
+      gap: 14px;
+      align-items: center;
+      padding: 11px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--traco, var(--border));
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+    }
+    .ranking-linha.lider {
+      background: var(--elevated);
+      border-color: var(--border-warm);
+    }
+    .ranking-pos {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .ranking-linha.lider .ranking-pos { color: var(--amber); font-weight: 700; }
+    .ranking-nome {
+      font-family: var(--display);
+      font-size: 0.97rem;
+      font-weight: 700;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+    .ranking-art {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .ranking-barra {
+      margin-top: 8px;
+      height: 4px;
+      background: rgba(245, 240, 232, 0.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .ranking-barra i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--traco, var(--amber));
+      transition: width 0.8s var(--ease-out);
+    }
+    .ranking-num { text-align: right; }
+    .ranking-votos {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .ranking-pct {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      margin-top: 3px;
+    }
+
     /* ─── EIDOS: anúncio do próximo álbum ─── */
     .eidos {
       width: 100%;
@@ -873,6 +988,14 @@
     </div>
   </section>
 
+  <section class="ranking" id="ranking" hidden>
+    <div class="ranking-topo">
+      <span class="ranking-titulo"><span class="pulse-ponto"></span> Ranking ao vivo</span>
+      <span class="ranking-total" id="rankingTotal"></span>
+    </div>
+    <div id="rankingLista"></div>
+  </section>
+
   <section class="eidos" id="eidos">
     <video
       class="eidos-video"
@@ -1052,7 +1175,8 @@
         if (!r.ok || !d.ok || !Array.isArray(d.faixas)) return null;
         const mapa = {};
         d.faixas.forEach(f => { mapa[f.id] = f.votos; });
-        return { mapa, total: d.totalVotos, pessoas: d.pessoas };
+        // d.faixas já vem ordenado por votos, com posicao e pct.
+        return { mapa, lista: d.faixas, total: d.totalVotos, pessoas: d.pessoas };
       } catch (e) {
         return null;
       }
@@ -1063,7 +1187,42 @@
       if (novo) {
         placar = novo;
         renderGrid();
+        renderRanking();
       }
+    }
+
+    const COR_ARTISTA = { "Zayre Lanay": "var(--amber)", "Aurya Lya": "#8FA9B8" };
+
+    function renderRanking() {
+      const secao = document.getElementById("ranking");
+      if (!placar || !placar.lista || placar.total === 0) {
+        secao.hidden = true;
+        return;
+      }
+
+      const maior = Math.max(1, ...placar.lista.map(f => f.votos));
+
+      const nf = n => n.toLocaleString("pt-BR");
+      document.getElementById("rankingTotal").textContent =
+        `${nf(placar.pessoas)} ${placar.pessoas === 1 ? "pessoa" : "pessoas"} · ` +
+        `${nf(placar.total)} ${placar.total === 1 ? "voto" : "votos"}`;
+
+      document.getElementById("rankingLista").innerHTML = placar.lista.map(f => `
+        <div class="ranking-linha ${f.posicao === 1 ? "lider" : ""}" style="--traco:${COR_ARTISTA[f.artista] || "var(--amber)"}">
+          <div class="ranking-pos">${String(f.posicao).padStart(2, "0")}</div>
+          <div>
+            <div class="ranking-nome">${f.titulo}</div>
+            <div class="ranking-art">${f.artista}</div>
+            <div class="ranking-barra"><i style="width:${(f.votos / maior) * 100}%"></i></div>
+          </div>
+          <div class="ranking-num">
+            <div class="ranking-votos">${nf(f.votos)}</div>
+            <div class="ranking-pct">${f.pct.toFixed(1)}%</div>
+          </div>
+        </div>
+      `).join("");
+
+      secao.hidden = false;
     }
 
     function renderGrid() {
@@ -1260,14 +1419,12 @@
 
     renderGrid();
 
-    // Quem já votou vê o placar de todo mundo — e ele se atualiza sozinho
-    // enquanto a aba estiver à vista.
-    if (getVotos().length >= MAX_VOTOS) {
-      atualizarPlacar();
-      setInterval(() => {
-        if (!document.hidden) atualizarPlacar();
-      }, 15000);
-    }
+    // O ranking é público: todo mundo vê, tenha votado ou não, e ele se
+    // atualiza sozinho enquanto a aba estiver à vista.
+    atualizarPlacar();
+    setInterval(() => {
+      if (!document.hidden) atualizarPlacar();
+    }, 15000);
 
     // Ao dar play no EIDOS, tudo o mais cala.
     (function () {
