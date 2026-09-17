@@ -3,57 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rodada 1 - Votação Parnaso | Acubo Studio</title>
-  <meta name="description" content="Vote na sua música favorita da Rodada 1 do álbum Parnaso (Zayre Lanay) no Acubo Studio." />
+  <title>Votação — 8 faixas inéditas | Acubo Studio</title>
+  <meta name="description" content="Ouça e vote na sua faixa favorita entre as 8 inéditas de Zayre Lanay e Aurya Lya no Acubo Studio." />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts — ACUBO Grand v5.0 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #08090d;
-      --card-bg: #11131a;
-      --card-hover: #171a24;
-      --accent: #1db954;
-      --accent-glow: rgba(29, 185, 84, 0.3);
-      --purple: #8b5cf6;
-      --purple-glow: rgba(139, 92, 246, 0.25);
-      --text: #ffffff;
-      --text-muted: #9ca3af;
-      --border: rgba(255, 255, 255, 0.08);
-      --radius: 16px;
+      /* Backgrounds — espresso-to-mahogany */
+      --bg:          #0A0805;
+      --surface:     #130E09;
+      --card:        #1C1510;
+      --elevated:    #261B12;
+
+      /* Amber — acento principal */
+      --amber:       #C9913A;
+      --amber-lt:    #E8C17A;
+      --amber-dim:   rgba(201, 145, 58, 0.10);
+      --amber-bdr:   rgba(201, 145, 58, 0.18);
+      --amber-glow:  rgba(201, 145, 58, 0.40);
+
+      /* Texto */
+      --cream:       #F5F0E8;
+      --parchment:   #D4C0A0;
+      --muted:       #8A7A68;
+
+      /* Bordas */
+      --border:      rgba(245, 240, 232, 0.07);
+      --border-warm: rgba(201, 145, 58, 0.15);
+
+      /* Utilitários */
+      --success:     #25D366;
+
+      /* Tipografia */
+      --display:     'Syne', Impact, 'Arial Black', sans-serif;
+      --body:        'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono:        'Space Mono', ui-monospace, monospace;
+
+      /* Forma e movimento */
+      --radius:      4px;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     body {
       background-color: var(--bg);
-      color: var(--text);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.65;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 24px 16px 60px;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Amber grid + glow do hero */
     .glow-bg {
       position: fixed;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(29, 185, 84, 0.06) 45%, transparent 70%);
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
+      inset: 0;
       z-index: -1;
       pointer-events: none;
+      background:
+        radial-gradient(circle 520px at 50% 0%, rgba(201, 145, 58, 0.12) 0%, transparent 65%),
+        linear-gradient(rgba(201, 145, 58, 0.06) 1px, transparent 1px) 0 0 / 80px 80px,
+        linear-gradient(90deg, rgba(201, 145, 58, 0.06) 1px, transparent 1px) 0 0 / 80px 80px;
+      mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
     }
 
     header {
@@ -74,44 +102,51 @@
     .brand-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
+      gap: 8px;
+      background: var(--amber-dim);
+      border: 1px solid var(--amber-bdr);
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.2s var(--ease-out);
     }
     .brand-badge:hover {
-      border-color: var(--accent);
-      color: #fff;
+      border-color: var(--amber);
+      color: var(--cream);
     }
     .brand-badge span {
-      color: var(--accent);
-      font-weight: 700;
+      font-family: var(--display);
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--amber);
     }
 
     .round-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(139, 92, 246, 0.15);
-      border: 1px solid rgba(139, 92, 246, 0.4);
-      color: #c4b5fd;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 0.82rem;
+      gap: 8px;
+      background: var(--amber-dim);
+      border: 1px solid var(--amber-bdr);
+      color: var(--amber-lt);
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
     .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: #a855f7;
+      width: 7px;
+      height: 7px;
+      background: var(--amber);
       border-radius: 50%;
-      box-shadow: 0 0 10px #a855f7;
+      box-shadow: 0 0 10px var(--amber-glow);
       animation: pulse 1.8s infinite;
     }
     @keyframes pulse {
@@ -120,19 +155,29 @@
     }
 
     h1 {
-      font-size: clamp(2.1rem, 5vw, 2.9rem);
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 5.5vw, 3.25rem);
       font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 14px;
-      background: linear-gradient(135deg, #ffffff 40%, #c4b5fd 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--amber);
     }
 
     p.subtitle {
-      color: var(--text-muted);
-      font-size: 1.02rem;
-      line-height: 1.6;
+      color: var(--parchment);
+      font-weight: 300;
+      font-size: 1.05rem;
+      line-height: 1.78;
+    }
+    p.subtitle strong {
+      color: var(--cream);
+      font-weight: 500;
     }
 
     .section-title {
@@ -141,15 +186,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
       margin-bottom: 16px;
-      font-size: 1.15rem;
+      padding-bottom: 12px;
+      border-bottom: 1px solid transparent;
+      border-image: linear-gradient(90deg, var(--border-warm), transparent) 1;
+      font-family: var(--mono);
+      font-size: 0.72rem;
       font-weight: 700;
-      color: #e5e7eb;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
     }
-    .section-title span {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
+    .section-title span:last-child {
+      color: var(--muted);
+      font-weight: 400;
     }
 
     .tracks-grid {
@@ -162,39 +213,41 @@
     }
 
     .track-card {
-      background: var(--card-bg);
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 18px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      transition: transform 0.3s var(--ease-out), border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
       position: relative;
     }
 
     .track-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--border-warm);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
 
     .track-card.voted {
-      border-color: var(--accent);
-      box-shadow: 0 0 24px var(--accent-glow);
+      border-color: var(--amber);
+      box-shadow: 0 0 20px rgba(201, 145, 58, 0.15);
     }
 
     .track-card.voted::after {
-      content: '✓ SEU VOTO';
+      content: 'SEU VOTO';
       position: absolute;
       top: 14px;
       right: 14px;
-      background: var(--accent);
-      color: #000;
-      font-size: 0.68rem;
-      font-weight: 800;
+      background: var(--amber);
+      color: var(--bg);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       padding: 4px 8px;
-      border-radius: 6px;
+      border-radius: var(--radius);
     }
 
     .track-top {
@@ -207,10 +260,10 @@
       position: relative;
       width: 76px;
       height: 76px;
-      border-radius: 12px;
+      border-radius: var(--radius);
       overflow: hidden;
       flex-shrink: 0;
-      background: #202430;
+      background: var(--elevated);
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
 
@@ -223,25 +276,25 @@
     .play-btn {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(10, 8, 5, 0.55);
       border: none;
-      color: #fff;
+      color: var(--cream);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       opacity: 0.92;
-      transition: all 0.2s;
+      transition: all 0.2s var(--ease-out);
     }
     .play-btn:hover {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(10, 8, 5, 0.25);
       transform: scale(1.05);
     }
     .play-btn svg {
-      width: 30px;
-      height: 30px;
-      fill: #ffffff;
-      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));
+      width: 28px;
+      height: 28px;
+      fill: var(--amber-lt);
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6));
     }
 
     .track-meta {
@@ -250,17 +303,26 @@
     }
 
     .track-title {
+      font-family: var(--display);
       font-size: 1.15rem;
       font-weight: 700;
-      white-space: nowrap;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: var(--cream);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
     }
 
     .track-artist {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      margin-top: 2px;
+      font-family: var(--mono);
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 5px;
     }
 
     .vote-results {
@@ -273,27 +335,30 @@
 
     .progress-bar-bg {
       width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 999px;
+      height: 6px;
+      background: rgba(245, 240, 232, 0.07);
+      border-radius: var(--radius);
       overflow: hidden;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--purple), var(--accent));
+      background: linear-gradient(90deg, var(--amber), var(--amber-lt));
       width: 0%;
-      border-radius: 999px;
-      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: width 0.9s var(--ease-out);
     }
 
     .vote-stats {
       display: flex;
       justify-content: space-between;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 600;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .vote-stats span:last-child {
+      color: var(--amber);
     }
 
     .track-actions {
@@ -304,51 +369,55 @@
 
     .btn-vote {
       flex: 1;
-      background: #ffffff;
-      color: #000;
-      border: none;
-      padding: 10px 14px;
-      border-radius: 10px;
+      background: var(--amber);
+      color: var(--bg);
+      border: 1px solid var(--amber);
+      border-radius: 0;
+      padding: 11px 14px;
+      font-family: var(--mono);
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s var(--ease-out);
     }
 
     .btn-vote:hover:not(:disabled) {
-      background: var(--accent);
-      color: #000;
-      box-shadow: 0 4px 14px var(--accent-glow);
+      background: var(--amber-lt);
+      border-color: var(--amber-lt);
+      box-shadow: 0 0 10px var(--amber-glow);
     }
 
     .btn-vote:disabled {
-      opacity: 0.45;
+      background: transparent;
+      color: var(--muted);
+      border-color: var(--border);
       cursor: not-allowed;
     }
 
     .btn-spotify {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: #fff;
+      background: transparent;
+      border: 1px solid var(--amber-bdr);
+      border-radius: 0;
+      color: var(--parchment);
       padding: 10px 14px;
-      border-radius: 10px;
       text-decoration: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: all 0.2s var(--ease-out);
     }
     .btn-spotify:hover {
-      background: rgba(29, 185, 84, 0.15);
-      border-color: var(--accent);
-      color: var(--accent);
+      border-color: var(--amber);
+      color: var(--amber);
     }
 
     .share-section {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--border-warm);
       border-radius: var(--radius);
-      padding: 24px 20px;
+      padding: 28px 22px;
       max-width: 600px;
       width: 100%;
       text-align: center;
@@ -357,11 +426,27 @@
     }
     .share-section.visible {
       display: block;
-      animation: fadeIn 0.4s ease forwards;
+      animation: fadeIn 0.4s var(--ease-out) forwards;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    .share-section h3 {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--amber);
+    }
+
+    .share-msg {
+      color: var(--parchment);
+      font-weight: 300;
+      margin-top: 8px;
+      font-size: 1rem;
     }
 
     .share-buttons {
@@ -369,104 +454,72 @@
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
-      margin-top: 14px;
+      margin-top: 18px;
     }
 
     .btn-share-wpp {
-      background: #25d366;
-      color: #000;
+      background: var(--success);
+      color: #06240F;
+      font-family: var(--mono);
       font-weight: 700;
-      padding: 11px 18px;
-      border-radius: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 12px 18px;
+      border-radius: 0;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.9rem;
+      gap: 8px;
+      transition: all 0.2s var(--ease-out);
+    }
+    .btn-share-wpp:hover {
+      filter: brightness(1.1);
     }
 
     .btn-copy {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      font-weight: 600;
-      padding: 11px 16px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    .round2-teaser {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius);
-      padding: 24px 20px;
-      width: 100%;
-      max-width: 900px;
-      margin-bottom: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 10px;
-    }
-    .teaser-pill {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
+      background: transparent;
+      color: var(--parchment);
+      font-family: var(--mono);
       font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .round2-teaser h3 {
-      font-size: 1.3rem;
-      color: #e5e7eb;
-    }
-    .round2-teaser p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      max-width: 520px;
-    }
-
-    .vip-form {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-      max-width: 440px;
-      margin-top: 8px;
-    }
-    .vip-input {
-      flex: 1;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      color: #fff;
-      font-size: 0.9rem;
-      outline: none;
-    }
-    .vip-input:focus {
-      border-color: var(--purple);
-    }
-    .vip-submit {
-      background: var(--purple);
-      color: #fff;
-      font-weight: 700;
-      border: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       padding: 12px 18px;
-      border-radius: 10px;
+      border-radius: 0;
+      border: 1px solid var(--amber-bdr);
       cursor: pointer;
+      transition: all 0.2s var(--ease-out);
+    }
+    .btn-copy:hover {
+      border-color: var(--amber);
+      color: var(--amber);
     }
 
     footer {
       text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding-top: 28px;
+      width: 100%;
+      max-width: 900px;
+      border-top: 1px solid transparent;
+      border-image: linear-gradient(90deg, transparent, var(--border-warm), transparent) 1;
     }
     footer a {
-      color: var(--accent);
+      color: var(--amber);
       text-decoration: none;
+    }
+    footer a:hover {
+      color: var(--amber-lt);
+    }
+
+    @media (max-width: 520px) {
+      .share-buttons { flex-direction: column; }
+      .btn-share-wpp, .btn-copy { justify-content: center; }
     }
   </style>
 </head>
@@ -476,97 +529,111 @@
   <header>
     <div class="header-badges">
       <a href="https://acubostudio.com" class="brand-badge" target="_blank" rel="noopener">
-        <span>ACUBO STUDIO</span> • acubostudio.com ↗
+        <span>ACUBO</span> acubostudio.com ↗
       </a>
       <div class="round-badge">
         <div class="pulse-dot"></div>
-        RODADA 1 ATIVA
+        Votação aberta
       </div>
     </div>
-    <h1>Qual a sua faixa favorita?</h1>
+    <h1>Qual a sua <em>faixa favorita</em>?</h1>
     <p class="subtitle">
-      Nesta <strong>Rodada 1</strong>, ouça e vote na sua preferida entre as 4 primeiras músicas do álbum <strong>Parnaso</strong>. Na próxima rodada, chegam mais 4 faixas!
+      Oito faixas inéditas, duas artistas: <strong>Zayre Lanay</strong> e <strong>Aurya Lya</strong>. Ouça todas e vote na que ficar com você.
     </p>
   </header>
 
   <div class="section-title">
-    <span>4 FAIXAS LIBERADAS</span>
-    <span>VOTO ÚNICO</span>
+    <span>8 faixas · 2 artistas</span>
+    <span>Voto único</span>
   </div>
 
   <main class="tracks-grid" id="tracksGrid"></main>
 
   <section class="share-section" id="shareSection">
-    <h3>🎉 Voto computado na Rodada 1!</h3>
-    <p style="color: var(--text-muted); margin-top: 6px; font-size: 0.95rem;" id="shareMsg"></p>
+    <h3>Voto computado</h3>
+    <p class="share-msg" id="shareMsg"></p>
     <div class="share-buttons">
-      <a href="#" class="btn-share-wpp" id="wppBtn" target="_blank">
-        📲 Convidar amigos no WhatsApp
+      <a href="#" class="btn-share-wpp" id="wppBtn" target="_blank" rel="noopener">
+        Convidar amigos no WhatsApp
       </a>
-      <button class="btn-copy" onclick="copyLink()">📋 Copiar Link</button>
-    </div>
-  </section>
-
-  <section class="round2-teaser">
-    <div class="teaser-pill">🔒 EM BREVE</div>
-    <h3>Rodada 2: Mais 4 Músicas Inéditas</h3>
-    <p>Cadastre seu WhatsApp ou e-mail para ouvir as 4 próximas faixas de Zayre Lanay antes do lançamento e votar na Rodada 2.</p>
-    <form class="vip-form" onsubmit="handleVipSubmit(event)">
-      <input type="text" class="vip-input" placeholder="Seu WhatsApp ou E-mail" required id="vipContact" />
-      <button type="submit" class="vip-submit">Avise-me</button>
-    </form>
-    <div id="vipFeedback" style="margin-top: 6px; font-size: 0.85rem; color: var(--accent); display: none;">
-      ✓ Cadastrado com sucesso! Você será avisado na abertura da Rodada 2.
+      <button class="btn-copy" onclick="copyLink()">Copiar link</button>
     </div>
   </section>
 
   <footer>
-    <p>© 2026 <a href="https://acubostudio.com">Acubo Studio</a> • Produção & Lançamento Musical</p>
+    <p>© 2026 <a href="https://acubostudio.com">Acubo Studio</a> · Produção &amp; Lançamento Musical</p>
   </footer>
 
   <script>
-    const CURRENT_ROUND = 1;
+    const ARTIST_PAGES = {
+      "Zayre Lanay": "https://open.spotify.com/intl-pt/artist/6DqkZ10PKoyWAbhOh0uFdu",
+      "Aurya Lya": "https://open.spotify.com/artist/2trqi3nDmIWCitV3RrwSdW"
+    };
 
     const SONGS_DATA = [
       {
         id: "eu-te-reconheci",
         title: "Eu Te Reconheci",
         artist: "Zayre Lanay",
-        round: 1,
         cover: "capas/1.jpeg",
         preview: "https://p.scdn.co/mp3-preview/97b2c83e05181552318847d7f0e405b9f857c3b7",
-        spotify: "https://open.spotify.com/intl-pt/track/4JDbY2damQy30O0u7q77Nk",
         initialVotes: 42
       },
       {
         id: "fogo-interno",
         title: "Fogo Interno",
         artist: "Zayre Lanay",
-        round: 1,
         cover: "capas/2.jpeg",
         preview: "https://p.scdn.co/mp3-preview/ddf17f9bd87bfd11c0fe632b4eb8fe1059fc1e63",
-        spotify: "https://open.spotify.com/intl-pt/track/1TNKcgelbKQkkrgdpKo7I4",
         initialVotes: 38
       },
       {
         id: "frequencia-unica",
         title: "Frequência Única",
         artist: "Zayre Lanay",
-        round: 1,
         cover: "capas/3.jpeg",
         preview: "https://p.scdn.co/mp3-preview/29ac46ebb3a1e4e3ca183476518d0cdbf397f668",
-        spotify: "https://open.spotify.com/intl-pt/track/78DeL2owD4j7nO0rLwGqlr",
         initialVotes: 51
       },
       {
         id: "decorar-do-avesso",
         title: "Decorar do Avesso",
         artist: "Zayre Lanay",
-        round: 1,
         cover: "capas/4.jpeg",
         preview: "https://p.scdn.co/mp3-preview/a6516918a53c01690022c237bb2e3c7aa898b051",
-        spotify: "https://open.spotify.com/intl-pt/track/3Bg1tlSicr75GlBOTWluj4",
         initialVotes: 35
+      },
+      {
+        id: "nebulosa",
+        title: "Nebulosa",
+        artist: "Aurya Lya",
+        cover: "capas/5.jpg",
+        preview: "audio/nebulosa.mp3",
+        initialVotes: 39
+      },
+      {
+        id: "atento",
+        title: "Atento",
+        artist: "Aurya Lya",
+        cover: "capas/6.jpg",
+        preview: "audio/atento.mp3",
+        initialVotes: 44
+      },
+      {
+        id: "janela-do-infinito",
+        title: "Janela do Infinito",
+        artist: "Aurya Lya",
+        cover: "capas/7.jpg",
+        preview: "audio/janela-do-infinito.mp3",
+        initialVotes: 47
+      },
+      {
+        id: "encanto",
+        title: "Encanto",
+        artist: "Aurya Lya",
+        cover: "capas/8.jpg",
+        preview: "audio/encanto.mp3",
+        initialVotes: 36
       }
     ];
 
@@ -576,16 +643,15 @@
     function toggleAudio(previewUrl, btnElement) {
       if (!previewUrl) return;
 
-      if (currentAudio && currentAudio.src === previewUrl) {
+      if (currentAudio && currentAudio.getAttribute("data-src") === previewUrl) {
         if (!currentAudio.paused) {
           currentAudio.pause();
           setPlayIcon(btnElement, false);
-          return;
         } else {
           currentAudio.play();
           setPlayIcon(btnElement, true);
-          return;
         }
+        return;
       }
 
       if (currentAudio) {
@@ -594,6 +660,7 @@
       }
 
       currentAudio = new Audio(previewUrl);
+      currentAudio.setAttribute("data-src", previewUrl);
       currentBtn = btnElement;
       setPlayIcon(btnElement, true);
 
@@ -607,14 +674,14 @@
         : `<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
     }
 
-    const STORAGE_KEY_VOTE = `acubo_voted_round_${CURRENT_ROUND}`;
-    const STORAGE_KEY_COUNTS = `acubo_votes_counts_round_${CURRENT_ROUND}`;
+    const STORAGE_KEY_VOTE = "acubo_voted_8faixas";
+    const STORAGE_KEY_COUNTS = "acubo_votes_counts_8faixas";
 
     function getVotesMap() {
       const saved = localStorage.getItem(STORAGE_KEY_COUNTS);
       if (saved) return JSON.parse(saved);
       const initial = {};
-      SONGS_DATA.filter(s => s.round === CURRENT_ROUND).forEach(s => initial[s.id] = s.initialVotes);
+      SONGS_DATA.forEach(s => initial[s.id] = s.initialVotes);
       return initial;
     }
 
@@ -628,20 +695,20 @@
       const votesMap = getVotesMap();
       const hasVoted = Boolean(userVote);
 
-      const activeTracks = SONGS_DATA.filter(s => s.round === CURRENT_ROUND);
       const totalVotes = Object.values(votesMap).reduce((a, b) => a + b, 0);
 
-      container.innerHTML = activeTracks.map(song => {
+      container.innerHTML = SONGS_DATA.map(song => {
         const votes = votesMap[song.id] || 0;
         const pct = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
         const isSelected = userVote === song.id;
+        const artistPage = ARTIST_PAGES[song.artist];
 
         return `
           <div class="track-card ${isSelected ? 'voted' : ''}">
             <div class="track-top">
               <div class="track-cover-wrap">
                 <img src="${song.cover}" alt="${song.title}" class="track-cover" />
-                <button class="play-btn" title="Ouvir prévia" onclick="toggleAudio('${song.preview}', this)">
+                <button class="play-btn" title="Ouvir ${song.title}" onclick="toggleAudio('${song.preview}', this)">
                   <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </button>
               </div>
@@ -662,14 +729,14 @@
             </div>
 
             <div class="track-actions">
-              <button 
-                class="btn-vote" 
+              <button
+                class="btn-vote"
                 onclick="castVote('${song.id}')"
                 ${hasVoted ? 'disabled' : ''}
               >
-                ${isSelected ? '✓ Votado' : (hasVoted ? 'Computado' : 'Votar nesta')}
+                ${isSelected ? 'Votado' : (hasVoted ? 'Computado' : 'Votar nesta')}
               </button>
-              <a href="${song.spotify}" class="btn-spotify" target="_blank" rel="noopener" title="Abrir no Spotify">
+              <a href="${artistPage}" class="btn-spotify" target="_blank" rel="noopener" title="Abrir ${song.artist} no Spotify">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.494 17.306c-.216.353-.674.464-1.027.248-2.812-1.718-6.352-2.106-10.523-1.153-.404.092-.806-.162-.898-.566-.092-.404.162-.806.566-.898 4.568-1.044 8.487-.601 11.634 1.342.353.216.464.674.248 1.027zm1.467-3.26c-.272.443-.852.584-1.295.312-3.22-1.979-8.127-2.551-11.936-1.394-.499.151-1.026-.134-1.177-.633-.151-.499.134-1.026.633-1.177 4.354-1.321 9.773-.682 13.463 1.587.443.272.584.852.312 1.295zm.126-3.41c-3.86-2.293-10.229-2.504-13.899-1.39-.592.18-1.222-.156-1.402-.748-.18-.592.156-1.222.748-1.402 4.227-1.283 11.261-1.037 15.694 1.595.534.316.708 1.009.392 1.543-.316.534-1.009.708-1.543.392z"/></svg>
               </a>
             </div>
@@ -702,9 +769,9 @@
       const msg = document.getElementById("shareMsg");
       const wpp = document.getElementById("wppBtn");
 
-      msg.innerText = `Você votou em "${song.title}" na Rodada 1!`;
+      msg.innerText = `Você votou em "${song.title}", de ${song.artist}.`;
 
-      const text = encodeURIComponent(`Acabei de votar na música "${song.title}" de Zayre Lanay na Rodada 1 no Acubo Studio! Ouça e vote também: ${window.location.href}`);
+      const text = encodeURIComponent(`Acabei de votar em "${song.title}", de ${song.artist}, na votação do Acubo Studio! Ouça as 8 faixas e vote também: ${window.location.href}`);
       wpp.href = `https://api.whatsapp.com/send?text=${text}`;
 
       section.classList.add("visible");
@@ -714,14 +781,6 @@
     function copyLink() {
       navigator.clipboard.writeText(window.location.href);
       alert("Link copiado!");
-    }
-
-    function handleVipSubmit(e) {
-      e.preventDefault();
-      const val = document.getElementById("vipContact").value;
-      if (!val) return;
-      document.getElementById("vipFeedback").style.display = "block";
-      document.getElementById("vipContact").value = "";
     }
 
     renderGrid();
