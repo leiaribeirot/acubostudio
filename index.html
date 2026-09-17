@@ -917,64 +917,56 @@
         title: "Eu Te Reconheci",
         artist: "Zayre Lanay",
         cover: "capas/1.jpeg",
-        preview: "https://p.scdn.co/mp3-preview/97b2c83e05181552318847d7f0e405b9f857c3b7",
-        initialVotes: 0
+        preview: "https://p.scdn.co/mp3-preview/97b2c83e05181552318847d7f0e405b9f857c3b7"
       },
       {
         id: "nebulosa",
         title: "Nebulosa",
         artist: "Aurya Lya",
         cover: "capas/5.jpg",
-        preview: "audio/nebulosa.mp3",
-        initialVotes: 0
+        preview: "audio/nebulosa.mp3"
       },
       {
         id: "fogo-interno",
         title: "Fogo Interno",
         artist: "Zayre Lanay",
         cover: "capas/2.jpeg",
-        preview: "https://p.scdn.co/mp3-preview/ddf17f9bd87bfd11c0fe632b4eb8fe1059fc1e63",
-        initialVotes: 0
+        preview: "https://p.scdn.co/mp3-preview/ddf17f9bd87bfd11c0fe632b4eb8fe1059fc1e63"
       },
       {
         id: "atento",
         title: "Atento",
         artist: "Aurya Lya",
         cover: "capas/6.jpg",
-        preview: "audio/atento.mp3",
-        initialVotes: 0
+        preview: "audio/atento.mp3"
       },
       {
         id: "frequencia-unica",
         title: "Frequência Única",
         artist: "Zayre Lanay",
         cover: "capas/3.jpeg",
-        preview: "https://p.scdn.co/mp3-preview/29ac46ebb3a1e4e3ca183476518d0cdbf397f668",
-        initialVotes: 0
+        preview: "https://p.scdn.co/mp3-preview/29ac46ebb3a1e4e3ca183476518d0cdbf397f668"
       },
       {
         id: "janela-do-infinito",
         title: "Janela do Infinito",
         artist: "Aurya Lya",
         cover: "capas/7.jpg",
-        preview: "audio/janela-do-infinito.mp3",
-        initialVotes: 0
+        preview: "audio/janela-do-infinito.mp3"
       },
       {
         id: "decorar-do-avesso",
         title: "Decorar do Avesso",
         artist: "Zayre Lanay",
         cover: "capas/4.jpeg",
-        preview: "https://p.scdn.co/mp3-preview/a6516918a53c01690022c237bb2e3c7aa898b051",
-        initialVotes: 0
+        preview: "https://p.scdn.co/mp3-preview/a6516918a53c01690022c237bb2e3c7aa898b051"
       },
       {
         id: "encanto",
         title: "Encanto",
         artist: "Aurya Lya",
         cover: "capas/8.jpg",
-        preview: "audio/encanto.mp3",
-        initialVotes: 0
+        preview: "audio/encanto.mp3"
       }
     ];
 
@@ -1030,10 +1022,10 @@
     // Cada pessoa escolhe até 2 faixas, e não pode votar duas vezes na mesma.
     const MAX_VOTOS = 2;
 
-    // Chaves novas: o formato mudou de um id para uma lista, e o total por
-    // pessoa dobrou — misturar com os dados antigos daria contagem errada.
+    // O localStorage guarda apenas QUAIS faixas esta pessoa escolheu.
+    // A contagem exibida vem do servidor — antes ela era local, o que fazia
+    // cada visitante ver um placar que só existia no navegador dele.
     const STORAGE_KEY_VOTE = "acubo_votos_8faixas_v2";
-    const STORAGE_KEY_COUNTS = "acubo_contagem_8faixas_v2";
 
     function getVotos() {
       try {
@@ -1048,30 +1040,45 @@
       localStorage.setItem(STORAGE_KEY_VOTE, JSON.stringify(lista));
     }
 
-    function getVotesMap() {
-      const saved = localStorage.getItem(STORAGE_KEY_COUNTS);
-      if (saved) return JSON.parse(saved);
-      const initial = {};
-      SONGS_DATA.forEach(s => initial[s.id] = s.initialVotes);
-      return initial;
+    // Placar compartilhado. Fica nulo enquanto o servidor não responde —
+    // e nesse caso não inventamos número: as barras simplesmente não saem.
+    const API_RANKING = "https://acubo-votos.vercel.app/api/ranking";
+    let placar = null;
+
+    async function buscarPlacar() {
+      try {
+        const r = await fetch(API_RANKING + "?_=" + Date.now(), { cache: "no-store" });
+        const d = await r.json();
+        if (!r.ok || !d.ok || !Array.isArray(d.faixas)) return null;
+        const mapa = {};
+        d.faixas.forEach(f => { mapa[f.id] = f.votos; });
+        return { mapa, total: d.totalVotos, pessoas: d.pessoas };
+      } catch (e) {
+        return null;
+      }
     }
 
-    function saveVotesMap(map) {
-      localStorage.setItem(STORAGE_KEY_COUNTS, JSON.stringify(map));
+    async function atualizarPlacar() {
+      const novo = await buscarPlacar();
+      if (novo) {
+        placar = novo;
+        renderGrid();
+      }
     }
 
     function renderGrid() {
       const container = document.getElementById("tracksGrid");
       const votos = getVotos();
-      const votesMap = getVotesMap();
       const acabou = votos.length >= MAX_VOTOS;
 
       atualizarContador(votos.length);
 
-      const totalVotes = Object.values(votesMap).reduce((a, b) => a + b, 0);
+      // Só mostramos números quando eles vêm do placar de verdade.
+      const temPlacar = Boolean(placar);
+      const totalVotes = temPlacar ? placar.total : 0;
 
       container.innerHTML = SONGS_DATA.map(song => {
-        const votes = votesMap[song.id] || 0;
+        const votes = temPlacar ? (placar.mapa[song.id] || 0) : 0;
         const pct = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
         const isSelected = votos.includes(song.id);
         const hasVoted = acabou;
@@ -1092,7 +1099,7 @@
               </div>
             </div>
 
-            <div class="vote-results ${hasVoted ? 'visible' : ''}">
+            <div class="vote-results ${hasVoted && temPlacar ? 'visible' : ''}">
               <div class="progress-bar-bg">
                 <div class="progress-bar-fill" style="width: ${hasVoted ? pct : 0}%"></div>
               </div>
@@ -1138,15 +1145,15 @@
       // Nem repetir a mesma faixa, nem passar do limite.
       if (votos.includes(songId) || votos.length >= MAX_VOTOS) return;
 
-      const votesMap = getVotesMap();
-      votesMap[songId] = (votesMap[songId] || 0) + 1;
-      saveVotesMap(votesMap);
-
       votos.push(songId);
       salvarVotos(votos);
-      registrarNoServidor(votos);
 
       renderGrid();
+
+      // Grava no placar de todo mundo e traz o resultado atualizado.
+      registrarNoServidor(votos).then(() => {
+        if (votos.length >= MAX_VOTOS) atualizarPlacar();
+      });
     }
 
     /* O placar compartilhado vive fora do navegador.
@@ -1156,16 +1163,16 @@
        visitante continua vendo as proprias escolhas. */
     const API_VOTOS = "https://acubo-votos.vercel.app/api/voto";
 
-    function registrarNoServidor(votos) {
+    async function registrarNoServidor(votos) {
       try {
-        fetch(API_VOTOS, {
+        await fetch(API_VOTOS, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ faixas: votos }),
           keepalive: true
-        }).catch(() => {});
+        });
       } catch (e) {
-        // sem rede, ou bloqueado: o voto local segue valendo
+        // sem rede, ou bloqueado: a escolha local segue valendo
       }
     }
 
@@ -1183,7 +1190,9 @@
         .map(s => `"${s.title}" (${s.artist})`)
         .join(" e ");
 
-      msg.innerText = `Você escolheu ${lista}.`;
+      msg.innerText = placar
+        ? `Você escolheu ${lista}. Já são ${placar.total} ${placar.total === 1 ? "voto" : "votos"} no total.`
+        : `Você escolheu ${lista}. O placar geral aparece assim que o servidor responder.`;
 
       const text = encodeURIComponent(`Escolhi ${lista} na votação do Acubo Studio! Ouça as 8 faixas e vote nas suas 2: ${window.location.href}`);
       wpp.href = `https://api.whatsapp.com/send?text=${text}`;
@@ -1250,6 +1259,15 @@
     }
 
     renderGrid();
+
+    // Quem já votou vê o placar de todo mundo — e ele se atualiza sozinho
+    // enquanto a aba estiver à vista.
+    if (getVotos().length >= MAX_VOTOS) {
+      atualizarPlacar();
+      setInterval(() => {
+        if (!document.hidden) atualizarPlacar();
+      }, 15000);
+    }
 
     // Ao dar play no EIDOS, tudo o mais cala.
     (function () {
