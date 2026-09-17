@@ -64,7 +64,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px 60px;
+      padding: 0;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -84,74 +84,153 @@
       -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
     }
 
-    header {
-      text-align: center;
-      max-width: 680px;
-      margin-bottom: 36px;
-    }
-
-    .header-badges {
+    /* ─── HERO: cenas em loop ─── */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+      text-align: center;
+      padding: 72px 20px 96px;
+      overflow: hidden;
+      isolation: isolate;
     }
 
-    .brand-badge {
+    .hero-cenas {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: var(--bg) center/cover no-repeat url("cenas/poster.jpg");
+    }
+
+    .cena {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.9s var(--ease-out);
+    }
+    .cena.ativa { opacity: 1; }
+
+    /* Véu: garante leitura do texto sobre qualquer cena */
+    .hero-veu {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(10, 8, 5, 0.55) 0%, rgba(10, 8, 5, 0.26) 40%, rgba(10, 8, 5, 0.88) 100%),
+        radial-gradient(circle 720px at 50% 45%, transparent 0%, rgba(10, 8, 5, 0.38) 100%);
+    }
+
+    .hero-conteudo {
+      max-width: 780px;
+      width: 100%;
+    }
+
+    /* ─── Selo AICF ─── */
+    .selo {
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
-      background: var(--amber-dim);
-      border: 1px solid var(--amber-bdr);
-      padding: 7px 14px;
-      border-radius: var(--radius);
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: all 0.2s var(--ease-out);
+      gap: 2px;
+      margin-bottom: 28px;
+      color: var(--amber-lt);
     }
-    .brand-badge:hover {
-      border-color: var(--amber);
-      color: var(--cream);
+    .selo-louros {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .brand-badge span {
+    .selo-louros svg { display: block; }
+    .selo-centro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+    }
+    .selo-sigla {
       font-family: var(--display);
       font-weight: 800;
-      letter-spacing: 0.15em;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+    }
+    .selo-ano {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       color: var(--amber);
+      margin-top: 4px;
+    }
+    .selo-legenda {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      margin-top: 6px;
+      line-height: 1.5;
     }
 
-    .round-badge {
+    .hero-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: var(--amber-dim);
-      border: 1px solid var(--amber-bdr);
-      color: var(--amber-lt);
-      padding: 7px 14px;
-      border-radius: var(--radius);
+      gap: 10px;
+      margin-top: 32px;
+      background: var(--amber);
+      color: var(--bg);
+      border: 1px solid var(--amber);
+      border-radius: 0;
+      padding: 14px 26px;
       font-family: var(--mono);
-      font-size: 0.72rem;
       font-weight: 700;
+      font-size: 0.72rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-out);
     }
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--amber);
-      border-radius: 50%;
+    .hero-cta:hover {
+      background: var(--amber-lt);
+      border-color: var(--amber-lt);
       box-shadow: 0 0 10px var(--amber-glow);
-      animation: pulse 1.8s infinite;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+
+    /* Marcador de qual cena está no ar */
+    .hero-cenas-indice {
+      position: absolute;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+    }
+    .indice-ponto {
+      width: 20px;
+      height: 2px;
+      background: rgba(245, 240, 232, 0.22);
+      transition: background 0.4s var(--ease-out);
+    }
+    .indice-ponto.ativo { background: var(--amber); }
+
+    /* ─── Conteúdo abaixo do hero ─── */
+    .conteudo {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 56px 16px 60px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cena { display: none; }
+      .hero-cenas-indice { display: none; }
     }
 
     h1 {
@@ -163,6 +242,7 @@
       letter-spacing: -0.025em;
       color: var(--cream);
       margin-bottom: 16px;
+      text-shadow: 0 2px 24px rgba(10, 8, 5, 0.85);
     }
     h1 em {
       font-style: normal;
@@ -173,7 +253,8 @@
       color: var(--parchment);
       font-weight: 300;
       font-size: 1.05rem;
-      line-height: 1.78;
+      line-height: 1.95;
+      text-shadow: 0 1px 16px rgba(10, 8, 5, 0.9);
     }
     p.subtitle strong {
       color: var(--cream);
@@ -205,7 +286,8 @@
 
     .tracks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      /* 2 colunas fixas: cada linha é um par (faixa N da Zayre | faixa N da Aurya) */
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
       width: 100%;
       max-width: 900px;
@@ -517,32 +599,89 @@
       color: var(--amber-lt);
     }
 
+    @media (max-width: 700px) {
+      /* Abaixo disso o par não cabe lado a lado; vira uma faixa por linha,
+         mantendo a ordem Zayre 1, Aurya 1, Zayre 2, Aurya 2... */
+      .tracks-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
     @media (max-width: 520px) {
       .share-buttons { flex-direction: column; }
       .btn-share-wpp, .btn-copy { justify-content: center; }
+      .hero { padding: 56px 16px 80px; }
     }
   </style>
 </head>
 <body>
   <div class="glow-bg"></div>
 
-  <header>
-    <div class="header-badges">
-      <a href="https://acubostudio.com" class="brand-badge" target="_blank" rel="noopener">
-        <span>ACUBO</span> acubostudio.com ↗
-      </a>
-      <div class="round-badge">
-        <div class="pulse-dot"></div>
-        Votação aberta
-      </div>
+  <header class="hero">
+    <div class="hero-cenas">
+      <video class="cena" id="cenaA" muted playsinline preload="auto"></video>
+      <video class="cena" id="cenaB" muted playsinline preload="auto"></video>
     </div>
-    <h1>Qual a sua <em>faixa favorita</em>?</h1>
-    <p class="subtitle">
-      Oito faixas inéditas, duas artistas: <strong>Zayre Lanay</strong> e <strong>Aurya Lya</strong>. Ouça todas e vote na que ficar com você.
-    </p>
+    <div class="hero-veu"></div>
+
+    <div class="hero-conteudo">
+      <div class="selo">
+        <div class="selo-louros">
+          <svg width="44" height="74" viewBox="0 0 46 76" fill="none" aria-hidden="true">
+            <path d="M38 5C17 17 7 39 13 71" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+            <g fill="currentColor" opacity="0.92">
+              <ellipse cx="24" cy="13" rx="7.5" ry="3.2" transform="rotate(-42 24 13)"/>
+              <ellipse cx="37" cy="15" rx="6.5" ry="2.9" transform="rotate(30 37 15)"/>
+              <ellipse cx="18" cy="25" rx="8" ry="3.3" transform="rotate(-30 18 25)"/>
+              <ellipse cx="32" cy="27" rx="7" ry="3" transform="rotate(38 32 27)"/>
+              <ellipse cx="13" cy="38" rx="8" ry="3.4" transform="rotate(-18 13 38)"/>
+              <ellipse cx="28" cy="40" rx="7.5" ry="3.1" transform="rotate(45 28 40)"/>
+              <ellipse cx="11" cy="50" rx="7.5" ry="3.3" transform="rotate(-8 11 50)"/>
+              <ellipse cx="25" cy="52" rx="7" ry="3" transform="rotate(52 25 52)"/>
+              <ellipse cx="11" cy="62" rx="7" ry="3.1" transform="rotate(4 11 62)"/>
+              <ellipse cx="23" cy="63" rx="6.5" ry="2.9" transform="rotate(58 23 63)"/>
+            </g>
+          </svg>
+
+          <div class="selo-centro">
+            <span class="selo-sigla">AICF</span>
+            <span class="selo-ano">2025</span>
+          </div>
+
+          <svg width="44" height="74" viewBox="0 0 46 76" fill="none" aria-hidden="true" style="transform: scaleX(-1)">
+            <path d="M38 5C17 17 7 39 13 71" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+            <g fill="currentColor" opacity="0.92">
+              <ellipse cx="24" cy="13" rx="7.5" ry="3.2" transform="rotate(-42 24 13)"/>
+              <ellipse cx="37" cy="15" rx="6.5" ry="2.9" transform="rotate(30 37 15)"/>
+              <ellipse cx="18" cy="25" rx="8" ry="3.3" transform="rotate(-30 18 25)"/>
+              <ellipse cx="32" cy="27" rx="7" ry="3" transform="rotate(38 32 27)"/>
+              <ellipse cx="13" cy="38" rx="8" ry="3.4" transform="rotate(-18 13 38)"/>
+              <ellipse cx="28" cy="40" rx="7.5" ry="3.1" transform="rotate(45 28 40)"/>
+              <ellipse cx="11" cy="50" rx="7.5" ry="3.3" transform="rotate(-8 11 50)"/>
+              <ellipse cx="25" cy="52" rx="7" ry="3" transform="rotate(52 25 52)"/>
+              <ellipse cx="11" cy="62" rx="7" ry="3.1" transform="rotate(4 11 62)"/>
+              <ellipse cx="23" cy="63" rx="6.5" ry="2.9" transform="rotate(58 23 63)"/>
+            </g>
+          </svg>
+        </div>
+        <span class="selo-legenda">Finalista Áudio · Original Composition</span>
+      </div>
+
+      <h1>Qual delas ficou <em>com você</em>?</h1>
+      <p class="subtitle">
+        Oito faixas inéditas.<br />
+        Dois universos: <strong>Zayre Lanay</strong> × <strong>Aurya Lya</strong>.<br />
+        Ouça todas. Escolha uma.<br />
+        Quero saber qual não te deixou ir embora.
+      </p>
+
+      <a href="#faixas" class="hero-cta">Ouvir as 8 faixas ↓</a>
+    </div>
+
+    <div class="hero-cenas-indice" id="cenasIndice"></div>
   </header>
 
-  <div class="section-title">
+  <div class="conteudo">
+
+  <div class="section-title" id="faixas">
     <span>8 faixas · 2 artistas</span>
     <span>Voto único</span>
   </div>
@@ -564,12 +703,15 @@
     <p>© 2026 <a href="https://acubostudio.com">Acubo Studio</a> · Produção &amp; Lançamento Musical</p>
   </footer>
 
+  </div><!-- /.conteudo -->
+
   <script>
     const ARTIST_PAGES = {
       "Zayre Lanay": "https://open.spotify.com/intl-pt/artist/6DqkZ10PKoyWAbhOh0uFdu",
       "Aurya Lya": "https://open.spotify.com/artist/2trqi3nDmIWCitV3RrwSdW"
     };
 
+    // Ordem par a par: faixa N da Zayre ao lado da faixa N da Aurya.
     const SONGS_DATA = [
       {
         id: "eu-te-reconheci",
@@ -577,30 +719,6 @@
         artist: "Zayre Lanay",
         cover: "capas/1.jpeg",
         preview: "https://p.scdn.co/mp3-preview/97b2c83e05181552318847d7f0e405b9f857c3b7",
-        initialVotes: 0
-      },
-      {
-        id: "fogo-interno",
-        title: "Fogo Interno",
-        artist: "Zayre Lanay",
-        cover: "capas/2.jpeg",
-        preview: "https://p.scdn.co/mp3-preview/ddf17f9bd87bfd11c0fe632b4eb8fe1059fc1e63",
-        initialVotes: 0
-      },
-      {
-        id: "frequencia-unica",
-        title: "Frequência Única",
-        artist: "Zayre Lanay",
-        cover: "capas/3.jpeg",
-        preview: "https://p.scdn.co/mp3-preview/29ac46ebb3a1e4e3ca183476518d0cdbf397f668",
-        initialVotes: 0
-      },
-      {
-        id: "decorar-do-avesso",
-        title: "Decorar do Avesso",
-        artist: "Zayre Lanay",
-        cover: "capas/4.jpeg",
-        preview: "https://p.scdn.co/mp3-preview/a6516918a53c01690022c237bb2e3c7aa898b051",
         initialVotes: 0
       },
       {
@@ -612,6 +730,14 @@
         initialVotes: 0
       },
       {
+        id: "fogo-interno",
+        title: "Fogo Interno",
+        artist: "Zayre Lanay",
+        cover: "capas/2.jpeg",
+        preview: "https://p.scdn.co/mp3-preview/ddf17f9bd87bfd11c0fe632b4eb8fe1059fc1e63",
+        initialVotes: 0
+      },
+      {
         id: "atento",
         title: "Atento",
         artist: "Aurya Lya",
@@ -620,11 +746,27 @@
         initialVotes: 0
       },
       {
+        id: "frequencia-unica",
+        title: "Frequência Única",
+        artist: "Zayre Lanay",
+        cover: "capas/3.jpeg",
+        preview: "https://p.scdn.co/mp3-preview/29ac46ebb3a1e4e3ca183476518d0cdbf397f668",
+        initialVotes: 0
+      },
+      {
         id: "janela-do-infinito",
         title: "Janela do Infinito",
         artist: "Aurya Lya",
         cover: "capas/7.jpg",
         preview: "audio/janela-do-infinito.mp3",
+        initialVotes: 0
+      },
+      {
+        id: "decorar-do-avesso",
+        title: "Decorar do Avesso",
+        artist: "Zayre Lanay",
+        cover: "capas/4.jpeg",
+        preview: "https://p.scdn.co/mp3-preview/a6516918a53c01690022c237bb2e3c7aa898b051",
         initialVotes: 0
       },
       {
@@ -784,6 +926,77 @@
     }
 
     renderGrid();
+
+    /* ─────────── Cenas do hero, em loop e na ordem ───────────
+       Dois <video> alternando: enquanto um toca, o outro já carregou
+       a cena seguinte. No 'ended' a troca é um crossfade, para não
+       piscar preto a cada 8 segundos. */
+    (function cenasDoHero() {
+      const CENAS = [1, 2, 3, 4, 5, 6].map(n => `cenas/cena-${n}.mp4`);
+
+      const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (semMovimento) return;  // fica só o poster
+
+      let atual = document.getElementById("cenaA");
+      let proxima = document.getElementById("cenaB");
+      let i = 0;
+
+      const indice = document.getElementById("cenasIndice");
+      CENAS.forEach(() => {
+        const p = document.createElement("div");
+        p.className = "indice-ponto";
+        indice.appendChild(p);
+      });
+      const pontos = indice.children;
+
+      function marcar(n) {
+        for (let k = 0; k < pontos.length; k++) {
+          pontos[k].classList.toggle("ativo", k === n);
+        }
+      }
+
+      function carregarProxima() {
+        proxima.src = CENAS[(i + 1) % CENAS.length];
+        proxima.load();
+      }
+
+      function trocar() {
+        proxima.currentTime = 0;
+        const p = proxima.play();
+        if (p) p.catch(() => {});
+
+        proxima.classList.add("ativa");
+        atual.classList.remove("ativa");
+
+        const anterior = atual;
+        atual = proxima;
+        proxima = anterior;
+
+        i = (i + 1) % CENAS.length;
+        marcar(i);
+        carregarProxima();
+      }
+
+      atual.addEventListener("ended", trocar);
+      proxima.addEventListener("ended", trocar);
+
+      // Fora de vista o vídeo só gasta bateria e dados.
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          atual.pause();
+        } else {
+          const p = atual.play();
+          if (p) p.catch(() => {});
+        }
+      });
+
+      atual.src = CENAS[0];
+      atual.classList.add("ativa");
+      marcar(0);
+      const inicio = atual.play();
+      if (inicio) inicio.catch(() => {});
+      carregarProxima();
+    })();
   </script>
 </body>
 </html>
