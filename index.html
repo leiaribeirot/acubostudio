@@ -948,7 +948,7 @@
       <p class="subtitle">
         Oito faixas inéditas.<br />
         Dois universos: <strong>Zayre Lanay</strong> × <strong>Aurya Lya</strong>.<br />
-        Ouça todas. Escolha duas.<br />
+        Ouça todas. Escolha quatro.<br />
         Quero saber qual não te deixou ir embora.
       </p>
 
@@ -967,7 +967,7 @@
 
   <div class="section-title" id="faixas">
     <span>8 faixas · 2 artistas</span>
-    <span id="contadorVotos">Escolha 2 faixas</span>
+    <span id="contadorVotos"></span>
   </div>
 
   <main class="tracks-grid" id="tracksGrid"></main>
@@ -1143,7 +1143,7 @@
     }
 
     // Cada pessoa escolhe até 2 faixas, e não pode votar duas vezes na mesma.
-    const MAX_VOTOS = 2;
+    const MAX_VOTOS = 4;
 
     // O localStorage guarda apenas QUAIS faixas esta pessoa escolheu.
     // A contagem exibida vem do servidor — antes ela era local, o que fazia
@@ -1195,7 +1195,12 @@
 
     function renderRanking() {
       const secao = document.getElementById("ranking");
-      if (!placar || !placar.lista || placar.total === 0) {
+
+      // Só depois de votar. Mostrar o placar antes induz o voto: quem chega
+      // em dúvida tende a acompanhar quem já lidera.
+      const jaVotou = getVotos().length >= MAX_VOTOS;
+
+      if (!jaVotou || !placar || !placar.lista || placar.total === 0) {
         secao.hidden = true;
         return;
       }
@@ -1296,7 +1301,7 @@
       const restam = MAX_VOTOS - usados;
       alvo.textContent = restam > 0
         ? `Escolha ${restam} ${restam === 1 ? "faixa" : "faixas"}`
-        : "Suas 2 escolhas estão feitas";
+        : `Suas ${MAX_VOTOS} escolhas estão feitas`;
     }
 
     function castVote(songId) {
@@ -1353,7 +1358,7 @@
         ? `Você escolheu ${lista}. Já são ${placar.total} ${placar.total === 1 ? "voto" : "votos"} no total.`
         : `Você escolheu ${lista}. O placar geral aparece assim que o servidor responder.`;
 
-      const text = encodeURIComponent(`Escolhi ${lista} na votação do Acubo Studio! Ouça as 8 faixas e vote nas suas 2: ${window.location.href}`);
+      const text = encodeURIComponent(`Escolhi ${lista} na votação do Acubo Studio! Ouça as 8 faixas e vote nas suas ${MAX_VOTOS}: ${window.location.href}`);
       wpp.href = `https://api.whatsapp.com/send?text=${text}`;
 
       section.classList.add("visible");
@@ -1419,11 +1424,14 @@
 
     renderGrid();
 
-    // O ranking é público: todo mundo vê, tenha votado ou não, e ele se
-    // atualiza sozinho enquanto a aba estiver à vista.
-    atualizarPlacar();
+    // O placar só é buscado por quem já votou — quem ainda não votou não
+    // deve vê-lo, então nem pedimos. Depois do voto, atualiza sozinho
+    // enquanto a aba estiver à vista.
+    const jaVotouAoAbrir = () => getVotos().length >= MAX_VOTOS;
+
+    if (jaVotouAoAbrir()) atualizarPlacar();
     setInterval(() => {
-      if (!document.hidden) atualizarPlacar();
+      if (!document.hidden && jaVotouAoAbrir()) atualizarPlacar();
     }, 15000);
 
     // Ao dar play no EIDOS, tudo o mais cala.
