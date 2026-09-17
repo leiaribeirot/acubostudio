@@ -202,6 +202,128 @@
       box-shadow: 0 0 10px var(--amber-glow);
     }
 
+    /* Botão de som das cenas */
+    .btn-som {
+      position: absolute;
+      bottom: 22px;
+      right: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(10, 8, 5, 0.55);
+      border: 1px solid var(--amber-bdr);
+      border-radius: var(--radius);
+      color: var(--parchment);
+      padding: 9px 14px;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-out);
+    }
+    .btn-som:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+    .btn-som[aria-pressed="true"] {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+    .btn-som svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ─── EIDOS: anúncio do próximo álbum ─── */
+    .eidos {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 40px;
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eidos-video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      display: block;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      object-fit: cover;
+    }
+
+    .eidos-eyebrow {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--amber);
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+    }
+
+    .eidos h3 {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      color: var(--cream);
+    }
+
+    .eidos-artista {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-top: 10px;
+    }
+
+    .eidos-info {
+      color: var(--parchment);
+      font-weight: 300;
+      margin-top: 14px;
+      line-height: 1.75;
+    }
+
+    .eidos-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      background: transparent;
+      border: 1px solid var(--amber-bdr);
+      border-radius: 0;
+      color: var(--parchment);
+      padding: 12px 18px;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s var(--ease-out);
+    }
+    .eidos-cta:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
     /* Marcador de qual cena está no ar */
     .hero-cenas-indice {
       position: absolute;
@@ -599,6 +721,17 @@
       color: var(--amber-lt);
     }
 
+    @media (max-width: 760px) {
+      /* O 9:16 e o texto deixam de caber lado a lado */
+      .eidos {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+        text-align: center;
+        padding: 22px;
+      }
+      .eidos-video { max-width: 240px; }
+    }
+
     @media (max-width: 700px) {
       /* Abaixo disso o par não cabe lado a lado; vira uma faixa por linha,
          mantendo a ordem Zayre 1, Aurya 1, Zayre 2, Aurya 2... */
@@ -677,6 +810,11 @@
     </div>
 
     <div class="hero-cenas-indice" id="cenasIndice"></div>
+
+    <button class="btn-som" id="btnSom" type="button" aria-pressed="false" hidden>
+      <svg viewBox="0 0 24 24" id="iconeSom" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12a7 7 0 0 1-3 5.74l1.2 1.6A9 9 0 0 0 21 12a9 9 0 0 0-3.8-7.34L16 6.26A7 7 0 0 1 19 12z" opacity=".55"/></svg>
+      <span id="rotuloSom">Ouvir as cenas</span>
+    </button>
   </header>
 
   <div class="conteudo">
@@ -696,6 +834,31 @@
         Convidar amigos no WhatsApp
       </a>
       <button class="btn-copy" onclick="copyLink()">Copiar link</button>
+    </div>
+  </section>
+
+  <section class="eidos" id="eidos">
+    <video
+      class="eidos-video"
+      id="eidosVideo"
+      src="cenas/eidos.mp4"
+      poster="cenas/eidos-poster.jpg"
+      preload="none"
+      playsinline
+      controls
+    ></video>
+
+    <div class="eidos-texto">
+      <span class="eidos-eyebrow">Próximo álbum</span>
+      <h3>Eidos</h3>
+      <p class="eidos-artista">Aurya Lya</p>
+      <p class="eidos-info">
+        14 faixas. Produção de <strong>Léia Ribeiro</strong>.<br />
+        Algumas coisas não nascem quando são encontradas — só ganham forma.
+      </p>
+      <a class="eidos-cta" href="https://open.spotify.com/artist/2trqi3nDmIWCitV3RrwSdW" target="_blank" rel="noopener">
+        Seguir Aurya Lya no Spotify ↗
+      </a>
     </div>
   </section>
 
@@ -782,8 +945,20 @@
     let currentAudio = null;
     let currentBtn = null;
 
+    // Um áudio de cada vez: prévia, cenas e EIDOS nunca tocam juntos.
+    function assumirAudio(exceto) {
+      if (typeof window.silenciarCenas === "function") window.silenciarCenas();
+      const eidos = document.getElementById("eidosVideo");
+      if (eidos && exceto !== eidos && !eidos.paused) eidos.pause();
+      if (exceto !== "previa" && currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        if (currentBtn) setPlayIcon(currentBtn, false);
+      }
+    }
+
     function toggleAudio(previewUrl, btnElement) {
       if (!previewUrl) return;
+      assumirAudio("previa");
 
       if (currentAudio && currentAudio.getAttribute("data-src") === previewUrl) {
         if (!currentAudio.paused) {
@@ -927,6 +1102,12 @@
 
     renderGrid();
 
+    // Ao dar play no EIDOS, tudo o mais cala.
+    (function () {
+      const eidos = document.getElementById("eidosVideo");
+      if (eidos) eidos.addEventListener("play", () => assumirAudio(eidos));
+    })();
+
     /* ─────────── Cenas do hero, em loop e na ordem ───────────
        Dois <video> alternando: enquanto um toca, o outro já carregou
        a cena seguinte. No 'ended' a troca é um crossfade, para não
@@ -955,6 +1136,20 @@
         }
       }
 
+      /* O navegador recusa o play() quando ele chega antes do buffer
+         ("video-only background media was paused to save power").
+         Nesse caso esperamos o canplay e tentamos de novo. */
+      function tocar(v) {
+        const p = v.play();
+        if (!p) return;
+        p.catch(() => {
+          v.addEventListener("canplay", () => {
+            const q = v.play();
+            if (q) q.catch(() => {});
+          }, { once: true });
+        });
+      }
+
       function carregarProxima() {
         proxima.src = CENAS[(i + 1) % CENAS.length];
         proxima.load();
@@ -962,8 +1157,7 @@
 
       function trocar() {
         proxima.currentTime = 0;
-        const p = proxima.play();
-        if (p) p.catch(() => {});
+        tocar(proxima);
 
         proxima.classList.add("ativa");
         atual.classList.remove("ativa");
@@ -985,16 +1179,43 @@
         if (document.hidden) {
           atual.pause();
         } else {
-          const p = atual.play();
-          if (p) p.catch(() => {});
+          tocar(atual);
         }
       });
+
+      /* Som das cenas.
+         O autoplay do navegador só roda mudo — sem exceção — então a página
+         abre em silêncio e o som depende deste botão. */
+      const btnSom = document.getElementById("btnSom");
+      const rotuloSom = document.getElementById("rotuloSom");
+      let somLigado = false;
+
+      function aplicarSom() {
+        atual.muted = !somLigado;
+        proxima.muted = !somLigado;
+        btnSom.setAttribute("aria-pressed", String(somLigado));
+        rotuloSom.textContent = somLigado ? "Silenciar cenas" : "Ouvir as cenas";
+      }
+
+      // Chamada de fora sempre que outro áudio assume a página.
+      window.silenciarCenas = function () {
+        if (!somLigado) return;
+        somLigado = false;
+        aplicarSom();
+      };
+
+      btnSom.addEventListener("click", () => {
+        somLigado = !somLigado;
+        aplicarSom();
+      });
+
+      btnSom.hidden = false;
+      aplicarSom();
 
       atual.src = CENAS[0];
       atual.classList.add("ativa");
       marcar(0);
-      const inicio = atual.play();
-      if (inicio) inicio.catch(() => {});
+      tocar(atual);
       carregarProxima();
     })();
   </script>
