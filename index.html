@@ -833,7 +833,7 @@
       <p class="subtitle">
         Oito faixas inéditas.<br />
         Dois universos: <strong>Zayre Lanay</strong> × <strong>Aurya Lya</strong>.<br />
-        Ouça todas. Escolha uma.<br />
+        Ouça todas. Escolha duas.<br />
         Quero saber qual não te deixou ir embora.
       </p>
 
@@ -852,13 +852,13 @@
 
   <div class="section-title" id="faixas">
     <span>8 faixas · 2 artistas</span>
-    <span>Voto único</span>
+    <span id="contadorVotos">Escolha 2 faixas</span>
   </div>
 
   <main class="tracks-grid" id="tracksGrid"></main>
 
   <section class="share-section" id="shareSection">
-    <h3>Voto computado</h3>
+    <h3>Escolhas registradas</h3>
     <p class="share-msg" id="shareMsg"></p>
     <div class="share-buttons">
       <a href="#" class="btn-share-wpp" id="wppBtn" target="_blank" rel="noopener">
@@ -1027,8 +1027,26 @@
         : `<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
     }
 
-    const STORAGE_KEY_VOTE = "acubo_voted_8faixas";
-    const STORAGE_KEY_COUNTS = "acubo_votes_counts_8faixas";
+    // Cada pessoa escolhe até 2 faixas, e não pode votar duas vezes na mesma.
+    const MAX_VOTOS = 2;
+
+    // Chaves novas: o formato mudou de um id para uma lista, e o total por
+    // pessoa dobrou — misturar com os dados antigos daria contagem errada.
+    const STORAGE_KEY_VOTE = "acubo_votos_8faixas_v2";
+    const STORAGE_KEY_COUNTS = "acubo_contagem_8faixas_v2";
+
+    function getVotos() {
+      try {
+        const salvo = JSON.parse(localStorage.getItem(STORAGE_KEY_VOTE));
+        return Array.isArray(salvo) ? salvo.slice(0, MAX_VOTOS) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function salvarVotos(lista) {
+      localStorage.setItem(STORAGE_KEY_VOTE, JSON.stringify(lista));
+    }
 
     function getVotesMap() {
       const saved = localStorage.getItem(STORAGE_KEY_COUNTS);
@@ -1044,16 +1062,19 @@
 
     function renderGrid() {
       const container = document.getElementById("tracksGrid");
-      const userVote = localStorage.getItem(STORAGE_KEY_VOTE);
+      const votos = getVotos();
       const votesMap = getVotesMap();
-      const hasVoted = Boolean(userVote);
+      const acabou = votos.length >= MAX_VOTOS;
+
+      atualizarContador(votos.length);
 
       const totalVotes = Object.values(votesMap).reduce((a, b) => a + b, 0);
 
       container.innerHTML = SONGS_DATA.map(song => {
         const votes = votesMap[song.id] || 0;
         const pct = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
-        const isSelected = userVote === song.id;
+        const isSelected = votos.includes(song.id);
+        const hasVoted = acabou;
         const artistPage = ARTIST_PAGES[song.artist];
 
         return `
@@ -1085,9 +1106,9 @@
               <button
                 class="btn-vote"
                 onclick="castVote('${song.id}')"
-                ${hasVoted ? 'disabled' : ''}
+                ${isSelected || acabou ? 'disabled' : ''}
               >
-                ${isSelected ? 'Votado' : (hasVoted ? 'Computado' : 'Votar nesta')}
+                ${isSelected ? 'Votado' : (acabou ? 'Computado' : 'Votar nesta')}
               </button>
               <a href="${artistPage}" class="btn-spotify" target="_blank" rel="noopener" title="Abrir ${song.artist} no Spotify">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.494 17.306c-.216.353-.674.464-1.027.248-2.812-1.718-6.352-2.106-10.523-1.153-.404.092-.806-.162-.898-.566-.092-.404.162-.806.566-.898 4.568-1.044 8.487-.601 11.634 1.342.353.216.464.674.248 1.027zm1.467-3.26c-.272.443-.852.584-1.295.312-3.22-1.979-8.127-2.551-11.936-1.394-.499.151-1.026-.134-1.177-.633-.151-.499.134-1.026.633-1.177 4.354-1.321 9.773-.682 13.463 1.587.443.272.584.852.312 1.295zm.126-3.41c-3.86-2.293-10.229-2.504-13.899-1.39-.592.18-1.222-.156-1.402-.748-.18-.592.156-1.222.748-1.402 4.227-1.283 11.261-1.037 15.694 1.595.534.316.708 1.009.392 1.543-.316.534-1.009.708-1.543.392z"/></svg>
@@ -1097,34 +1118,53 @@
         `;
       }).join('');
 
-      if (hasVoted) {
-        showShareSection(userVote);
+      if (acabou) {
+        showShareSection(votos);
       }
     }
 
+    // "Voto único" vira o placar de quantas escolhas ainda restam.
+    function atualizarContador(usados) {
+      const alvo = document.getElementById("contadorVotos");
+      if (!alvo) return;
+      const restam = MAX_VOTOS - usados;
+      alvo.textContent = restam > 0
+        ? `Escolha ${restam} ${restam === 1 ? "faixa" : "faixas"}`
+        : "Suas 2 escolhas estão feitas";
+    }
+
     function castVote(songId) {
-      if (localStorage.getItem(STORAGE_KEY_VOTE)) return;
+      const votos = getVotos();
+      // Nem repetir a mesma faixa, nem passar do limite.
+      if (votos.includes(songId) || votos.length >= MAX_VOTOS) return;
 
       const votesMap = getVotesMap();
       votesMap[songId] = (votesMap[songId] || 0) + 1;
       saveVotesMap(votesMap);
-      localStorage.setItem(STORAGE_KEY_VOTE, songId);
+
+      votos.push(songId);
+      salvarVotos(votos);
 
       renderGrid();
-      showShareSection(songId);
     }
 
-    function showShareSection(songId) {
-      const song = SONGS_DATA.find(s => s.id === songId);
-      if (!song) return;
+    function showShareSection(votos) {
+      const escolhidas = votos
+        .map(id => SONGS_DATA.find(s => s.id === id))
+        .filter(Boolean);
+      if (!escolhidas.length) return;
 
       const section = document.getElementById("shareSection");
       const msg = document.getElementById("shareMsg");
       const wpp = document.getElementById("wppBtn");
 
-      msg.innerText = `Você votou em "${song.title}", de ${song.artist}.`;
+      const lista = escolhidas
+        .map(s => `"${s.title}" (${s.artist})`)
+        .join(" e ");
 
-      const text = encodeURIComponent(`Acabei de votar em "${song.title}", de ${song.artist}, na votação do Acubo Studio! Ouça as 8 faixas e vote também: ${window.location.href}`);
+      msg.innerText = `Você escolheu ${lista}.`;
+
+      const text = encodeURIComponent(`Escolhi ${lista} na votação do Acubo Studio! Ouça as 8 faixas e vote nas suas 2: ${window.location.href}`);
       wpp.href = `https://api.whatsapp.com/send?text=${text}`;
 
       section.classList.add("visible");
