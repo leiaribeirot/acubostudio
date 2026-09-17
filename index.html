@@ -699,6 +699,37 @@
       border-color: var(--amber);
       color: var(--amber);
     }
+    .btn-copy.copiado {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    .copia-manual {
+      margin-top: 16px;
+      text-align: left;
+    }
+    .copia-manual p {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .copia-manual input {
+      width: 100%;
+      background: rgba(10, 8, 5, 0.6);
+      border: 1px solid var(--amber-bdr);
+      border-radius: var(--radius);
+      padding: 11px 13px;
+      color: var(--cream);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      outline: none;
+    }
+    .copia-manual input:focus {
+      border-color: var(--amber);
+    }
 
     footer {
       text-align: center;
@@ -833,7 +864,12 @@
       <a href="#" class="btn-share-wpp" id="wppBtn" target="_blank" rel="noopener">
         Convidar amigos no WhatsApp
       </a>
-      <button class="btn-copy" onclick="copyLink()">Copiar link</button>
+      <button class="btn-copy" id="btnCopiar" onclick="copyLink()">Copiar link</button>
+    </div>
+
+    <div class="copia-manual" id="copiaManual" hidden>
+      <p>Seu navegador bloqueou a cópia. Copie o link daqui:</p>
+      <input type="text" id="copiaManualUrl" readonly onclick="this.select()" />
     </div>
   </section>
 
@@ -1095,9 +1131,61 @@
       section.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    function copyLink() {
-      navigator.clipboard.writeText(window.location.href);
-      alert("Link copiado!");
+    /* Copiar link.
+       A Clipboard API falha em varios casos reais (permissao negada,
+       documento sem foco, contexto nao seguro) e devolve uma promessa
+       rejeitada. Antes o codigo ignorava isso e avisava "copiado" mesmo
+       quando nao copiava. Agora: tenta a API, cai para a selecao antiga
+       e, se as duas falharem, mostra a URL para a pessoa copiar. */
+    function copiarPorSelecao(texto) {
+      try {
+        const campo = document.createElement("textarea");
+        campo.value = texto;
+        campo.setAttribute("readonly", "");
+        campo.style.position = "fixed";
+        campo.style.top = "-1000px";
+        campo.style.opacity = "0";
+        document.body.appendChild(campo);
+        campo.select();
+        campo.setSelectionRange(0, texto.length);
+        const ok = document.execCommand("copy");
+        campo.remove();
+        return ok;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function copyLink() {
+      const url = window.location.href;
+      const btn = document.getElementById("btnCopiar");
+      const manual = document.getElementById("copiaManual");
+      let copiou = false;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(url);
+          copiou = true;
+        }
+      } catch (e) {
+        // segue para o plano B
+      }
+
+      if (!copiou) copiou = copiarPorSelecao(url);
+
+      if (copiou) {
+        manual.hidden = true;
+        btn.textContent = "Link copiado";
+        btn.classList.add("copiado");
+        setTimeout(() => {
+          btn.textContent = "Copiar link";
+          btn.classList.remove("copiado");
+        }, 2500);
+      } else {
+        document.getElementById("copiaManualUrl").value = url;
+        manual.hidden = false;
+        btn.textContent = "Copie abaixo";
+      }
     }
 
     renderGrid();
