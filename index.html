@@ -1144,8 +1144,29 @@
 
       votos.push(songId);
       salvarVotos(votos);
+      registrarNoServidor(votos);
 
       renderGrid();
+    }
+
+    /* O placar compartilhado vive fora do navegador.
+       A lista inteira e reenviada a cada voto: o servidor conta so a
+       diferenca, entao quem vota uma vez e volta depois nao perde o voto
+       nem conta duas vezes. Falha aqui nao pode travar a pagina — o
+       visitante continua vendo as proprias escolhas. */
+    const API_VOTOS = "https://acubo-votos.vercel.app/api/voto";
+
+    function registrarNoServidor(votos) {
+      try {
+        fetch(API_VOTOS, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ faixas: votos }),
+          keepalive: true
+        }).catch(() => {});
+      } catch (e) {
+        // sem rede, ou bloqueado: o voto local segue valendo
+      }
     }
 
     function showShareSection(votos) {
