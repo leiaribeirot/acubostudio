@@ -577,7 +577,7 @@
         artist: "Zayre Lanay",
         cover: "capas/1.jpeg",
         preview: "https://p.scdn.co/mp3-preview/97b2c83e05181552318847d7f0e405b9f857c3b7",
-        initialVotes: 42
+        initialVotes: 0
       },
       {
         id: "fogo-interno",
@@ -585,7 +585,7 @@
         artist: "Zayre Lanay",
         cover: "capas/2.jpeg",
         preview: "https://p.scdn.co/mp3-preview/ddf17f9bd87bfd11c0fe632b4eb8fe1059fc1e63",
-        initialVotes: 38
+        initialVotes: 0
       },
       {
         id: "frequencia-unica",
@@ -593,7 +593,7 @@
         artist: "Zayre Lanay",
         cover: "capas/3.jpeg",
         preview: "https://p.scdn.co/mp3-preview/29ac46ebb3a1e4e3ca183476518d0cdbf397f668",
-        initialVotes: 51
+        initialVotes: 0
       },
       {
         id: "decorar-do-avesso",
@@ -601,7 +601,7 @@
         artist: "Zayre Lanay",
         cover: "capas/4.jpeg",
         preview: "https://p.scdn.co/mp3-preview/a6516918a53c01690022c237bb2e3c7aa898b051",
-        initialVotes: 35
+        initialVotes: 0
       },
       {
         id: "nebulosa",
@@ -609,7 +609,7 @@
         artist: "Aurya Lya",
         cover: "capas/5.jpg",
         preview: "audio/nebulosa.mp3",
-        initialVotes: 39
+        initialVotes: 0
       },
       {
         id: "atento",
@@ -617,7 +617,7 @@
         artist: "Aurya Lya",
         cover: "capas/6.jpg",
         preview: "audio/atento.mp3",
-        initialVotes: 44
+        initialVotes: 0
       },
       {
         id: "janela-do-infinito",
@@ -625,7 +625,7 @@
         artist: "Aurya Lya",
         cover: "capas/7.jpg",
         preview: "audio/janela-do-infinito.mp3",
-        initialVotes: 47
+        initialVotes: 0
       },
       {
         id: "encanto",
@@ -633,7 +633,7 @@
         artist: "Aurya Lya",
         cover: "capas/8.jpg",
         preview: "audio/encanto.mp3",
-        initialVotes: 36
+        initialVotes: 0
       }
     ];
 
@@ -723,7 +723,7 @@
                 <div class="progress-bar-fill" style="width: ${hasVoted ? pct : 0}%"></div>
               </div>
               <div class="vote-stats">
-                <span>${votes} votos</span>
+                <span>${votes} ${votes === 1 ? 'voto' : 'votos'}</span>
                 <span>${pct}%</span>
               </div>
             </div>
