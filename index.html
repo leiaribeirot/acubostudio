@@ -6,6 +6,7 @@
 <title>ACUBO. · Sua marca, ao cubo</title>
 <meta name="description" content="O departamento de marketing que a sua empresa não tem. Direção criativa de Léia Ribeiro e produção por um sistema de agentes que pesquisa, escreve, desenha, anima e publica.">
 <meta name="theme-color" content="#050403">
+<meta name="color-scheme" content="dark">
 <link rel="icon" type="image/svg+xml" href="assets/acubo-avatar.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/acubo-avatar-32.png">
 <link rel="apple-touch-icon" href="assets/acubo-avatar-180.png">
@@ -93,7 +94,7 @@
   .vframe { position: relative; overflow: hidden; background: #000; }
   .vframe video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); transform-origin: 30% 30%; }
 
-  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
+  .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
   .hero .bg { position: absolute; inset: 0; }
   .hero .bg video { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s var(--ease); }
   .hero .bg video.on { opacity: 1; }
@@ -174,8 +175,10 @@
   .principle blockquote { margin: 0; font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(24px, 3.4vw, 46px); line-height: 1.06; color: var(--cream); max-width: 22ch; text-wrap: balance; }
   .principle p { margin: 18px 0 0; max-width: 58ch; }
 
-  .exp { font-family: var(--display); font-weight: 800; font-size: 44px; line-height: 1; }
-  .exp.spec-text { font-size: 52px; }
+  .exp { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -.01em; }
+  .exp sup { font-size: .55em; vertical-align: .75em; margin-left: .04em; }
+  .exp.spec-text { font-size: 40px; }
+  .swipe { display: none; margin: 0 0 12px; }
 
   .fd { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
   @media (max-width: 900px) { .fd { grid-template-columns: 1fr; } }
@@ -268,6 +271,41 @@
   footer .lines p { margin: 4px 0; color: var(--muted); font-size: 15px; }
   footer .fin { display: inline-block; margin-top: 40px; font-family: var(--mono); font-size: 11px; letter-spacing: .5em; }
 
+  /* celular (Galaxy A15 e parecidos: ~384 x 832) */
+  html { -webkit-tap-highlight-color: transparent; }
+  section[id] { scroll-margin-top: 72px; }
+  @media (max-width: 480px) {
+    body { font-size: 17px; }
+    .nav .wrap { padding-block: 12px; }
+    .terminal { font-size: 10.5px; letter-spacing: .18em; margin-bottom: 18px; }
+    .hero .content { padding-block: 104px 40px; }
+    .hero h1 { font-size: clamp(40px, 12.5vw, 56px); }
+    .hero .tagline { font-size: 17px; margin: 20px 0 12px; }
+    .hero .sub { font-size: 16px; line-height: 1.6; margin-bottom: 26px; }
+    .actions { flex-direction: column; }
+    .actions .btn, .fd-card .btn, .combo .btn, .diag .btn { width: 100%; }
+    .btn { font-size: 11.5px; letter-spacing: .1em; padding: 16px 18px; }
+    .hero .meta { margin-top: 26px; }
+    .scene { padding-block: 72px; }
+    h2 { font-size: clamp(28px, 8.6vw, 38px); }
+    .head p, .versus p { font-size: 17px; }
+    .formula { font-size: 18px; }
+    .formula .eq { font-size: 46px; }
+    .dims li { grid-template-columns: 92px 1fr; font-size: 15.5px; }
+    .swipe { display: block; }
+    .reel .vframe:last-child { grid-column: span 2; }
+    .step .n { font-size: 52px; }
+    .principle { gap: 18px; }
+    .principle blockquote { font-size: 24px; }
+    .fd-list li { grid-template-columns: 40px 1fr; }
+    .fd-list h3 { font-size: 20px; }
+    .combo { padding: 26px 20px; }
+    .leia blockquote { font-size: 26px; }
+    .diag .box p { font-size: 22px; }
+    summary { font-size: 17px; }
+    .credits li { grid-template-columns: 1fr 1.2fr; gap: 12px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -359,6 +397,7 @@
         <p>Uma empresa pequena costuma contratar cada parte do marketing de alguém diferente. Só redes, tráfego e quatro artigos por mês já somam perto de R$ 10 mil, considerando o preço médio de cada serviço no mercado. E cada fornecedor entende a sua marca de um jeito.</p>
       </div>
     </div>
+    <p class="label swipe wrap">Deslize para ver os cinco →</p>
     <div class="filmstrip rv" role="list" aria-label="Preços de mercado por fornecedor">
       <div class="frames">
         <div class="frame" role="listitem"><span class="label">Redes sociais</span><span class="v">R$ 800 a 3 mil/mês</span><span>quase sempre sem vídeo</span></div>
@@ -431,7 +470,7 @@
           <li><span class="fd-n">05</span><div><h3>Os próximos 3 meses planejados</h3><p>Os temas de cada semana, em ordem, ligados ao que você vende.</p></div></li>
         </ol>
         <aside class="fd-card rv">
-          <div class="top"><span class="label">A base · pagamento único</span><span class="exp" style="color:var(--amber-light)" aria-hidden="true">⁰</span></div>
+          <div class="top"><span class="label">A base · pagamento único</span><span class="exp" style="color:var(--amber-light)" aria-hidden="true">a<sup>0</sup></span></div>
           <div class="fd-bonus">
             <span class="label" style="color:var(--amber-light)">Incluso</span>
             <p><strong>6 posts prontos</strong> para a sua primeira semana, já com a marca nova. Você vê o sistema funcionando antes de decidir qualquer combo.</p>
@@ -462,7 +501,7 @@
       </div>
       <div class="combos rv">
         <article class="combo">
-          <span class="exp" style="color:var(--amber-light)" aria-hidden="true">¹</span>
+          <span class="exp" style="color:var(--amber-light)" aria-hidden="true">a<sup>1</sup></span>
           <h3>Presença</h3>
           <div><span class="from">a partir de</span><div class="price">R$ 2.200<small>por mês</small></div></div>
           <p class="for">Para quem ainda não aparece com constância.</p>
@@ -470,7 +509,7 @@
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Presença.">Quero o Presença</a>
         </article>
         <article class="combo">
-          <span class="exp" style="color:var(--ember)" aria-hidden="true">²</span>
+          <span class="exp" style="color:var(--ember)" aria-hidden="true">a<sup>2</sup></span>
           <h3>Autoridade</h3>
           <div><span class="from">a partir de</span><div class="price">R$ 4.200<small>por mês</small></div></div>
           <p class="for">Para quem vende conhecimento e precisa ser encontrado.</p>
@@ -479,7 +518,7 @@
         </article>
         <article class="combo featured">
           <span class="tag">Ao cubo · recomendado</span>
-          <span class="exp spec-text" aria-hidden="true">³</span>
+          <span class="exp spec-text" aria-hidden="true">a<sup>3</sup></span>
           <h3>Crescimento</h3>
           <div><span class="from">a partir de</span><div class="price">R$ 6.800<small>por mês, mais a verba</small></div></div>
           <p class="for">Para quem já tem oferta e quer vender mais.</p>
@@ -487,7 +526,7 @@
           <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Crescimento.">Quero o Crescimento</a>
         </article>
         <article class="combo">
-          <span class="exp" style="color:var(--violet)" aria-hidden="true">³⁺</span>
+          <span class="exp" style="color:var(--violet)" aria-hidden="true">a<sup>3+</sup></span>
           <h3>Empresa inteira</h3>
           <div><span class="from">a partir de</span><div class="price">R$ 12.000<small>por mês, mais a verba</small></div></div>
           <p class="for">O departamento de marketing completo.</p>
