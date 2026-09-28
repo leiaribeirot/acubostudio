@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 524" role="img" aria-label="ACUBO.">
+  <title>ACUBO.</title>
+  <polygon points="230,0 0,119 230,119" fill="#BF8341"/>
+  <polygon points="230,0 460,119 230,119" fill="#E9B56F"/>
+  <polygon points="0,119 230,119 230,239" fill="#9E6644"/>
+  <polygon points="230,119 460,119 230,239" fill="#D89848"/>
+  <polygon points="0,119 230,239 131,334" fill="#E9B56D"/>
+  <polygon points="0,119 131,334 0,407" fill="#BC754B"/>
+  <polygon points="0,407 131,334 230,524" fill="#965F41"/>
+  <polygon points="131,334 230,239 230,524" fill="#BF8440"/>
+  <polygon points="230,239 460,119 329,334" fill="#764634"/>
+  <polygon points="460,119 460,407 329,334" fill="#BF774B"/>
+  <polygon points="329,334 460,407 230,524" fill="#764634"/>
+</svg>
