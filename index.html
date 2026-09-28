@@ -48,8 +48,8 @@
     --ease: cubic-bezier(.2,.7,.1,1);
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--black); color: var(--parchment); font-family: var(--body); font-weight: 300; font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; cursor: crosshair; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { margin: 0; overflow-x: hidden; overflow-x: clip; max-width: 100%; background: var(--black); color: var(--parchment); font-family: var(--body); font-weight: 300; font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; cursor: crosshair; }
   a, button, summary { cursor: pointer; }
   img, svg, video { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
@@ -60,8 +60,9 @@
   .spec-text { background: var(--spec); -webkit-background-clip: text; background-clip: text; color: transparent; }
   sup.cube { font-size: .5em; vertical-align: .9em; margin-left: .04em; }
 
-  .grain { position: fixed; inset: -50%; z-index: 50; pointer-events: none; opacity: .06; mix-blend-mode: overlay; background-size: 180px 180px; animation: grain 1.2s steps(6) infinite; }
-  @keyframes grain { 0%{transform:translate(0,0)} 20%{transform:translate(-3%,2%)} 40%{transform:translate(2%,-3%)} 60%{transform:translate(-2%,-1%)} 80%{transform:translate(3%,3%)} 100%{transform:translate(0,0)} }
+  /* grão preso ao tamanho da tela: uma camada maior que o viewport faz o celular afastar o zoom */
+  .grain { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: .06; mix-blend-mode: overlay; background-size: 180px 180px; animation: grain 1.2s steps(6) infinite; }
+  @keyframes grain { 0%{background-position:0 0} 20%{background-position:-40px 30px} 40%{background-position:30px -50px} 60%{background-position:-25px -15px} 80%{background-position:45px 40px} 100%{background-position:0 0} }
 
   /* a linha de nível: sobe do âmbar ao violeta conforme a página desce */
   .level { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 60; transform-origin: left; transform: scaleX(0); background: var(--spec); box-shadow: 0 0 12px rgba(194,24,106,.55); }
