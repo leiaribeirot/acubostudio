@@ -692,7 +692,7 @@
     el.target = '_blank'; el.rel = 'noopener';
   });
 
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 760px)').matches;
 
   // Grão de filme gerado uma vez em canvas.
   (function grain() {
