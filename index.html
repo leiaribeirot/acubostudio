@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://acubostudio.com/">
 <meta property="og:title" content="ACUBO. · Sua marca, ao cubo">
 <meta property="og:description" content="O departamento de marketing que a sua empresa não tem. Cada entrega com assinatura.">
-<meta property="og:image" content="https://acubostudio.com/cenas/cena-6-poster.jpg">
+<meta property="og:image" content="https://acubostudio.com/cenas/cena-2-poster.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap">
@@ -247,6 +247,8 @@
   .invite .bgv::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #000 20%, rgba(0,0,0,.35)); }
   .diag { position: relative; display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
   @media (max-width: 900px) { .diag { grid-template-columns: minmax(0,1fr); } }
+  .diag h2 { font-size: clamp(22px, 2.9vw, 42px); }
+  @media (max-width: 900px) { .diag h2 { font-size: clamp(22px, 5.6vw, 42px); } }
   .diag ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 16px; counter-reset: d; }
   .diag li { counter-increment: d; display: grid; grid-template-columns: 40px 1fr; font-size: 17.5px; }
   .diag li::before { content: counter(d, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--amber-light); padding-top: 5px; letter-spacing: .1em; }
@@ -316,6 +318,28 @@
     .grain { display: none; }
   }
   @media (max-width: 350px) { .hero h1 { font-size: 10.4vw; } }
+
+  /* Botao de som do topo e dos videos. O som so liga por toque. */
+  .snd, .vsound { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--cream); background: rgba(5,4,3,.45); border: 1px solid rgba(245,240,232,.3); padding: 9px 14px; cursor: pointer; transition: border-color .3s, color .3s; }
+  .snd:hover, .vsound:hover { border-color: var(--amber-light); color: var(--amber-light); }
+  .snd[aria-pressed="true"], .vsound[aria-pressed="true"] { border-color: var(--amber-light); color: var(--amber-light); }
+  .vsound { position: absolute; right: 12px; bottom: 12px; z-index: 3; }
+  .vframe img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Os seis passos: cartoes que se deslizam. */
+  .cards { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 clamp(16px, 4vw, 48px) 8px; }
+  .cards::-webkit-scrollbar { display: none; }
+  .card { flex: 0 0 min(310px, 82vw); scroll-snap-align: start; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+  .card .t { padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .card .n { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; color: var(--amber-light); }
+  .card h3 { font-size: 22px; margin: 0; }
+  .card p { margin: 0; font-size: 15.5px; }
+  .card p b { font-weight: 500; color: var(--cream); }
+  #problema h2 { font-size: clamp(18px, 5.2vw, 52px); }
+  #leia .leia blockquote { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.3; }
+  .leia-foto { display: block; width: 100%; max-width: 340px; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 16%; margin: 0 0 56px; border: 1px solid var(--line); }
+  #como .swipe { display: block; }
+  @media (max-width: 480px) { .nav-links { gap: 10px; } .snd { padding: 8px 10px; } }
 </style>
 </head>
 <body>
@@ -330,22 +354,24 @@
       <span class="wordmark">ACUBO<span class="dot"></span></span>
     </a>
     <nav class="nav-links" aria-label="Seções">
-      <a class="txt" href="#ao-cubo">Ao cubo</a>
-      <a class="txt" href="#cenas">Cenas</a>
+      <a class="txt" href="#como">Como funciona</a>
       <a class="txt" href="#combos">Combos</a>
       <a class="txt" href="#leia">Direção</a>
-      <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero um diagnóstico da minha marca.">Diagnóstico</a>
+      <button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Ligar o som do site">Som</button>
+      <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 49,90).">Diagnóstico</a>
     </nav>
   </div>
 </header>
+
+<audio id="trilha" loop preload="none" src="assets/trilha-syntax-echo.mp3"></audio>
 
 <main id="topo">
 
   <section class="hero">
     <div class="bg vframe" aria-hidden="true">
-      <video class="on" muted playsinline loop autoplay preload="auto" poster="cenas/cena-6-poster.jpg"><source src="cenas/cena-6.mp4" type="video/mp4"></video>
-      <video muted playsinline loop preload="none" poster="cenas/cena-1-poster.jpg"><source src="cenas/cena-1.mp4" type="video/mp4"></video>
-      <video muted playsinline loop preload="none" poster="cenas/cena-3-poster.jpg"><source src="cenas/cena-3.mp4" type="video/mp4"></video>
+      <video class="on" muted playsinline loop autoplay preload="auto" poster="cenas/cena-1-poster.jpg"><source src="cenas/cena-1.mp4" type="video/mp4"></video>
+      <video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg"><source src="cenas/cena-2.mp4" type="video/mp4"></video>
+      <video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg"><source src="cenas/cena-4.mp4" type="video/mp4"></video>
     </div>
     <div class="shade" aria-hidden="true"></div>
     <div class="scan" aria-hidden="true"></div>
@@ -354,11 +380,11 @@
         <div class="terminal rise">ACUBO. // estúdio de marketing com direção criativa<span class="cursor" aria-hidden="true"></span></div>
         <h1 class="rise d1">Sua marca,<span class="l2">ao cubo<sup class="cube spec-text">3</sup></span></h1>
         <p class="tagline rise d2">O departamento de marketing que a sua empresa não tem.</p>
-        <p class="sub rise d3">Eu cuido da sua marca inteira: conteúdo, blog, site e anúncios, tudo saindo da mesma direção. Quem produz é um sistema de agentes de IA. Quem decide o que vai ao ar sou eu, e nenhuma peça chega até você sem eu ter lido antes.</p>
+        <p class="sub rise d3">Eu dirijo. Um sistema de agentes de IA produz. Nenhuma peça chega até você sem eu ter lido antes.</p>
         <div class="actions rise d4">
-          <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero um diagnóstico da minha marca.">
+          <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 49,90).">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-            Quero um diagnóstico da minha marca
+            Diagnóstico de marca · R$&nbsp;49,90
           </a>
           <a class="btn btn-ghost" href="#combos">Ver os combos</a>
         </div>
@@ -372,7 +398,7 @@
       <div class="rv">
         <span class="label slate-line">O conceito</span>
         <h2>Por que ao cubo.</h2>
-        <p style="margin:0 0 24px;font-size:19px;max-width:56ch">Contratar três fornecedores soma três trabalhos. O ACUBO multiplica: a direção, o sistema e a sua marca entram juntos em cada peça. É por isso que o nome é uma potência, e não uma soma.</p>
+        <p style="margin:0 0 24px;font-size:19px;max-width:56ch">Três fornecedores somam três trabalhos. No ACUBO, a direção, o sistema e a sua marca entram juntos em cada peça. Por isso o nome é uma potência, e não uma soma.</p>
         <div class="formula" aria-label="Visão vezes execução vezes conexão igual a marca ao cubo">
           <span>Visão</span><span class="x">×</span><span>Execução</span><span class="x">×</span><span>Conexão</span>
           <span class="eq">= Marca<sup class="cube spec-text">3</sup></span>
@@ -380,15 +406,16 @@
         <ul class="dims">
           <li><b>Visão</b><span>A direção: o que a sua marca diz, para quem, e o que ela nunca diria.</span></li>
           <li><b>Execução</b><span>O sistema de agentes que pesquisa, escreve, desenha, anima e publica.</span></li>
-          <li><b>Conexão</b><span>A sua marca configurada uma vez, para cada peça sair do mesmo lugar.</span></li>
-          <li><b>Saúde</b><span>A base que ninguém vê: escopo fechado e um ritmo que se sustenta, para você e para mim.</span></li>
+          <li><b>Conexão</b><span>A sua marca configurada uma vez, para toda peça sair do mesmo lugar.</span></li>
+          <li><b>Saúde</b><span>Escopo fechado e um ritmo que se sustenta, para você e para mim.</span></li>
         </ul>
       </div>
       <div class="rv">
         <div class="vframe">
-          <video muted playsinline loop preload="none" poster="cenas/eidos-poster.jpg" data-inview><source src="cenas/eidos.mp4" type="video/mp4"></video>
+          <video muted playsinline loop preload="none" poster="cenas/abertura-poster.jpg" data-inview><source src="cenas/abertura.mp4" type="video/mp4"></video>
+          <button class="vsound" type="button" aria-pressed="false">Ouvir</button>
         </div>
-        <p class="label cap">Cena de Eidos · direção de Léia Ribeiro</p>
+        <p class="label cap">Abertura do ACUBO · direção de Léia Ribeiro</p>
       </div>
     </div>
   </section>
@@ -398,22 +425,10 @@
       <div class="head rv">
         <span class="label slate-line">O problema</span>
         <h2>Cinco fornecedores, cinco vozes.</h2>
-        <p>Uma empresa pequena costuma contratar cada parte do marketing de alguém diferente. Só redes, tráfego e quatro artigos por mês já somam perto de R$ 10 mil, considerando o preço médio de cada serviço no mercado. E cada fornecedor entende a sua marca de um jeito.</p>
+        <p>Redes, tráfego, blog, identidade e site costumam vir de cinco pessoas diferentes. Cada uma entende a sua marca de um jeito, e quem sente a diferença é o seu cliente.</p>
       </div>
-    </div>
-    <p class="label swipe wrap">Deslize para ver os cinco →</p>
-    <div class="filmstrip rv" role="list" aria-label="Preços de mercado por fornecedor">
-      <div class="frames">
-        <div class="frame" role="listitem"><span class="label">Redes sociais</span><span class="v">R$ 800 a 3 mil/mês</span><span>quase sempre sem vídeo</span></div>
-        <div class="frame" role="listitem"><span class="label">Tráfego pago</span><span class="v">R$ 1,5 a 8 mil/mês</span><span>fora a verba de anúncio</span></div>
-        <div class="frame" role="listitem"><span class="label">Blog e SEO</span><span class="v">R$ 400 a 1.500</span><span>por artigo aprofundado</span></div>
-        <div class="frame" role="listitem"><span class="label">Identidade</span><span class="v">R$ 2,5 a 8 mil</span><span>por projeto</span></div>
-        <div class="frame" role="listitem"><span class="label">Site</span><span class="v">R$ 1,5 a 12 mil</span><span>por projeto</span></div>
-      </div>
-    </div>
-    <div class="wrap">
       <div class="versus rv">
-        <p>O post diz uma coisa, o anúncio diz outra, e o site ficou parado no ano em que foi feito. Ninguém está errado sozinho: falta alguém olhando o conjunto.</p>
+        <p>O post diz uma coisa, o anúncio diz outra, e o site parou no ano em que foi feito. Ninguém erra sozinho: falta alguém olhando o conjunto.</p>
         <p><strong>Aqui, a sua marca é configurada uma vez</strong>, com voz, regras e público, e toda peça nasce dessa base, em qualquer formato. Mudou a estratégia? Muda em um lugar só.</p>
       </div>
     </div>
@@ -424,30 +439,60 @@
       <div class="head rv">
         <span class="label slate-line">Cenas</span>
         <h2>Imagem que parece dirigida, e não gerada.</h2>
-        <p>Cenas produzidas no ACUBO com o mesmo sistema que faz o conteúdo dos clientes. Luz, ritmo e intenção decididos antes de a câmera se mover.</p>
+        <p>Detalhes feitos no ACUBO com o mesmo sistema que faz o conteúdo dos clientes. Luz e ritmo decididos antes de a câmera se mover.</p>
       </div>
       <div class="reel rv">
-        <div class="vframe big"><video muted playsinline loop preload="none" poster="cenas/cena-3-poster.jpg" data-inview><source src="cenas/cena-3.mp4" type="video/mp4"></video><span class="label tag">Cena 03</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-1-poster.jpg" data-inview><source src="cenas/cena-1.mp4" type="video/mp4"></video><span class="label tag">Cena 01</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg" data-inview><source src="cenas/cena-2.mp4" type="video/mp4"></video><span class="label tag">Cena 02</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg" data-inview><source src="cenas/cena-4.mp4" type="video/mp4"></video><span class="label tag">Cena 04</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-5-poster.jpg" data-inview><source src="cenas/cena-5.mp4" type="video/mp4"></video><span class="label tag">Cena 05</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-6-poster.jpg" data-inview><source src="cenas/cena-6.mp4" type="video/mp4"></video><span class="label tag">Cena 06</span></div>
+        <div class="vframe big"><video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg" data-inview><source src="cenas/cena-2.mp4" type="video/mp4"></video><span class="label tag">Produto</span></div>
+        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-1-poster.jpg" data-inview><source src="cenas/cena-1.mp4" type="video/mp4"></video><span class="label tag">Espaço</span></div>
+        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg" data-inview><source src="cenas/cena-4.mp4" type="video/mp4"></video><span class="label tag">Moda</span></div>
+        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-5-poster.jpg" data-inview><source src="cenas/cena-5.mp4" type="video/mp4"></video><span class="label tag">Joia</span></div>
+        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-5.jpg" data-inview><source src="cenas/som.mp4" type="video/mp4"></video><span class="label tag">Som</span></div>
+        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-6.jpg" data-inview><source src="cenas/marca.mp4" type="video/mp4"></video><span class="label tag">Marca</span></div>
       </div>
     </div>
   </section>
 
-  <section class="scene" id="como">
+  <section class="scene" id="bastidores">
+    <div class="wrap cubed">
+      <div class="rv">
+        <span class="label slate-line">Bastidores</span>
+        <h2>Quem decide sou eu.</h2>
+        <p style="margin:0 0 24px;font-size:19px;max-width:56ch">Este vídeo foi feito com IA, e as decisões são minhas. Você vê o que a ferramenta fez, o que eu reprovei e o que ficou.</p>
+        <ul class="dims">
+          <li><b>A imagem</b><span>“Nada pode parecer sexy, precisa ser profissional.”</span></li>
+          <li><b>O som</b><span>“A trilha está estourando, ajusta.”</span></li>
+          <li><b>A edição</b><span>“Esse é está duplicado, tira.”</span></li>
+        </ul>
+        <p style="margin:24px 0 0;font-size:17px;max-width:52ch">O Claude executa. O ACUBO organiza o caminho. A direção é minha.</p>
+      </div>
+      <div class="rv">
+        <div class="vframe">
+          <video muted playsinline loop preload="none" poster="cenas/bastidores-poster.jpg" data-inview><source src="cenas/bastidores.mp4" type="video/mp4"></video>
+          <button class="vsound" type="button" aria-pressed="false">Ouvir</button>
+        </div>
+        <p class="label cap">Bastidores · direção criativa de Léia Ribeiro</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene dark" id="como">
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Como funciona</span>
-        <h2>Da essência da marca ao conteúdo publicado.</h2>
+        <h2>Do diagnóstico à peça publicada.</h2>
+        <p>Tudo começa pelo diagnóstico de marca, de R$&nbsp;49,90. Se fizer sentido, você segue para a Fundação e depois para um combo mensal. Em cada passo, você sabe o que faz e o que recebe.</p>
       </div>
-      <div class="steps rv">
-        <div class="step"><span class="n">01</span><h3>Entrada</h3><p>Posicionamento, público, tom de voz, produtos, objetivos e regras da marca. Acontece uma vez, na Fundação.</p></div>
-        <div class="step"><span class="n">02</span><h3>Produção</h3><p>Pesquisa de pautas, planejamento e criação de textos, carrosséis, vídeos curtos, stories, artigos e anúncios.</p></div>
-        <div class="step"><span class="n">03</span><h3>Controle e evolução</h3><p>Revisão de qualidade automática, a minha leitura, a sua aprovação, publicação nos canais e um relatório do mês com o que muda no seguinte.</p></div>
-      </div>
+    </div>
+    <p class="label swipe wrap">Deslize para ver os seis →</p>
+    <div class="cards rv" role="list" aria-label="Os seis passos">
+      <article class="card" role="listitem"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">01 · Comece aqui</span><h3>Diagnóstico de marca</h3><p><b>Você faz:</b> manda o seu perfil e o seu site.</p><p><b>Você recebe:</b> uma pesquisa sobre os seus concorrentes e o meu conselho sobre o que fazer primeiro. R$&nbsp;49,90.</p></div></article>
+      <article class="card" role="listitem"><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="t"><span class="n">02 · Se fizer sentido</span><h3>Fundação</h3><p><b>Você faz:</b> responde a uma entrevista e a algumas perguntas.</p><p><b>Você recebe, em 15 dias úteis:</b> manual da marca, logo e kit, pesquisa de mercado, a sua voz registrada, 3 meses planejados, um site simples no seu domínio e 6 posts prontos. R$&nbsp;1.500.</p></div></article>
+      <article class="card" role="listitem"><img src="cenas/cena-2-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">03 · No combo mensal</span><h3>Produção</h3><p><b>Você faz:</b> nada. É comigo e com o sistema.</p><p><b>Você recebe:</b> as peças do seu combo, todas saindo do seu manual.</p></div></article>
+      <article class="card" role="listitem"><img src="cenas/cena-5-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">04 · No combo mensal</span><h3>A minha leitura</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> só o que eu li e aprovei. O que não soa como a sua marca, eu refaço antes de chegar até você.</p></div></article>
+      <article class="card" role="listitem"><img src="cenas/detalhe-5.jpg" alt="" loading="lazy"><div class="t"><span class="n">05 · No combo mensal</span><h3>A sua aprovação</h3><p><b>Você faz:</b> aprova o mês inteiro de uma vez, em um ambiente só seu.</p><p><b>Você recebe:</b> todas as peças reunidas num só lugar e duas rodadas de ajuste, se precisar.</p></div></article>
+      <article class="card" role="listitem"><img src="cenas/cena-4-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">06 · No combo mensal</span><h3>Publicação e relatório</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> as peças publicadas automaticamente, nos dias agendados, nos seus canais e, no fim do mês, um relatório com o que funcionou e o que muda no seguinte.</p></div></article>
+    </div>
+    <div class="wrap">
       <div class="principle rv">
         <span class="bar" aria-hidden="true"></span>
         <div>
@@ -458,20 +503,21 @@
     </div>
   </section>
 
-  <section class="scene dark" id="fundacao">
+  <section class="scene" id="fundacao">
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">O começo de todo cliente</span>
         <h2>Fundação: em 15 dias úteis, a sua marca pronta para aparecer.</h2>
-        <p>Antes de produzir qualquer coisa, eu preciso entender a sua marca. É a etapa que eu não pulo, porque sem ela conteúdo vira peça solta. Você sai com cinco entregas e com a primeira semana de posts já feita.</p>
+        <p>É a etapa que eu não pulo: sem ela, conteúdo vira peça solta. Você sai com seis entregas e com a primeira semana de posts já feita.</p>
       </div>
       <div class="fd">
         <ol class="fd-list rv">
-          <li><span class="fd-n">01</span><div><h3>Manual da marca</h3><p>Quem você é, para quem fala, como fala e o que nunca diz. É o documento que qualquer pessoa da sua equipe consegue seguir.</p></div></li>
+          <li><span class="fd-n">01</span><div><h3>Manual da marca</h3><p>Quem você é, para quem fala, como fala e o que nunca diz. Um documento que qualquer pessoa da sua equipe consegue seguir.</p></div></li>
           <li><span class="fd-n">02</span><div><h3>Logo e kit de arquivos</h3><p>Logo nova ou revisão da atual, com versões para perfil, site e impressão.</p></div></li>
-          <li><span class="fd-n">03</span><div><h3>Pesquisa de mercado</h3><p>O que os seus concorrentes fazem, o que eles não fazem, e o espaço que sobra para você.</p></div></li>
-          <li><span class="fd-n">04</span><div><h3>A sua voz registrada</h3><p>Os textos passam a soar como você, e não como uma máquina escrevendo por você.</p></div></li>
+          <li><span class="fd-n">03</span><div><h3>Pesquisa de mercado</h3><p>Um relatório sobre o que os seus concorrentes fazem, o que eles não fazem, e o espaço que sobra para você.</p></div></li>
+          <li><span class="fd-n">04</span><div><h3>A sua voz registrada</h3><p>Um documento com o seu jeito de falar, para os textos soarem como você, e não como uma máquina escrevendo por você.</p></div></li>
           <li><span class="fd-n">05</span><div><h3>Os próximos 3 meses planejados</h3><p>Os temas de cada semana, em ordem, ligados ao que você vende.</p></div></li>
+          <li><span class="fd-n">06</span><div><h3>Site simples, no seu domínio</h3><p>Uma página com a sua apresentação, os seus serviços e o contato. O domínio fica no seu nome, e é você quem o paga e o controla: o endereço é seu, e nunca meu.</p></div></li>
         </ol>
         <aside class="fd-card rv">
           <div class="top"><span class="label">A base · pagamento único</span><span class="exp" style="color:var(--amber-light)" aria-hidden="true">a<sup>0</sup></span></div>
@@ -481,13 +527,12 @@
           </div>
           <div>
             <span class="label">Investimento</span>
-            <div class="price-big" style="margin-top:10px">R$ 4.500</div>
-            <p class="price-note">Só uma identidade visual profissional custa de R$ 2,5 a 8 mil no mercado. A Fundação inclui ela e mais quatro entregas. Se você já tem logo e quer manter, o valor é menor.</p>
+            <div class="price-big" style="margin-top:10px">R$&nbsp;1.500</div>
           </div>
           <ul class="fd-promises">
-            <li><b>É seu.</b> Manual, logo e arquivos ficam com você, com ou sem combo.</li>
+            <li><b>É seu.</b> Manual, logo, arquivos e site ficam com você, com ou sem combo.</li>
             <li><b>Eu refaço.</b> Duas rodadas de ajuste no manual e na logo, até soar como a sua marca.</li>
-            <li><b>Vira crédito.</b> Fechou um combo em até 30 dias? R$ 1.000 da Fundação saem da primeira mensalidade.</li>
+            <li><b>Bônus de R$&nbsp;500.</b> Contratou um combo mensal em menos de 30 dias depois da Fundação? Você ganha R$&nbsp;500 de desconto na primeira mensalidade.</li>
           </ul>
           <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero a Fundação para a minha marca.">Quero a Fundação</a>
           <p class="label cap">Abro até duas Fundações por mês, porque cada uma passa inteira por mim.</p>
@@ -496,35 +541,35 @@
     </div>
   </section>
 
-  <section class="scene" id="combos">
+  <section class="scene dark" id="combos">
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Combos mensais</span>
         <h2>Escolha até onde eu cuido.</h2>
-        <p>Cada combo inclui o anterior. O escopo é fechado, você aprova o mês inteiro de uma vez, e o contrato mínimo é de três meses. Conteúdo e SEO não mostram resultado em trinta dias, e eu prefiro dizer isso antes.</p>
+        <p>Cada combo inclui o anterior. O escopo é fechado e você aprova o mês inteiro de uma vez, em um ambiente só seu. O contrato mínimo é de três meses: conteúdo e SEO não mostram resultado em trinta dias, e eu prefiro dizer isso antes.</p>
       </div>
       <div class="combos rv">
         <article class="combo">
           <span class="exp" style="color:var(--amber-light)" aria-hidden="true">a<sup>1</sup></span>
           <h3>Presença</h3>
-          <div><span class="from">a partir de</span><div class="price">R$ 2.200<small>por mês</small></div></div>
+          <div><span class="from">a partir de</span><div class="price">R$&nbsp;800<small>por mês</small></div></div>
           <p class="for">Para quem ainda não aparece com constância.</p>
-          <ul><li>12 posts de feed ou carrossel</li><li>4 reels curtos</li><li>Stories três vezes por semana</li><li>Legenda para cada canal e agendamento</li><li>Relatório mensal</li></ul>
+          <ul><li>Site novo, no seu domínio, pronto para receber o blog</li><li>12 posts de feed ou carrossel</li><li>4 reels curtos</li><li>Stories três vezes por semana</li><li>Legenda para cada canal</li><li>Você aprova tudo em um ambiente só seu</li><li>Publicação automática nos dias agendados</li><li>Relatório mensal: o que funcionou e o que muda</li></ul>
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Presença.">Quero o Presença</a>
         </article>
         <article class="combo">
           <span class="exp" style="color:var(--ember)" aria-hidden="true">a<sup>2</sup></span>
           <h3>Autoridade</h3>
-          <div><span class="from">a partir de</span><div class="price">R$ 4.200<small>por mês</small></div></div>
+          <div><span class="from">a partir de</span><div class="price">R$&nbsp;1.500<small>por mês</small></div></div>
           <p class="for">Para quem vende conhecimento e precisa ser encontrado.</p>
-          <ul><li>Tudo do Presença</li><li>4 artigos de blog com SEO</li><li>Newsletter mensal</li><li>Carrosséis derivados dos artigos</li></ul>
+          <ul><li>Tudo do Presença</li><li>4 artigos de blog com SEO, publicados no seu site</li><li>Newsletter mensal</li><li>Carrosséis derivados dos artigos</li></ul>
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Autoridade.">Quero o Autoridade</a>
         </article>
         <article class="combo featured">
           <span class="tag">Ao cubo · recomendado</span>
           <span class="exp spec-text" aria-hidden="true">a<sup>3</sup></span>
           <h3>Crescimento</h3>
-          <div><span class="from">a partir de</span><div class="price">R$ 6.800<small>por mês, mais a verba</small></div></div>
+          <div><span class="from">a partir de</span><div class="price">R$&nbsp;2.500<small>por mês, mais a verba</small></div></div>
           <p class="for">Para quem já tem oferta e quer vender mais.</p>
           <ul><li>Tudo do Autoridade</li><li>Criativos de anúncio para Meta, com variações</li><li>Montagem e acompanhamento das campanhas</li><li>Uma landing page por trimestre</li><li>Texto de oferta e sequência de e-mail</li></ul>
           <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Crescimento.">Quero o Crescimento</a>
@@ -532,7 +577,7 @@
         <article class="combo">
           <span class="exp" style="color:var(--violet)" aria-hidden="true">a<sup>3+</sup></span>
           <h3>Empresa inteira</h3>
-          <div><span class="from">a partir de</span><div class="price">R$ 12.000<small>por mês, mais a verba</small></div></div>
+          <div><span class="from">a partir de</span><div class="price">R$&nbsp;5.000<small>por mês, mais a verba</small></div></div>
           <p class="for">O departamento de marketing completo.</p>
           <ul><li>Tudo do Crescimento</li><li>Cortes semanais das suas gravações</li><li>Roteiro de vídeo longo por mês</li><li>Um filme de marca por semestre</li><li>Site mantido e atualizado</li><li>Revisão de estratégia a cada trimestre</li></ul>
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Empresa inteira.">Quero o Empresa inteira</a>
@@ -545,29 +590,29 @@
         <h3 style="font-size:30px;text-transform:uppercase">Projetos avulsos</h3>
       </div>
       <div class="extras rv">
-        <div class="extra"><span><b>Identidade</b><span class="d">Manual de marca, logo e kit</span></span><span class="p">R$ 3.500+</span></div>
-        <div class="extra"><span><b>Site ou landing page</b><span class="d">Uma página de campanha ou um site completo</span></span><span class="p">R$ 2.500+</span></div>
-        <div class="extra"><span><b>Pesquisa de mercado</b><span class="d">Relatório de concorrentes, público e oportunidades</span></span><span class="p">R$ 1.500+</span></div>
-        <div class="extra"><span><b>Filme de marca</b><span class="d">Manifesto ou institucional, do roteiro ao corte final</span></span><span class="p">R$ 6.000+</span></div>
-        <div class="extra"><span><b>Apresentação</b><span class="d">Deck comercial ou de investimento</span></span><span class="p">R$ 1.200+</span></div>
-        <div class="extra"><span><b>Assinatura sonora</b><span class="d">Som da marca, composto e com licença escrita</span></span><span class="p">R$ 1.500+</span></div>
+        <div class="extra"><span><b>Identidade</b><span class="d">Manual de marca, logo e kit</span></span><span class="p">R$&nbsp;1.200+</span></div>
+        <div class="extra"><span><b>Site ou landing page</b><span class="d">Uma página de campanha ou um site completo</span></span><span class="p">R$&nbsp;1.000+</span></div>
+        <div class="extra"><span><b>Pesquisa de mercado</b><span class="d">Relatório de concorrentes, público e oportunidades</span></span><span class="p">R$&nbsp;600+</span></div>
+        <div class="extra"><span><b>Filme de marca</b><span class="d">Manifesto ou institucional, do roteiro ao corte final</span></span><span class="p">R$&nbsp;2.500+</span></div>
+        <div class="extra"><span><b>Apresentação</b><span class="d">Deck comercial ou de investimento</span></span><span class="p">R$&nbsp;500+</span></div>
+        <div class="extra"><span><b>Assinatura sonora</b><span class="d">Som da marca, composto e com licença escrita</span></span><span class="p">R$&nbsp;600+</span></div>
       </div>
     </div>
   </section>
 
-  <section class="scene dark" id="leia">
+  <section class="scene" id="leia">
     <div class="wrap">
       <span class="label slate-line rv">A direção</span>
       <div class="leia">
         <div class="rv">
+          <img class="leia-foto" src="cenas/leia-cidade.jpg" alt="Léia Ribeiro, direção criativa do ACUBO" loading="lazy">
           <blockquote>Eu quero que quem me contratar tenha essa visão de arte também, e não apenas de marketing.</blockquote>
           <cite class="label">Léia Ribeiro · direção criativa</cite>
         </div>
         <div class="bio rv">
           <p>Eu sou a <strong>Léia Ribeiro</strong>. Programei por seis anos antes de dirigir criação. Hoje eu opero um sistema de agentes que faz o trabalho de uma equipe, e fico com a parte que nenhum sistema faz: decidir o que a sua marca deve dizer, e o que ela nunca diria.</p>
-          <p>Antes do ACUBO, eu fazia criativo à mão para um cliente só, e não sobrava tempo para mais ninguém. O estúdio tem o formato que tem por causa disso.</p>
           <p>O meu método tem começo, meio e fim, nessa ordem: <strong>diagnóstico, arquitetura, execução.</strong></p>
-          <p>Também criei dois mundos musicais do zero, com som, imagem, letra e regra de conteúdo próprios:</p>
+          <p>Também criei dois mundos musicais do zero, com som, imagem, letra e regra de conteúdo próprios. O som deste site é de um deles.</p>
           <div class="works">
             <a class="work" href="https://www.instagram.com/aurya_lya/" target="_blank" rel="noopener"><span class="label">Obra da casa</span><span class="t">Aurya Lya</span><span>Um multiverso sonoro, com som e regras próprias em cada álbum.</span></a>
             <a class="work" href="https://www.instagram.com/zayre_lanay/" target="_blank" rel="noopener"><span class="label">Obra da casa</span><span class="t">Zayre Lanay</span><span>Dark rock e trip-hop. A arquiteta da intuição.</span></a>
@@ -582,18 +627,18 @@
     <div class="wrap diag">
       <div class="rv">
         <span class="label slate-line">Comece por aqui</span>
-        <h2>Diagnóstico da sua marca, sem custo.</h2>
-        <p style="margin:0 0 28px;max-width:56ch">Me manda o seu perfil e o seu site pelo WhatsApp. Em poucos dias você recebe:</p>
+        <h2>Diagnóstico de marca.</h2>
+        <p style="margin:0 0 28px;max-width:56ch"><strong>R$&nbsp;49,90</strong>, um valor simbólico, para a gente começar. Me manda o seu perfil e o seu site pelo WhatsApp. Em poucos dias você recebe:</p>
         <ol>
-          <li>Uma leitura curta dos seus concorrentes e de onde a sua marca pode se diferenciar</li>
-          <li>Três posts de exemplo, feitos na voz da sua marca</li>
-          <li>A minha recomendação: qual combo faz sentido para você, ou se nenhum faz agora</li>
+          <li><b style="color:var(--cream);font-weight:500">Uma pesquisa curta:</b> o que os seus concorrentes fazem e onde a sua marca pode se diferenciar</li>
+          <li><b style="color:var(--cream);font-weight:500">O meu conselho:</b> o que eu faria primeiro, e qual combo faz sentido para você, ou se nenhum faz agora</li>
         </ol>
+        <p style="margin:28px 0 0"><a class="btn btn-ghost" href="diagnostico-exemplo.html" target="_blank" rel="noopener">Ver um exemplo: o diagnóstico do próprio ACUBO</a></p>
       </div>
       <div class="box rv">
         <span class="label">WhatsApp</span>
         <p>Uma conversa comigo, sem formulário.</p>
-        <a class="btn btn-spec js-wa" href="https://www.instagram.com/acubo.studio/" data-msg="Oi, Léia! Quero um diagnóstico da minha marca. Meu perfil é: ">Pedir o diagnóstico</a>
+        <a class="btn btn-spec js-wa" href="https://www.instagram.com/acubo.studio/" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 49,90). Meu perfil é: ">Pedir o diagnóstico</a>
       </div>
     </div>
   </section>
@@ -605,11 +650,12 @@
         <h2>Antes de conversar.</h2>
       </div>
       <div class="faq rv">
-        <details><summary>O conteúdo é feito com inteligência artificial?</summary><p>Sim, a produção usa um sistema de agentes de IA. É o que me deixa entregar o volume de uma equipe no prazo de um estúdio pequeno. A direção e a revisão são minhas: nenhuma peça chega até você sem eu ter lido e aprovado.</p></details>
-        <details><summary>Preciso fazer contrato longo?</summary><p>Os combos mensais têm mínimo de três meses, porque conteúdo e SEO precisam desse tempo para mostrar resultado. Depois disso, é mês a mês. A Fundação e os projetos avulsos são pagamento único.</p></details>
+        <details><summary>O conteúdo é feito com inteligência artificial?</summary><p>Sim. A produção usa um sistema de agentes de IA, e é isso que entrega o volume de uma equipe. A direção e a revisão são minhas: nenhuma peça chega até você sem eu ter lido e aprovado.</p></details>
+        <details><summary>Preciso fazer contrato longo?</summary><p>Os combos mensais têm mínimo de três meses, porque conteúdo e SEO precisam desse tempo para mostrar resultado. Depois disso, é mês a mês. O diagnóstico, a Fundação e os projetos avulsos são pagamento único.</p></details>
         <details><summary>A verba de anúncio está incluída?</summary><p>Não. Você paga a verba direto ao Meta ou ao Google, na sua conta. O combo cobre a criação dos anúncios, a montagem e o acompanhamento das campanhas.</p></details>
-        <details><summary>Quanto do meu tempo isso vai tomar?</summary><p>Na Fundação, uma entrevista e algumas respostas. Depois, uma rodada de aprovação por mês, com todas as peças do período juntas, e duas rodadas de ajuste se precisar.</p></details>
-        <details><summary>Vocês atendem fora de Manaus?</summary><p>Sim. Eu trabalho de forma remota, e a gente conversa pelo WhatsApp e por chamada de vídeo.</p></details>
+        <details><summary>O site e o domínio ficam no meu nome?</summary><p>O domínio fica no seu nome, e é você quem o paga e o controla. Eu configuro o site nele, e o endereço nunca é meu.</p></details>
+        <details><summary>Quanto do meu tempo isso vai tomar?</summary><p>Na Fundação, uma entrevista e algumas respostas. Depois, uma rodada de aprovação por mês, em um ambiente só seu, com todas as peças do período juntas, e duas rodadas de ajuste se precisar. A publicação é automática, nos dias agendados.</p></details>
+        <details><summary>Você atende fora de Manaus?</summary><p>Sim. Eu trabalho de forma remota, e a gente conversa pelo WhatsApp e por chamada de vídeo.</p></details>
       </div>
     </div>
   </section>
@@ -704,6 +750,31 @@
     document.querySelectorAll('.rv').forEach((el) => io.observe(el));
     setTimeout(() => document.querySelectorAll('.rv').forEach((el) => el.classList.add('in')), 4000);
   }
+
+  // Som: a trilha (base de SYSTEM_AURYA_TR-808, da Aurya Lya) so toca quando a pessoa liga.
+  // Videos com som pausam a trilha enquanto tocam com som.
+  (function sound() {
+    const trilha = document.getElementById('trilha'); const snd = document.getElementById('snd');
+    if (!trilha || !snd) return;
+    trilha.volume = 0.35; let wanted = false;
+    const paint = () => { snd.setAttribute('aria-pressed', String(wanted && !trilha.paused)); snd.textContent = wanted ? 'Som ligado' : 'Som'; };
+    snd.addEventListener('click', () => {
+      wanted = !wanted;
+      if (wanted) { document.querySelectorAll('.vsound[aria-pressed="true"]').forEach((b) => b.click()); trilha.play().catch(() => {}); } else { trilha.pause(); }
+      paint();
+    });
+    document.querySelectorAll('.vsound').forEach((btn) => {
+      const v = btn.parentElement.querySelector('video');
+      btn.addEventListener('click', () => {
+        const on = btn.getAttribute('aria-pressed') !== 'true';
+        document.querySelectorAll('.vsound[aria-pressed="true"]').forEach((o) => { if (o !== btn) o.click(); });
+        btn.setAttribute('aria-pressed', String(on)); btn.textContent = on ? 'Sem som' : 'Ouvir';
+        v.muted = !on;
+        if (on) { trilha.pause(); v.currentTime = 0; v.play().catch(() => {}); } else if (wanted) { trilha.play().catch(() => {}); }
+        paint();
+      });
+    });
+  })();
 </script>
 </body>
 </html>
