@@ -339,6 +339,16 @@
   #leia .leia blockquote { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.3; }
   .leia-foto { display: block; width: 100%; max-width: 340px; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 16%; margin: 0 0 56px; border: 1px solid var(--line); }
   #como .swipe { display: block; }
+  .cards-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .cards-head .swipe { margin: 0; }
+  .cards-nav { display: flex; gap: 8px; flex: none; }
+  .cn { font-family: var(--mono); font-size: 16px; line-height: 1; color: var(--cream); background: rgba(5,4,3,.45); border: 1px solid rgba(245,240,232,.3); width: 46px; height: 40px; cursor: pointer; transition: border-color .3s, color .3s, opacity .3s; }
+  .cn:hover:not(:disabled) { border-color: var(--amber-light); color: var(--amber-light); }
+  .cn:disabled { opacity: .3; cursor: default; }
+  .cards { cursor: grab; scroll-padding-inline: clamp(16px, 4vw, 48px); }
+  .cards.drag { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  .card img { -webkit-user-drag: none; user-select: none; }
+  @media (max-width: 480px) { #como h2 { font-size: clamp(18px, 6vw, 30px); } }
   @media (max-width: 760px) {
     .grain { display: none !important; }
     .js .rv { filter: none !important; transition: opacity 1.1s var(--ease), transform 1.1s var(--ease) !important; }
@@ -486,7 +496,13 @@
         <p>Tudo começa pelo diagnóstico de marca, de R$&nbsp;49,90. Se fizer sentido, você segue para a Fundação e depois para um combo mensal. Em cada passo, você sabe o que faz e o que recebe.</p>
       </div>
     </div>
-    <p class="label swipe wrap">Deslize para ver os seis →</p>
+    <div class="cards-head wrap">
+      <p class="label swipe">Deslize ou use as setas para ver os seis</p>
+      <div class="cards-nav" role="group" aria-label="Navegar pelos seis passos">
+        <button class="cn" type="button" data-dir="-1" aria-label="Passo anterior">←</button>
+        <button class="cn" type="button" data-dir="1" aria-label="Próximo passo">→</button>
+      </div>
+    </div>
     <div class="cards rv" role="list" aria-label="Os seis passos">
       <article class="card" role="listitem"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">01 · Comece aqui</span><h3>Diagnóstico de marca</h3><p><b>Você faz:</b> manda o seu perfil e o seu site.</p><p><b>Você recebe:</b> uma pesquisa sobre os seus concorrentes e o meu conselho sobre o que fazer primeiro. R$&nbsp;49,90.</p></div></article>
       <article class="card" role="listitem"><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="t"><span class="n">02 · Se fizer sentido</span><h3>Fundação</h3><p><b>Você faz:</b> responde a uma entrevista e a algumas perguntas.</p><p><b>Você recebe, em 15 dias úteis:</b> manual da marca, logo e kit, pesquisa de mercado, a sua voz registrada, 3 meses planejados, um site simples no seu domínio e 6 posts prontos. R$&nbsp;1.500.</p></div></article>
@@ -777,6 +793,29 @@
         paint();
       });
     });
+  })();
+
+  // Seis passos: setas e arrastar com o mouse (no celular continua o deslizar nativo).
+  (function cards() {
+    const c = document.querySelector('.cards'); if (!c) return;
+    const btns = [...document.querySelectorAll('.cn')];
+    const step = () => { const k = c.querySelector('.card'); return (k ? k.getBoundingClientRect().width : 310) + 12; };
+    const paint = () => {
+      const max = c.scrollWidth - c.clientWidth;
+      btns.forEach((b) => { b.disabled = b.dataset.dir === '-1' ? c.scrollLeft <= 4 : c.scrollLeft >= max - 4; });
+    };
+    btns.forEach((b) => b.addEventListener('click', () => c.scrollBy({ left: step() * Number(b.dataset.dir), behavior: reduce ? 'auto' : 'smooth' })));
+    c.addEventListener('scroll', paint, { passive: true });
+    addEventListener('resize', paint);
+    let down = false, sx = 0, sl = 0;
+    c.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; sx = e.clientX; sl = c.scrollLeft; c.classList.add('drag');
+    });
+    addEventListener('pointermove', (e) => { if (down) c.scrollLeft = sl - (e.clientX - sx); });
+    const end = () => { if (!down) return; down = false; c.classList.remove('drag'); };
+    addEventListener('pointerup', end); addEventListener('pointercancel', end);
+    paint();
   })();
 </script>
 </body>
