@@ -339,7 +339,10 @@
   #leia .leia blockquote { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.3; }
   .leia-foto { display: block; width: 100%; max-width: 340px; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 16%; margin: 0 0 56px; border: 1px solid var(--line); }
   #como .swipe { display: block; }
-  @media (max-width: 480px) { .nav-links { gap: 10px; } .snd { padding: 8px 10px; } }
+  @media (max-width: 760px) {
+    .grain { display: none !important; }
+    .js .rv { filter: none !important; transition: opacity 1.1s var(--ease), transform 1.1s var(--ease) !important; }
+  }
 </style>
 </head>
 <body>
@@ -692,7 +695,7 @@
     el.target = '_blank'; el.rel = 'noopener';
   });
 
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 760px)').matches;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Grão de filme gerado uma vez em canvas.
   (function grain() {
