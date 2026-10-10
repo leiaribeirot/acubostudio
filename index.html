@@ -88,6 +88,8 @@
   .nav .brand img { width: 26px; }
   .nav .wordmark { font-size: 15px; }
   .nav-links { display: flex; align-items: center; gap: 30px; }
+  .nav-links a.txt.txt-blog { color: var(--amber-light); opacity: 1; }
+  .nav-links a.txt.txt-blog:hover { color: var(--cream); }
   .nav-links a.txt { text-decoration: none; font-family: var(--mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--cream); opacity: .8; transition: opacity .3s, color .3s; }
   .nav-links a.txt:hover { opacity: 1; color: var(--amber-light); }
   .nav .btn { padding: 11px 16px; font-size: 11px; }
@@ -370,7 +372,7 @@
       <a class="txt" href="#como">Como funciona</a>
       <a class="txt" href="#combos">Combos</a>
       <a class="txt" href="#leia">Direção</a>
-      <a class="txt" href="/blog/">Blog</a>
+      <a class="txt txt-blog" href="/blog/">Blog</a>
       <button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Ligar o som do site">Som</button>
       <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 49,90).">Diagnóstico</a>
     </nav>
