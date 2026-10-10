@@ -74,7 +74,10 @@
   .cover:has(.hero) .post-head .label { color: var(--amber-light); text-shadow: 0 1px 14px rgba(10,8,5,.9); }
   .cover:has(.hero) .post-head h1 { text-shadow: 0 2px 24px rgba(10,8,5,.55); }
   .cover:not(:has(.hero)) .cover-text { padding-top: clamp(96px, 14vw, 150px); }
-  .post-head { padding-block: 0; max-width: 720px; margin-inline: auto; }
+  .post-head { padding-block: 0; max-width: 720px; margin-inline: auto; position: relative; }
+  .voltar-site { position: absolute; left: 0; top: calc(-1 * clamp(56px, 9vh, 100px)); display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--amber-light); background: rgba(5,4,3,.55); border: 1px solid rgba(232,193,122,.4); transition: background .3s, border-color .3s; }
+  .voltar-site:hover, .voltar-site:focus-visible { background: rgba(5,4,3,.8); border-color: var(--amber-light); }
+  .cover:not(:has(.hero)) .voltar-site { position: static; display: flex; width: fit-content; margin-bottom: 28px; }
   .post-head h1 { font-family: var(--display); font-weight: 800; text-transform: uppercase; color: var(--cream); font-size: clamp(22px, 6.4vw, 52px); line-height: 1.04; margin: 18px 0 22px; text-wrap: balance; overflow-wrap: break-word; hyphens: manual; }
   @media (min-width: 900px) { .post-head h1 { font-size: clamp(40px, 4.2vw, 56px); } }
   .post-head .lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--parchment); margin: 0; max-width: 64ch; }
@@ -130,6 +133,7 @@
   <figure class="hero"><img src="/blog/quem-decide-sou-eu-ia-sem-perder-a-voz-da-marca/img/hero-001.webp" alt="Quem decide sou eu: como usar IA sem perder a voz da marca"></figure>
   <div class="cover-text wrap">
     <header class="post-head">
+      <a class="voltar-site" href="/">← Voltar ao site</a>
       <span class="label"><time datetime="2026-10-10">10 de outubro de 2026</time> · leitura de 2 min</span>
       <h1>Quem decide sou eu: como usar IA sem perder a voz da marca</h1>
       <p class="lede">A IA produz rápido. Quem decide o que a marca diz continua sendo uma pessoa. Veja como eu divido o trabalho entre direção humana e produção com IA no ACUBO.</p>
