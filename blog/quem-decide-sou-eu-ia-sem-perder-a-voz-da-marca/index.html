@@ -60,7 +60,7 @@
   .nav-links a.txt { text-decoration: none; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--cream); opacity: .8; }
   .nav-links a.txt:hover, .nav-links a.txt[aria-current] { opacity: 1; color: var(--amber-light); }
   .nav .btn { padding: 10px 14px; font-size: 10.5px; }
-  @media (max-width: 560px) { .nav-links a.txt.hide-sm { display: none; } .nav-links { gap: 16px; } }
+  @media (max-width: 560px) { .nav-links a.txt.hide-sm { display: none; } .nav-links a.txt .nav-long { display: none; } .nav-links { gap: 16px; } }
   footer { border-top: 1px solid var(--line); margin-top: 96px; padding-block: 48px 64px; }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 40px; align-items: center; justify-content: space-between; }
   footer p { margin: 0; font-size: 14px; color: var(--muted); }
@@ -75,9 +75,6 @@
   .cover:has(.hero) .post-head h1 { text-shadow: 0 2px 24px rgba(10,8,5,.55); }
   .cover:not(:has(.hero)) .cover-text { padding-top: clamp(96px, 14vw, 150px); }
   .post-head { padding-block: 0; max-width: 720px; margin-inline: auto; position: relative; }
-  .voltar-site { position: absolute; left: 0; top: calc(-1 * clamp(56px, 9vh, 100px)); display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--amber-light); background: rgba(5,4,3,.55); border: 1px solid rgba(232,193,122,.4); transition: background .3s, border-color .3s; }
-  .voltar-site:hover, .voltar-site:focus-visible { background: rgba(5,4,3,.8); border-color: var(--amber-light); }
-  .cover:not(:has(.hero)) .voltar-site { position: static; display: flex; width: fit-content; margin-bottom: 28px; }
   .post-head h1 { font-family: var(--display); font-weight: 800; text-transform: uppercase; color: var(--cream); font-size: clamp(22px, 6.4vw, 52px); line-height: 1.04; margin: 18px 0 22px; text-wrap: balance; overflow-wrap: break-word; hyphens: manual; }
   @media (min-width: 900px) { .post-head h1 { font-size: clamp(40px, 4.2vw, 56px); } }
   .post-head .lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--parchment); margin: 0; max-width: 64ch; }
@@ -122,6 +119,7 @@
       <span class="wordmark">ACUBO<span class="dot"></span></span>
     </a>
     <nav class="nav-links" aria-label="Seções">
+      <a class="txt" href="/">← <span class="nav-long">Voltar ao </span>site</a>
       <a class="txt hide-sm" href="/#combos">Combos</a>
       <a class="txt" href="/blog/">Blog</a>
       <a class="btn btn-amber" href="https://wa.me/5592981282915?text=Oi%2C%20L%C3%A9ia!%20Quero%20um%20diagn%C3%B3stico%20da%20minha%20marca." rel="noopener">Diagnóstico</a>
@@ -133,7 +131,6 @@
   <figure class="hero"><img src="/blog/quem-decide-sou-eu-ia-sem-perder-a-voz-da-marca/img/hero-001.webp" alt="Quem decide sou eu: como usar IA sem perder a voz da marca"></figure>
   <div class="cover-text wrap">
     <header class="post-head">
-      <a class="voltar-site" href="/">← Voltar ao site</a>
       <span class="label"><time datetime="2026-10-10">10 de outubro de 2026</time> · leitura de 2 min</span>
       <h1>Quem decide sou eu: como usar IA sem perder a voz da marca</h1>
       <p class="lede">A IA produz rápido. Quem decide o que a marca diz continua sendo uma pessoa. Veja como eu divido o trabalho entre direção humana e produção com IA no ACUBO.</p>
