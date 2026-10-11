@@ -6,5 +6,21 @@
     "date": "2026-10-10",
     "hero": "/blog/quem-decide-sou-eu-ia-sem-perder-a-voz-da-marca/img/hero-001.webp",
     "reading_time": 2
+  },
+  {
+    "slug": "o-que-e-fundacao-de-marca",
+    "title": "O que é a Fundação de marca",
+    "description": "A Fundação é a base de todo combo mensal do ACUBO.: seis entregas, R$ 1.500 em pagamento único e 15 dias úteis.",
+    "date": "2026-10-11",
+    "hero": "/blog/o-que-e-fundacao-de-marca/img/hero-001.webp",
+    "reading_time": 8
+  },
+  {
+    "slug": "imagem-e-video-com-ia-com-direcao-humana",
+    "title": "Imagem e vídeo com IA, com direção humana",
+    "description": "Como o ACUBO. faz imagem e vídeo com agentes de IA: uma cadeia de papéis, uma checagem visual contra o estilo da marca e a direção humana no meio.",
+    "date": "2026-10-11",
+    "hero": "/blog/imagem-e-video-com-ia-com-direcao-humana/img/detalhe-5.jpg",
+    "reading_time": 6
   }
 ]
