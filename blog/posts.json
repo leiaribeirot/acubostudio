@@ -1,26 +1,26 @@
 [
   {
-    "slug": "o-que-e-fundacao-de-marca",
-    "title": "O que é a Fundação de marca",
-    "description": "A Fundação é a base de todo combo mensal do ACUBO.: seis entregas, R$ 1.500 em pagamento único e 15 dias úteis.",
-    "date": "2026-10-11",
-    "hero": "/blog/o-que-e-fundacao-de-marca/img/hero-001.webp",
-    "reading_time": 8
-  },
-  {
-    "slug": "imagem-e-video-com-ia-com-direcao-humana",
-    "title": "Imagem e vídeo com IA, com direção humana",
-    "description": "Como o ACUBO. faz imagem e vídeo com agentes de IA: uma cadeia de papéis, uma checagem visual contra o estilo da marca e a direção humana no meio.",
-    "date": "2026-10-11",
-    "hero": "/blog/imagem-e-video-com-ia-com-direcao-humana/img/detalhe-5.jpg",
-    "reading_time": 6
-  },
-  {
     "slug": "quem-decide-sou-eu-ia-sem-perder-a-voz-da-marca",
     "title": "Quem decide sou eu: como usar IA sem perder a voz da marca",
     "description": "A IA produz rápido. Quem decide o que a marca diz continua sendo uma pessoa. Veja como eu divido o trabalho entre direção humana e produção com IA no ACUBO.",
     "date": "2026-10-12",
     "hero": "/blog/quem-decide-sou-eu-ia-sem-perder-a-voz-da-marca/img/hero-001.webp",
     "reading_time": 3
+  },
+  {
+    "slug": "imagem-e-video-com-ia-com-direcao-humana",
+    "title": "Imagem e vídeo com IA: onde eu entro no processo",
+    "description": "Como o ACUBO. faz imagem e vídeo com agentes de IA: uma cadeia de papéis, uma checagem visual contra o estilo da marca e a minha direção no meio, não só no fim.",
+    "date": "2026-10-12",
+    "hero": "/blog/imagem-e-video-com-ia-com-direcao-humana/img/detalhe-5.jpg",
+    "reading_time": 3
+  },
+  {
+    "slug": "o-que-e-fundacao-de-marca",
+    "title": "O que é a Fundação de marca e por que ela vem antes do post",
+    "description": "A Fundação é a base de todo combo mensal do ACUBO.: seis entregas, R$ 1.500 em pagamento único e 15 dias úteis. Eu explico o que entra e o que fica com você.",
+    "date": "2026-10-12",
+    "hero": "/blog/o-que-e-fundacao-de-marca/img/hero-001.webp",
+    "reading_time": 4
   }
 ]
