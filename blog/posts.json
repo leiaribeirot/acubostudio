@@ -8,19 +8,19 @@
     "reading_time": 3
   },
   {
-    "slug": "imagem-e-video-com-ia-com-direcao-humana",
-    "title": "Imagem e vídeo com IA: onde eu entro no processo",
-    "description": "Como o ACUBO. faz imagem e vídeo com agentes de IA: uma cadeia de papéis, uma checagem visual contra o estilo da marca e a minha direção no meio, não só no fim.",
-    "date": "2026-10-12",
-    "hero": "/blog/imagem-e-video-com-ia-com-direcao-humana/img/detalhe-5.jpg",
-    "reading_time": 3
-  },
-  {
     "slug": "o-que-e-fundacao-de-marca",
     "title": "O que é a Fundação de marca e por que ela vem antes do post",
     "description": "A Fundação é a base de todo combo mensal do ACUBO.: seis entregas, R$ 1.500 em pagamento único e 15 dias úteis. Eu explico o que entra e o que fica com você.",
     "date": "2026-10-12",
     "hero": "/blog/o-que-e-fundacao-de-marca/img/hero-001.webp",
     "reading_time": 4
+  },
+  {
+    "slug": "imagem-e-video-com-ia-com-direcao-humana",
+    "title": "Imagem e vídeo com IA: onde eu entro no processo",
+    "description": "Como o ACUBO. faz imagem e vídeo com agentes de IA: uma cadeia de papéis, uma checagem visual contra o estilo da marca e a minha direção no meio, não só no fim.",
+    "date": "2026-10-12",
+    "hero": "/blog/imagem-e-video-com-ia-com-direcao-humana/img/detalhe-5.jpg",
+    "reading_time": 3
   }
 ]
