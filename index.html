@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ACUBO. · Sua marca, ao cubo</title>
-<meta name="description" content="O departamento de marketing que a sua empresa não tem. Direção criativa de Léia Ribeiro e produção por um sistema de agentes que pesquisa, escreve, desenha, anima e publica.">
+<title>ACUBO. · Sua marca, ao cubo | Marketing com direção criativa</title>
+<meta name="description" content="O departamento de marketing que a sua empresa não tem. Léia Ribeiro dirige, um sistema de agentes de IA produz, e nenhuma peça chega até você sem a leitura dela. Estúdio em Manaus.">
+<link rel="canonical" href="https://acubostudio.com/">
+<link rel="alternate" type="application/rss+xml" title="Blog do ACUBO." href="/blog/feed.xml">
 <meta name="theme-color" content="#050403">
 <meta name="color-scheme" content="dark">
 <link rel="icon" type="image/svg+xml" href="assets/acubo-avatar.svg">
@@ -12,9 +14,10 @@
 <link rel="apple-touch-icon" href="assets/acubo-avatar-180.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://acubostudio.com/">
-<meta property="og:title" content="ACUBO. · Sua marca, ao cubo">
+<meta property="og:title" content="ACUBO. · Sua marca, ao cubo | Marketing com direção criativa">
 <meta property="og:description" content="O departamento de marketing que a sua empresa não tem. Cada entrega com assinatura.">
 <meta property="og:image" content="https://acubostudio.com/assets/acubo-avatar-512.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"ACUBO.","url":"https://acubostudio.com/","description":"Estúdio de marketing com direção criativa de Léia Ribeiro e produção por um sistema de agentes de IA.","founder":{"@type":"Person","name":"Léia Ribeiro"},"areaServed":"BR","address":{"@type":"PostalAddress","addressLocality":"Manaus","addressCountry":"BR"},"sameAs":["https://www.instagram.com/acubo.studio/"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap">
@@ -39,6 +42,7 @@
     --cream: #F5F0E8;
     --parchment: #D4C0A0;
     --muted: #8A7A68;
+    --muted-ui: #A8977F; /* o muted da marca falha 4,5:1 sobre os cards; este passa */
     --line: #2A1F16;
     --spec: linear-gradient(90deg, #E8C17A 0%, #E2573B 32%, #C2186A 62%, #7B2FA0 84%, #4B2A8C 100%);
     --display: "Syne", "Arial Black", system-ui, sans-serif;
@@ -58,7 +62,7 @@
   .wrap > *, .wrap > * > * { min-width: 0; }
   h1, h2, h3, p, li, .label { overflow-wrap: break-word; }
   .wrap { max-width: 1200px; margin: 0 auto; padding-inline: var(--gutter); }
-  .label { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .label { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted-ui); }
   .spec-text { background: var(--spec); -webkit-background-clip: text; background-clip: text; color: transparent; }
   sup.cube { font-size: .5em; vertical-align: .9em; margin-left: .04em; }
 
@@ -116,6 +120,7 @@
   .hero .tagline { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(17px, 2vw, 26px); color: var(--cream); margin: 26px 0 16px; max-width: 34ch; line-height: 1.2; }
   .hero .sub { font-size: clamp(16.5px, 1.5vw, 19px); max-width: 58ch; margin: 0 0 34px; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .note { margin: 20px 0 0; font-size: 15.5px; max-width: 60ch; color: rgba(212,192,160,.85); }
   .hero .meta { margin-top: 40px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .hero .meta span { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(212,192,160,.6); font-variant-numeric: tabular-nums; }
   .rise { animation: rise 1.6s var(--ease) both; }
@@ -199,30 +204,40 @@
   .fd-bonus { border: 1px dashed rgba(232,193,122,.45); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
   .fd-bonus p { margin: 0; font-size: 16px; }
   .price-big { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 4.4vw, 58px); color: var(--amber-light); line-height: 1; }
-  .price-note { font-size: 15px; color: var(--muted); margin: 12px 0 0; }
+  .price-note { font-size: 15.5px; color: var(--muted-ui); margin: 12px 0 0; }
+  .stack { font-size: 15.5px; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--line); }
   .fd-promises { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
   .fd-promises li { font-size: 15.5px; padding-left: 22px; position: relative; }
   .fd-promises li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; background: var(--amber); transform: rotate(45deg); }
   .fd-promises b { font-weight: 500; color: var(--cream); }
   .cap { margin: 0; text-align: center; }
 
-  .combos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  @media (max-width: 1060px) { .combos { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 620px) { .combos { grid-template-columns: 1fr; } }
+  .combos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: stretch; }
+  @media (max-width: 900px) { .combos { grid-template-columns: 1fr; } }
+  /* a âncora: o teto da escada aparece primeiro, para os outros lerem a partir dele */
+  .combo.anchor { margin-bottom: 30px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr) auto; gap: 18px clamp(24px,4vw,56px); align-items: start; padding: clamp(28px,3.4vw,44px); border-color: rgba(123,47,160,.55); background: linear-gradient(135deg,#1a1018,var(--surface) 55%); }
+  .combo.anchor .a-head { display: flex; flex-direction: column; gap: 14px; }
+  .combo.anchor .price { font-size: clamp(30px,2.6vw,38px); }
+  .combo.anchor .tag { background: var(--amber); }
+  .combo.anchor ul { grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .combo.anchor .btn { margin-top: 0; align-self: center; }
+  @media (max-width: 900px) { .combo.anchor { grid-template-columns: 1fr; } .combo.anchor ul { grid-template-columns: 1fr; } .combo.anchor .btn { margin-top: 6px; align-self: stretch; } }
+  .combo.featured { padding-block: 40px; }
+  @media (min-width: 901px) { .combo.featured { transform: translateY(-8px); } .combo.featured:hover { transform: translateY(-12px); } }
   .combo { position: relative; background: var(--surface); border: 1px solid var(--line); padding: 30px 24px; display: flex; flex-direction: column; gap: 14px; transition: border-color .6s var(--ease), transform .6s var(--ease), box-shadow .6s var(--ease); }
   .combo:hover { border-color: rgba(201,145,58,.45); transform: translateY(-4px); box-shadow: 0 30px 60px rgba(0,0,0,.5); }
   .combo.featured { border: 1px solid transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--spec) border-box; box-shadow: 0 0 60px rgba(194,24,106,.18); }
   .combo .tag { position: absolute; top: -11px; right: 18px; background: var(--spec); color: var(--black); font-family: var(--mono); font-weight: 700; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 10px; }
   .combo h3 { font-size: 24px; text-transform: uppercase; letter-spacing: .02em; }
-  .combo .from { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .combo .from { font-family: var(--mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-ui); }
   .combo .price { font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1.05; color: var(--cream); font-variant-numeric: tabular-nums; }
-  .combo .price small { display: block; font-family: var(--body); font-weight: 300; font-size: 14px; color: var(--muted); }
-  .combo .for { margin: 0; font-size: 15.5px; }
-  .combo ul { margin: 0; padding: 0; list-style: none; font-size: 15.5px; line-height: 1.5; display: grid; gap: 8px; }
+  .combo .price small { display: block; font-family: var(--body); font-weight: 300; font-size: 15px; color: var(--muted-ui); }
+  .combo .for { margin: 0; font-size: 16.5px; color: var(--cream); }
+  .combo ul { margin: 0; padding: 0; list-style: none; font-size: 16px; line-height: 1.5; display: grid; gap: 8px; }
   .combo li { padding-left: 16px; position: relative; }
   .combo li::before { content: ""; position: absolute; left: 0; top: .65em; width: 6px; height: 1px; background: var(--amber); }
   .combo .btn { margin-top: auto; }
-  .fine { margin-top: 26px; font-size: 14.5px; color: var(--muted); max-width: 84ch; }
+  .fine { margin-top: 26px; font-size: 15.5px; color: var(--muted-ui); max-width: 84ch; }
   .extras-head { margin: clamp(72px, 9vw, 110px) 0 24px; }
   .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 36px; }
   @media (max-width: 860px) { .extras { grid-template-columns: 1fr; } }
@@ -335,7 +350,7 @@
   .card .t { padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; }
   .card .n { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; color: var(--amber-light); }
   .card h3 { font-size: 22px; margin: 0; }
-  .card p { margin: 0; font-size: 15.5px; }
+  .card p { margin: 0; font-size: 16px; }
   .card p b { font-weight: 500; color: var(--cream); }
   #problema h2 { font-size: clamp(18px, 5.2vw, 52px); }
   #leia .leia blockquote { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.3; }
@@ -374,7 +389,7 @@
       <a class="txt" href="#leia">Direção</a>
       <a class="txt txt-blog" href="/blog/">Blog</a>
       <button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Ligar o som do site">Som</button>
-      <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 149).">Diagnóstico</a>
+      <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca.">Diagnóstico</a>
     </nav>
   </div>
 </header>
@@ -396,14 +411,15 @@
         <div class="terminal rise">ACUBO. // estúdio de marketing com direção criativa<span class="cursor" aria-hidden="true"></span></div>
         <h1 class="rise d1">Sua marca,<span class="l2">ao cubo<sup class="cube spec-text">3</sup></span></h1>
         <p class="tagline rise d2">O departamento de marketing que a sua empresa não tem.</p>
-        <p class="sub rise d3">Eu dirijo. Um sistema de agentes de IA produz. Nenhuma peça chega até você sem eu ter lido antes.</p>
+        <p class="sub rise d3">Eu dirijo a criação e um sistema de agentes de IA produz o volume de uma equipe. Nenhuma peça chega até você sem eu ter lido antes.</p>
         <div class="actions rise d4">
-          <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 149).">
+          <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca.">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-            Diagnóstico de marca · R$&nbsp;149
+            Pedir o meu diagnóstico
           </a>
           <a class="btn btn-ghost" href="#combos">Ver os combos</a>
         </div>
+        <p class="note rise d4">Sem formulário: a conversa é direto comigo, pelo WhatsApp. Se nenhum combo fizer sentido para você agora, eu digo.</p>
         <div class="meta"><span>Cada entrega com assinatura.</span><span id="tc">00:00:00:00</span></div>
       </div>
     </div>
@@ -477,7 +493,7 @@
         <ul class="dims">
           <li><b>A imagem</b><span>“Nada pode parecer sexy, precisa ser profissional.”</span></li>
           <li><b>O som</b><span>“A trilha está estourando, ajusta.”</span></li>
-          <li><b>A edição</b><span>“Esse é está duplicado, tira.”</span></li>
+          <li><b>A edição</b><span>“Esse aqui está duplicado, tira.”</span></li>
         </ul>
         <p style="margin:24px 0 0;font-size:17px;max-width:52ch">O Claude executa. O ACUBO organiza o caminho. A direção é minha.</p>
       </div>
@@ -496,7 +512,7 @@
       <div class="head rv">
         <span class="label slate-line">Como funciona</span>
         <h2>Do diagnóstico à peça publicada.</h2>
-        <p>Tudo começa pelo diagnóstico de marca, de R$&nbsp;149. Se fizer sentido, você segue para a Fundação e depois para um combo mensal. Em cada passo, você sabe o que faz e o que recebe.</p>
+        <p>Tudo começa por uma conversa e pelo diagnóstico de marca. Se fizer sentido, você segue para a Fundação e depois para um combo mensal. Em cada passo, você sabe o que faz e o que recebe.</p>
       </div>
     </div>
     <div class="cards-head wrap">
@@ -507,8 +523,8 @@
       </div>
     </div>
     <div class="cards rv" role="list" aria-label="Os seis passos">
-      <article class="card" role="listitem"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">01 · Comece aqui</span><h3>Diagnóstico de marca</h3><p><b>Você faz:</b> manda o seu perfil e o seu site.</p><p><b>Você recebe:</b> análise inicial, pesquisa breve dos concorrentes, oportunidades de diferenciação, orientação de prioridade e recomendação do serviço mais adequado. R$&nbsp;149.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="t"><span class="n">02 · Se fizer sentido</span><h3>Fundação</h3><p><b>Você faz:</b> responde a uma entrevista e a algumas perguntas.</p><p><b>Você recebe, em 15 dias úteis:</b> manual da marca, logo e kit, pesquisa de mercado, voz e linguagem, 3 meses planejados, um site simples no seu domínio e 6 posts prontos. A partir de R$&nbsp;3.900.</p></div></article>
+      <article class="card" role="listitem"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">01 · Comece aqui</span><h3>Diagnóstico de marca</h3><p><b>Você faz:</b> manda o seu perfil e o seu site.</p><p><b>Você recebe:</b> uma pesquisa curta sobre os seus concorrentes e o meu conselho: o que eu faria primeiro e qual combo faz sentido para você, ou se nenhum faz agora.</p></div></article>
+      <article class="card" role="listitem"><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="t"><span class="n">02 · Se fizer sentido</span><h3>Fundação</h3><p><b>Você faz:</b> responde a uma entrevista e a algumas perguntas.</p><p><b>Você recebe, em 15 dias úteis:</b> manual da marca, logo e kit, pesquisa de mercado, voz e linguagem, 3 meses planejados, um site simples no seu domínio e 6 posts prontos.</p></div></article>
       <article class="card" role="listitem"><img src="cenas/cena-2-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">03 · No combo mensal</span><h3>Produção</h3><p><b>Você faz:</b> nada. É comigo e com o sistema.</p><p><b>Você recebe:</b> as peças do seu combo, todas saindo do seu manual.</p></div></article>
       <article class="card" role="listitem"><img src="cenas/cena-5-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">04 · No combo mensal</span><h3>A minha leitura</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> só o que eu li e aprovei. O que não soa como a sua marca, eu refaço antes de chegar até você.</p></div></article>
       <article class="card" role="listitem"><img src="cenas/detalhe-5.jpg" alt="" loading="lazy"><div class="t"><span class="n">05 · No combo mensal</span><h3>A sua aprovação</h3><p><b>Você faz:</b> aprova o mês inteiro de uma vez, em um ambiente só seu.</p><p><b>Você recebe:</b> todas as peças reunidas num só lugar e duas rodadas de ajuste, se precisar.</p></div></article>
@@ -530,7 +546,7 @@
       <div class="head rv">
         <span class="label slate-line">O começo de todo cliente</span>
         <h2>Fundação: em 15 dias úteis, a sua marca pronta para aparecer.</h2>
-        <p>É a etapa que eu não pulo: sem ela, conteúdo vira peça solta. Você sai com seis entregas e com a primeira semana de posts já feita.</p>
+        <p>É a etapa que eu não pulo: sem ela, conteúdo vira peça solta. Você sai com seis entregas, com a primeira semana de posts já feita e com a base de todo combo que vier depois.</p>
       </div>
       <div class="fd">
         <ol class="fd-list rv">
@@ -548,8 +564,10 @@
             <p><strong>6 posts prontos</strong> para a sua primeira semana, já com a marca nova. Você vê o sistema funcionando antes de decidir qualquer combo.</p>
           </div>
           <div>
-            <span class="label">Investimento</span>
-          <div class="price-big" style="margin-top:10px">a partir de R$&nbsp;3.900</div>
+            <span class="label">Investimento de referência</span>
+          <div class="price-big" style="margin-top:10px">R$&nbsp;3.900</div>
+          <p class="stack">Identidade, site e pesquisa de mercado, contratados à parte nesta página, partem de <strong>R$&nbsp;5.500</strong> juntos. A Fundação traz as três, e ainda a voz registrada, os 3 meses planejados e 6 posts.</p>
+          <p class="price-note">O valor final a gente fecha na conversa, olhando o que a sua marca precisa.</p>
           </div>
           <ul class="fd-promises">
             <li><b>É seu.</b> Manual, logo, arquivos e site ficam com você, com ou sem combo.</li>
@@ -568,21 +586,34 @@
       <div class="head rv">
         <span class="label slate-line">Combos mensais</span>
         <h2>Escolha até onde eu cuido.</h2>
-        <p>Cada combo inclui o anterior. O escopo é fechado e você aprova o mês inteiro de uma vez, em um ambiente só seu. O contrato mínimo é de três meses: conteúdo e SEO não mostram resultado em trinta dias, e eu prefiro dizer isso antes.</p>
+        <p>Cada combo inclui os que vêm antes dele na escada. O escopo é fechado e você aprova o mês inteiro de uma vez, em um ambiente só seu. O contrato mínimo é de três meses: conteúdo e SEO não mostram resultado em trinta dias, e eu prefiro dizer isso antes.</p>
+      </div>
+      <div class="rv">
+        <article class="combo anchor">
+          <span class="tag">A direção inteira</span>
+          <div class="a-head">
+            <span class="exp" style="color:var(--violet)" aria-hidden="true">a<sup>3+</sup></span>
+            <h3>Empresa inteira</h3>
+            <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;7.500<small>mais a verba</small></div></div>
+            <p class="for">O departamento de marketing completo, sob uma direção só: a minha.</p>
+          </div>
+          <ul><li>Tudo do Crescimento, do Autoridade e do Presença</li><li>Cortes semanais das suas gravações</li><li>Roteiro de vídeo longo por mês</li><li>Um filme de marca por semestre</li><li>Site mantido e atualizado</li><li>Revisão de estratégia a cada trimestre</li></ul>
+          <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Empresa inteira.">Quero o Empresa inteira</a>
+        </article>
       </div>
       <div class="combos rv">
         <article class="combo">
           <span class="exp" style="color:var(--amber-light)" aria-hidden="true">a<sup>1</sup></span>
           <h3>Presença</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;1.800<small>por mês</small></div></div>
-          <p class="for">Para quem ainda não aparece com constância.</p>
+          <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;1.800<small>escopo fechado</small></div></div>
+          <p class="for">Para quem tem o que mostrar e ainda não aparece com constância.</p>
           <ul><li>Site novo, no seu domínio, pronto para receber o blog</li><li>12 posts de feed ou carrossel</li><li>4 reels curtos</li><li>Stories três vezes por semana</li><li>Legenda para cada canal</li><li>Você aprova tudo em um ambiente só seu</li><li>Publicação automática nos dias agendados</li><li>Relatório mensal: o que funcionou e o que muda</li></ul>
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Presença.">Quero o Presença</a>
         </article>
         <article class="combo">
           <span class="exp" style="color:var(--ember)" aria-hidden="true">a<sup>2</sup></span>
           <h3>Autoridade</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;2.900<small>por mês</small></div></div>
+          <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;2.900<small>escopo fechado</small></div></div>
           <p class="for">Para quem vende conhecimento e precisa ser encontrado.</p>
           <ul><li>Tudo do Presença</li><li>4 artigos de blog com SEO, publicados no seu site</li><li>Newsletter mensal</li><li>Carrosséis derivados dos artigos</li></ul>
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Autoridade.">Quero o Autoridade</a>
@@ -591,25 +622,18 @@
           <span class="tag">Ao cubo · recomendado</span>
           <span class="exp spec-text" aria-hidden="true">a<sup>3</sup></span>
           <h3>Crescimento</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;4.500<small>por mês, mais a verba</small></div></div>
-          <p class="for">Para quem já tem oferta e quer vender mais.</p>
+          <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;4.500<small>mais a verba</small></div></div>
+          <p class="for">Para quem já tem oferta e quer vender mais, com anúncio feito sobre a marca, e não ao lado dela.</p>
           <ul><li>Tudo do Autoridade</li><li>Criativos de anúncio para Meta, com variações</li><li>Montagem e acompanhamento das campanhas</li><li>Uma landing page por trimestre</li><li>Texto de oferta e sequência de e-mail</li></ul>
           <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Crescimento.">Quero o Crescimento</a>
         </article>
-        <article class="combo">
-          <span class="exp" style="color:var(--violet)" aria-hidden="true">a<sup>3+</sup></span>
-          <h3>Empresa inteira</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;7.500<small>por mês, mais a verba</small></div></div>
-          <p class="for">O departamento de marketing completo.</p>
-          <ul><li>Tudo do Crescimento</li><li>Cortes semanais das suas gravações</li><li>Roteiro de vídeo longo por mês</li><li>Um filme de marca por semestre</li><li>Site mantido e atualizado</li><li>Revisão de estratégia a cada trimestre</li></ul>
-          <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Empresa inteira.">Quero o Empresa inteira</a>
-        </article>
       </div>
-      <p class="fine">Todo combo começa pela Fundação. A verba de anúncio você paga direto à plataforma, na sua conta. Eu prometo entrega e método. Número de seguidores ou de vendas depende de muita coisa que não está na minha mão, e eu não prometo o que não controlo.</p>
+      <p class="fine">Todo combo começa pela Fundação. Os valores são a referência de cada escopo, e o valor final a gente fecha na conversa, olhando o que a sua marca precisa. A verba de anúncio você paga direto à plataforma, na sua conta. Eu prometo entrega e método. Número de seguidores ou de vendas depende de muita coisa que não está na minha mão, e eu não prometo o que não controlo.</p>
 
       <div class="extras-head rv">
         <span class="label slate-line">Sem contrato mensal</span>
         <h3 style="font-size:30px;text-transform:uppercase">Projetos avulsos</h3>
+        <p style="margin:12px 0 0;font-size:16.5px;max-width:58ch">Para quem quer resolver uma frente só. O valor fecha no escopo, na conversa.</p>
       </div>
       <div class="extras rv">
         <div class="extra"><span><b>Identidade visual</b><span class="d">Manual, logo e kit</span></span><span class="p">R$&nbsp;2.500+</span></div>
@@ -650,17 +674,19 @@
       <div class="rv">
         <span class="label slate-line">Comece por aqui</span>
         <h2>Diagnóstico de marca.</h2>
-        <p style="margin:0 0 28px;max-width:56ch"><strong>R$&nbsp;149</strong>. Me manda o seu perfil e o seu site pelo WhatsApp. Em poucos dias você recebe:</p>
+        <p style="margin:0 0 28px;max-width:56ch">Me manda o seu perfil e o seu site pelo WhatsApp. A gente conversa, eu leio com calma e, em poucos dias, você recebe:</p>
         <ol>
           <li><span><b style="color:var(--cream);font-weight:500">Uma pesquisa curta:</b> o que os seus concorrentes fazem e onde a sua marca pode se diferenciar</span></li>
           <li><span><b style="color:var(--cream);font-weight:500">O meu conselho:</b> o que eu faria primeiro, e qual combo faz sentido para você, ou se nenhum faz agora</span></li>
         </ol>
+        <p style="margin:24px 0 0;max-width:56ch">Se nenhum combo fizer sentido agora, eu digo, e você não gasta com o que não precisa.</p>
         <p style="margin:28px 0 0"><a class="btn btn-ghost" href="diagnostico-exemplo" target="_blank" rel="noopener">Ver um exemplo: o diagnóstico do próprio ACUBO</a></p>
       </div>
       <div class="box rv">
         <span class="label">WhatsApp</span>
         <p>Uma conversa comigo, sem formulário.</p>
-        <a class="btn btn-spec js-wa" href="https://www.instagram.com/acubo.studio/" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 149). Meu perfil é: ">Pedir o diagnóstico</a>
+        <p style="font-family:var(--body);font-weight:300;text-transform:none;font-size:16.5px;line-height:1.5;color:var(--parchment)">O investimento a gente combina na conversa, antes de eu começar.</p>
+        <a class="btn btn-spec js-wa" href="https://www.instagram.com/acubo.studio/" data-msg="Oi, Léia! Quero o diagnóstico de marca. Meu perfil é: ">Pedir o diagnóstico</a>
       </div>
     </div>
   </section>
@@ -672,8 +698,10 @@
         <h2>Antes de conversar.</h2>
       </div>
       <div class="faq rv">
+        <details><summary>Quanto custa?</summary><p>A Fundação, os combos e os projetos avulsos têm o valor de referência nesta página, e o valor final fecha no escopo, na conversa. O diagnóstico eu combino com você antes de começar.</p></details>
+        <details><summary>Qual a diferença para uma agência?</summary><p>Em agência, a sua marca passa por vários setores, e cada um entende de um jeito. Aqui, quem entende a sua marca é a mesma pessoa que lê cada peça: eu. O sistema dá o volume, e a direção é minha.</p></details>
         <details><summary>O conteúdo é feito com inteligência artificial?</summary><p>Sim. A produção usa um sistema de agentes de IA, e é isso que entrega o volume de uma equipe. A direção e a revisão são minhas: nenhuma peça chega até você sem eu ter lido e aprovado.</p></details>
-        <details><summary>Preciso fazer contrato longo?</summary><p>Os combos mensais têm mínimo de três meses, porque conteúdo e SEO precisam desse tempo para mostrar resultado. Depois disso, é mês a mês. O diagnóstico, a Fundação e os projetos avulsos são pagamento único.</p></details>
+        <details><summary>Preciso fazer contrato longo?</summary><p>Os combos mensais têm mínimo de três meses, porque conteúdo e SEO precisam desse tempo para mostrar resultado. Depois disso, é mês a mês. A Fundação, o diagnóstico e os projetos avulsos são pagamento único.</p></details>
         <details><summary>A verba de anúncio está incluída?</summary><p>Não. Você paga a verba direto ao Meta ou ao Google, na sua conta. O combo cobre a criação dos anúncios, a montagem e o acompanhamento das campanhas.</p></details>
         <details><summary>O site e o domínio ficam no meu nome?</summary><p>O domínio fica no seu nome, e é você quem o paga e o controla. Eu configuro o site nele, e o endereço nunca é meu.</p></details>
         <details><summary>Quanto do meu tempo isso vai tomar?</summary><p>Na Fundação, uma entrevista e algumas respostas. Depois, uma rodada de aprovação por mês, em um ambiente só seu, com todas as peças do período juntas, e duas rodadas de ajuste se precisar. A publicação é automática, nos dias agendados.</p></details>
