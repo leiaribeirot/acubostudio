@@ -487,6 +487,9 @@
     .tab .tt, .tab .when { display: none; }
   }
 
+  /* o vídeo e o poster da Marca são verticais (544x736): num quadro 16:10 o corte padrão pega o meio e deixa o cubo pela metade; aqui o enquadramento segue o cubo, sem a ampliação de 1,1 */
+  .reel .vframe.vf-marca video { transform: none; object-position: 50% 70%; }
+
   /* faixa logo abaixo da hero: as três cenas em sequência, com fusão (eram o fundo da hero) */
   .seq { position: relative; background: var(--black); height: clamp(320px, 62svh, 640px); overflow: hidden; }
   .seq-bg { position: absolute; inset: 0; }
@@ -624,7 +627,7 @@
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg" data-inview><source src="cenas/cena-4.mp4" type="video/mp4"></video><span class="label tag">Moda</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/produto-poster.jpg" data-inview><source src="cenas/produto.mp4" type="video/mp4"></video><span class="label tag">Produto</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-5.jpg" data-inview><source src="cenas/som.mp4" type="video/mp4"></video><span class="label tag">Som</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-6.jpg" data-inview><source src="cenas/marca.mp4" type="video/mp4"></video><span class="label tag">Marca</span></div>
+        <div class="vframe vf-marca"><video muted playsinline loop preload="none" poster="cenas/detalhe-6.jpg" data-inview><source src="cenas/marca.mp4" type="video/mp4"></video><span class="label tag">Marca</span></div>
       </div>
     </div>
   </section>
