@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ACUBO. · Sua marca, ao cubo</title>
-<meta name="description" content="O departamento de marketing que a sua empresa não tem. Direção criativa de Léia Ribeiro e produção por um sistema de agentes que pesquisa, escreve, desenha, anima e publica.">
+<title>ACUBO. · Sua marca, ao cubo | Marketing com direção criativa</title>
+<meta name="description" content="O departamento de marketing que a sua empresa não tem. Léia Ribeiro dirige, um sistema de agentes de IA produz, e nenhuma peça chega até você sem a leitura dela. Estúdio em Manaus.">
+<link rel="canonical" href="https://acubostudio.com/">
+<link rel="alternate" type="application/rss+xml" title="Blog do ACUBO." href="/blog/feed.xml">
 <meta name="theme-color" content="#050403">
 <meta name="color-scheme" content="dark">
 <link rel="icon" type="image/svg+xml" href="assets/acubo-avatar.svg">
@@ -12,9 +14,10 @@
 <link rel="apple-touch-icon" href="assets/acubo-avatar-180.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://acubostudio.com/">
-<meta property="og:title" content="ACUBO. · Sua marca, ao cubo">
+<meta property="og:title" content="ACUBO. · Sua marca, ao cubo | Marketing com direção criativa">
 <meta property="og:description" content="O departamento de marketing que a sua empresa não tem. Cada entrega com assinatura.">
 <meta property="og:image" content="https://acubostudio.com/assets/acubo-avatar-512.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"ACUBO.","url":"https://acubostudio.com/","description":"Estúdio de marketing com direção criativa de Léia Ribeiro e produção por um sistema de agentes de IA.","founder":{"@type":"Person","name":"Léia Ribeiro"},"areaServed":"BR","address":{"@type":"PostalAddress","addressLocality":"Manaus","addressCountry":"BR"},"sameAs":["https://www.instagram.com/acubo.studio/"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap">
@@ -39,6 +42,7 @@
     --cream: #F5F0E8;
     --parchment: #D4C0A0;
     --muted: #8A7A68;
+    --muted-ui: #A8977F; /* o muted da marca falha 4,5:1 sobre os cards; este passa */
     --line: #2A1F16;
     --spec: linear-gradient(90deg, #E8C17A 0%, #E2573B 32%, #C2186A 62%, #7B2FA0 84%, #4B2A8C 100%);
     --display: "Syne", "Arial Black", system-ui, sans-serif;
@@ -58,7 +62,7 @@
   .wrap > *, .wrap > * > * { min-width: 0; }
   h1, h2, h3, p, li, .label { overflow-wrap: break-word; }
   .wrap { max-width: 1200px; margin: 0 auto; padding-inline: var(--gutter); }
-  .label { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .label { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted-ui); }
   .spec-text { background: var(--spec); -webkit-background-clip: text; background-clip: text; color: transparent; }
   sup.cube { font-size: .5em; vertical-align: .9em; margin-left: .04em; }
 
@@ -116,6 +120,7 @@
   .hero .tagline { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(17px, 2vw, 26px); color: var(--cream); margin: 26px 0 16px; max-width: 34ch; line-height: 1.2; }
   .hero .sub { font-size: clamp(16.5px, 1.5vw, 19px); max-width: 58ch; margin: 0 0 34px; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .note { margin: 20px 0 0; font-size: 15.5px; max-width: 60ch; color: rgba(212,192,160,.85); }
   .hero .meta { margin-top: 40px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .hero .meta span { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(212,192,160,.6); font-variant-numeric: tabular-nums; }
   .rise { animation: rise 1.6s var(--ease) both; }
@@ -137,7 +142,8 @@
   /* ao cubo */
   .cubed { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
   @media (max-width: 900px) { .cubed { grid-template-columns: 1fr; } }
-  .cubed .vframe { aspect-ratio: 9 / 14; width: 100%; max-width: 420px; margin-inline: auto; box-shadow: 0 40px 90px rgba(0,0,0,.6), 0 0 80px rgba(123,47,160,.18); }
+  /* o vídeo vertical tem que caber inteiro na altura da tela (notebook a 100%), sem precisar de zoom */
+  .cubed .vframe { aspect-ratio: 9 / 14; width: 100%; max-width: 420px; max-width: min(420px, calc((100svh - 170px) * 9 / 14)); margin-inline: auto; box-shadow: 0 40px 90px rgba(0,0,0,.6), 0 0 80px rgba(123,47,160,.18); }
   .cubed .vframe video { transform: scale(1.06); transform-origin: 50% 40%; }
   .cubed .cap { margin-top: 14px; text-align: center; }
   .formula { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; margin: 8px 0 28px; font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(20px, 2.4vw, 30px); color: var(--cream); }
@@ -198,31 +204,41 @@
   .fd-card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
   .fd-bonus { border: 1px dashed rgba(232,193,122,.45); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
   .fd-bonus p { margin: 0; font-size: 16px; }
-  .price-big { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 4.4vw, 58px); color: var(--amber-light); line-height: 1; }
-  .price-note { font-size: 15px; color: var(--muted); margin: 12px 0 0; }
+  .price-big { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 3.6vw, 46px); color: var(--amber-light); line-height: 1; }
+  .price-note { font-size: 15.5px; color: var(--muted-ui); margin: 12px 0 0; }
+  .stack { font-size: 15.5px; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--line); }
   .fd-promises { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
   .fd-promises li { font-size: 15.5px; padding-left: 22px; position: relative; }
   .fd-promises li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; background: var(--amber); transform: rotate(45deg); }
   .fd-promises b { font-weight: 500; color: var(--cream); }
   .cap { margin: 0; text-align: center; }
 
-  .combos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  @media (max-width: 1060px) { .combos { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 620px) { .combos { grid-template-columns: 1fr; } }
+  .combos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: stretch; }
+  @media (max-width: 900px) { .combos { grid-template-columns: 1fr; } }
+  /* a âncora: o teto da escada aparece primeiro, para os outros lerem a partir dele */
+  .combo.anchor { margin-bottom: 30px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr) auto; gap: 18px clamp(24px,4vw,56px); align-items: start; padding: clamp(28px,3.4vw,44px); border-color: rgba(123,47,160,.55); background: linear-gradient(135deg,#1a1018,var(--surface) 55%); }
+  .combo.anchor .a-head { display: flex; flex-direction: column; gap: 14px; }
+  .combo.anchor .price { font-size: clamp(30px,2.6vw,38px); }
+  .combo.anchor .tag { background: var(--amber); }
+  .combo.anchor ul { grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .combo.anchor .btn { margin-top: 0; align-self: center; }
+  @media (max-width: 900px) { .combo.anchor { grid-template-columns: 1fr; } .combo.anchor ul { grid-template-columns: 1fr; } .combo.anchor .btn { margin-top: 6px; align-self: stretch; } }
+  .combo.featured { padding-block: 40px; }
+  @media (min-width: 901px) { .combo.featured { transform: translateY(-8px); } .combo.featured:hover { transform: translateY(-12px); } }
   .combo { position: relative; background: var(--surface); border: 1px solid var(--line); padding: 30px 24px; display: flex; flex-direction: column; gap: 14px; transition: border-color .6s var(--ease), transform .6s var(--ease), box-shadow .6s var(--ease); }
   .combo:hover { border-color: rgba(201,145,58,.45); transform: translateY(-4px); box-shadow: 0 30px 60px rgba(0,0,0,.5); }
   .combo.featured { border: 1px solid transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--spec) border-box; box-shadow: 0 0 60px rgba(194,24,106,.18); }
   .combo .tag { position: absolute; top: -11px; right: 18px; background: var(--spec); color: var(--black); font-family: var(--mono); font-weight: 700; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 10px; }
   .combo h3 { font-size: 24px; text-transform: uppercase; letter-spacing: .02em; }
-  .combo .from { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .combo .from { font-family: var(--mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-ui); }
   .combo .price { font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1.05; color: var(--cream); font-variant-numeric: tabular-nums; }
-  .combo .price small { display: block; font-family: var(--body); font-weight: 300; font-size: 14px; color: var(--muted); }
-  .combo .for { margin: 0; font-size: 15.5px; }
-  .combo ul { margin: 0; padding: 0; list-style: none; font-size: 15.5px; line-height: 1.5; display: grid; gap: 8px; }
+  .combo .price small { display: block; font-family: var(--body); font-weight: 300; font-size: 15px; color: var(--muted-ui); }
+  .combo .for { margin: 0; font-size: 16.5px; color: var(--cream); }
+  .combo ul { margin: 0; padding: 0; list-style: none; font-size: 16px; line-height: 1.5; display: grid; gap: 8px; }
   .combo li { padding-left: 16px; position: relative; }
   .combo li::before { content: ""; position: absolute; left: 0; top: .65em; width: 6px; height: 1px; background: var(--amber); }
   .combo .btn { margin-top: auto; }
-  .fine { margin-top: 26px; font-size: 14.5px; color: var(--muted); max-width: 84ch; }
+  .fine { margin-top: 26px; font-size: 15.5px; color: var(--muted-ui); max-width: 84ch; }
   .extras-head { margin: clamp(72px, 9vw, 110px) 0 24px; }
   .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 36px; }
   @media (max-width: 860px) { .extras { grid-template-columns: 1fr; } }
@@ -335,7 +351,7 @@
   .card .t { padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; }
   .card .n { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; color: var(--amber-light); }
   .card h3 { font-size: 22px; margin: 0; }
-  .card p { margin: 0; font-size: 15.5px; }
+  .card p { margin: 0; font-size: 16px; }
   .card p b { font-weight: 500; color: var(--cream); }
   #problema h2 { font-size: clamp(18px, 5.2vw, 52px); }
   #leia .leia blockquote { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.3; }
@@ -354,6 +370,136 @@
   @media (max-width: 760px) {
     .grain { display: none !important; }
     .js .rv { filter: none !important; transition: opacity 1.1s var(--ease), transform 1.1s var(--ease) !important; }
+  }
+
+  /* versão enxuta: menos texto, mais forma */
+  .dims-short li { font-size: 17px; }
+  .voices { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 8px 0 40px; }
+  .voices .v { font-family: var(--mono); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; padding: 14px 20px; border: 1px solid; color: var(--cream); }
+  .voices .v1 { border-color: var(--amber); } .voices .v2 { border-color: var(--ember); } .voices .v3 { border-color: var(--magenta); } .voices .v4 { border-color: var(--violet); } .voices .v5 { border-color: var(--indigo); }
+  .voices .arr { font-family: var(--mono); color: var(--muted-ui); font-size: 24px; padding: 0 6px; }
+  .voices .one { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: clamp(18px, 2.4vw, 28px); padding: 14px 26px; color: var(--black); background: var(--spec); }
+  .lead { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 2.8vw, 34px); line-height: 1.2; color: var(--cream); max-width: 28ch; margin: 0; }
+  .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .tile { background: var(--surface); border: 1px solid var(--line); padding: 26px 24px; display: flex; flex-direction: column; gap: 8px; min-height: 176px; transition: border-color .5s var(--ease); }
+  .tile:hover { border-color: rgba(201,145,58,.45); }
+  .tile .n { font-family: var(--display); font-weight: 800; font-size: 54px; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--amber-light); }
+  .tile h3 { font-size: 20px; margin-top: auto; }
+  .tile p { margin: 0; font-size: 16px; }
+  @media (max-width: 560px) { .tiles { grid-template-columns: 1fr; } .tile { min-height: 0; } }
+  .band { position: relative; overflow: hidden; margin-top: clamp(56px, 8vw, 96px); padding-block: clamp(90px, 14vw, 190px); background: #000 center / cover no-repeat; }
+  .band::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,4,3,.94), rgba(5,4,3,.5)); }
+  .band .wrap { position: relative; }
+  .band blockquote { margin: 0; font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 4.4vw, 64px); line-height: 1.04; color: var(--cream); max-width: 20ch; text-wrap: balance; }
+  .band .bar-s { display: block; width: 64px; height: 3px; background: var(--spec); margin-bottom: 28px; }
+
+  /* topo no sistema B+C (aprovado 15/10): creme, grade fina, Fraunces com a palavra-destaque em itálico âmbar,
+     régua áurea 900:540 (texto : coluna da foto). Sobrescreve as regras do topo acima. */
+  @font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; font-display: swap; src: url(assets/fonts/fraunces-latin-600-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Fraunces"; font-weight: 600; font-style: italic; font-display: swap; src: url(assets/fonts/fraunces-latin-600-italic.woff2) format("woff2"); }
+  .nav:not(.solid) { background: var(--cream); border-bottom-color: rgba(10,8,5,.12); }
+  .nav:not(.solid) .wordmark { color: var(--espresso); }
+  .nav:not(.solid) .nav-links a.txt { color: var(--espresso); opacity: .8; }
+  .nav:not(.solid) .nav-links a.txt:hover { color: var(--copper); opacity: 1; }
+  .nav:not(.solid) .nav-links a.txt.txt-blog { color: var(--copper); }
+  .nav:not(.solid) .snd { color: var(--espresso); background: transparent; border-color: rgba(10,8,5,.3); }
+  .hero { display: grid; grid-template-columns: 62.5fr 37.5fr; align-items: stretch; padding-top: 66px; background-color: var(--cream); color: var(--espresso);
+    background-image: linear-gradient(rgba(10,8,5,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,8,5,.07) 1px, transparent 1px); background-size: 120px 120px; }
+  .hero .content { padding-block: clamp(40px, 8vh, 96px); padding-left: clamp(18px, 6.7vw, 96px); padding-right: clamp(18px, 3vw, 48px); align-self: center; }
+  .hero .wrap { max-width: none; padding-inline: 0; }
+  .hero .terminal { color: var(--copper); }
+  .hero .terminal .cursor { background: var(--amber); }
+  .hero h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; font-size: clamp(52px, 7.8vw, 112px); line-height: .98; letter-spacing: -.025em; color: var(--espresso); }
+  .hero h1 em { font-style: italic; color: var(--amber); }
+  .hero h1 sup.cube { font-style: normal; }
+  .hero .tagline { font-family: var(--body); font-weight: 400; text-transform: none; font-size: clamp(19px, 2vw, 26px); color: var(--espresso); max-width: 30ch; line-height: 1.3; }
+  .hero .sub { color: #5a4636; max-width: 46ch; }
+  /* cabe na altura da tela (notebook a 100%): tipo e respiros seguem a altura, não só a largura */
+  @media (min-width: 901px) {
+    .hero { height: 100svh; min-height: 560px; }
+    .hero .content { padding-block: clamp(16px, 3svh, 64px); }
+    .hero h1 { font-size: clamp(40px, min(7.8vw, 12.5svh), 112px); }
+    .hero .terminal { margin-bottom: clamp(12px, 2.4svh, 26px); }
+    .hero .tagline { font-size: clamp(17px, min(2vw, 3.4svh), 26px); margin: clamp(12px, 2.4svh, 26px) 0 clamp(8px, 1.6svh, 16px); }
+    .hero .sub { font-size: clamp(15px, min(1.5vw, 2.4svh), 19px); margin-bottom: clamp(16px, 3svh, 34px); }
+    .hero .btn { padding-block: clamp(12px, 1.8svh, 17px); }
+    .hero .note { margin-top: clamp(10px, 1.8svh, 20px); font-size: clamp(14px, 2svh, 15.5px); }
+  }
+  .hero .note { color: #5a4636; }
+  .hero .btn-ghost { color: var(--espresso); border-color: var(--espresso); background: transparent; }
+  .hero .btn-ghost:hover { color: var(--copper); border-color: var(--copper); }
+  .hero .side { display: grid; grid-template-rows: minmax(0, 3fr) minmax(0, 2fr); min-height: 0; }
+  .hero .fotobox { position: relative; min-height: 0; overflow: hidden; }
+  .hero .foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; display: block; }
+  .hero .dark { background: var(--espresso); padding: clamp(22px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
+  .hero .mono-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .hero .mono-list a { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--amber-light); text-decoration: none; }
+  .hero .mono-list a:hover { color: var(--cream); }
+  .hero .meta { margin-top: 0; }
+  /* B+C no site todo: seções claras viram creme com grade (as variáveis viram só ali), as escuras seguem espresso */
+  .scene:not(.dark):not(.invite) { background-color: #F5F0E8; color: #5a4636; --cream: #0A0805; --surface: #ECE5D8; --line: rgba(10,8,5,.14); --muted: #6b5a48; --muted-ui: #6b5a48; --parchment: #5a4636; --amber-light: #8A5A22;
+    background-image: linear-gradient(rgba(10,8,5,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,8,5,.06) 1px, transparent 1px); background-size: 120px 120px; }
+  .scene.dark { background-image: linear-gradient(rgba(245,240,232,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(245,240,232,.035) 1px, transparent 1px); background-size: 120px 120px; }
+  .scene:not(.dark):not(.invite) .btn-ghost { border-color: rgba(10,8,5,.4); background: transparent; }
+  .scene:not(.dark):not(.invite) .btn-ghost:hover { border-color: var(--copper); color: var(--copper); }
+  .scene:not(.dark):not(.invite) .fd-card { --cream: #F5F0E8; --amber-light: #E8C17A; --muted-ui: #A8977F; --line: #2A1F16; --parchment: #D4C0A0; color: #D4C0A0; }
+  .scene:not(.dark):not(.invite) .work { background: var(--surface); }
+  h2, h3, summary, .lead, .formula, .band blockquote, .leia blockquote, .principle blockquote, .diag .box p, .combo .price, .price-big { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; }
+  h2 { font-size: clamp(32px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -.02em; }
+  h2 em { font-style: italic; color: var(--amber); }
+  h3 { letter-spacing: -.01em; }
+  .combo h3 { text-transform: none; letter-spacing: -.01em; font-size: 26px; }
+  .work .t { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 22px; }
+  .band { background-position: 50% 15%; }
+  .vframe .vsound { color: #F5F0E8; border-color: rgba(245,240,232,.4); background: rgba(5,4,3,.55); }
+  .scene:not(.dark):not(.invite) .cubed .vframe { box-shadow: 0 24px 50px rgba(10,8,5,.22); }
+  .band::before { background: linear-gradient(90deg, rgba(5,4,3,.92) 15%, rgba(5,4,3,.35)); }
+  .band blockquote { letter-spacing: -.02em; }
+
+  /* como funciona: abas, uma de cada vez */
+  .tabs { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4vw, 56px); align-items: start; }
+  .tab-list { display: grid; border-top: 1px solid var(--line); }
+  .tab { display: grid; grid-template-columns: 48px 1fr; grid-template-areas: "n tt" "n when"; gap: 2px 12px; align-items: baseline; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 16px 10px; color: var(--cream); font: inherit; cursor: pointer; opacity: .55; transition: opacity .3s, background .3s; }
+  .tab:hover { opacity: .85; }
+  .tab[aria-selected="true"] { opacity: 1; background: rgba(201,145,58,.08); box-shadow: inset 3px 0 0 var(--amber); }
+  .tab .n { grid-area: n; font-family: var(--mono); font-size: 12px; letter-spacing: .18em; color: var(--amber); }
+  .tab .tt { grid-area: tt; font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.2; }
+  .tab .when { grid-area: when; font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-ui); }
+  .panel { background: var(--surface); border: 1px solid var(--line); animation: panelin .6s var(--ease) both; }
+  .panel[hidden] { display: none; }
+  @keyframes panelin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .panel img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+  .panel .pt { padding: clamp(20px, 2.4vw, 32px); display: grid; gap: 14px; }
+  .panel h3 { font-size: clamp(24px, 2.4vw, 32px); }
+  .panel p { margin: 0; font-size: 17px; }
+  .panel p b { display: block; font-family: var(--mono); font-weight: 700; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--amber-light); margin-bottom: 4px; }
+  .panel .next { justify-self: start; font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream); background: none; border: 1px solid var(--amber); padding: 12px 18px; cursor: pointer; }
+  .panel .next:hover { background: var(--amber); color: var(--black); }
+  @media (max-width: 900px) {
+    .tabs { grid-template-columns: 1fr; }
+    .tab-list { grid-auto-flow: column; grid-auto-columns: 1fr; border-top: 0; }
+    .tab { grid-template-columns: 1fr; grid-template-areas: "n"; justify-items: center; padding: 14px 4px; border: 1px solid var(--line); border-right-width: 0; }
+    .tab:last-child { border-right-width: 1px; }
+    .tab .tt, .tab .when { display: none; }
+  }
+
+  /* faixa logo abaixo da hero: as três cenas em sequência, com fusão (eram o fundo da hero) */
+  .seq { position: relative; background: var(--black); height: clamp(320px, 62svh, 640px); overflow: hidden; }
+  .seq-bg { position: absolute; inset: 0; }
+  .seq-bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s var(--ease); }
+  .seq-bg video.on { opacity: 1; }
+  .seq-shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(5,4,3,.75) 0%, transparent 45%); pointer-events: none; }
+  .seq-cap { position: absolute; left: 0; right: 0; bottom: 28px; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: 0; }
+    .hero .side { grid-template-rows: auto auto; }
+    .hero .fotobox { aspect-ratio: 4 / 5; max-height: 80svh; }
+  }
+  @media (max-width: 480px) {
+    .hero { padding-top: 54px; }
+    .hero .content { padding-block: 32px 40px; }
+    .hero h1 { font-size: clamp(44px, 14vw, 60px); }
+    .hero .tagline { font-size: 18px; }
   }
 </style>
 </head>
@@ -374,7 +520,7 @@
       <a class="txt" href="#leia">Direção</a>
       <a class="txt txt-blog" href="/blog/">Blog</a>
       <button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Ligar o som do site">Som</button>
-      <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 149).">Diagnóstico</a>
+      <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca.">Diagnóstico</a>
     </nav>
   </div>
 </header>
@@ -384,46 +530,57 @@
 <main id="topo">
 
   <section class="hero">
-    <div class="bg vframe" aria-hidden="true">
-      <video class="on" muted playsinline loop autoplay preload="auto" poster="cenas/cena-1-poster.jpg"><source src="cenas/cena-1.mp4" type="video/mp4"></video>
-      <video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg"><source src="cenas/cena-2.mp4" type="video/mp4"></video>
-      <video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg"><source src="cenas/cena-4.mp4" type="video/mp4"></video>
-    </div>
-    <div class="shade" aria-hidden="true"></div>
-    <div class="scan" aria-hidden="true"></div>
     <div class="content">
       <div class="wrap">
         <div class="terminal rise">ACUBO. // estúdio de marketing com direção criativa<span class="cursor" aria-hidden="true"></span></div>
-        <h1 class="rise d1">Sua marca,<span class="l2">ao cubo<sup class="cube spec-text">3</sup></span></h1>
+        <h1 class="rise d1">Sua marca,<span class="l2">ao <em>cubo</em><sup class="cube spec-text">3</sup></span></h1>
         <p class="tagline rise d2">O departamento de marketing que a sua empresa não tem.</p>
-        <p class="sub rise d3">Eu dirijo. Um sistema de agentes de IA produz. Nenhuma peça chega até você sem eu ter lido antes.</p>
+        <p class="sub rise d3">Eu dirijo. Um sistema de agentes de IA produz. Nenhuma peça chega até você sem eu ler.</p>
         <div class="actions rise d4">
-          <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 149).">
+          <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero o diagnóstico de marca.">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-            Diagnóstico de marca · R$&nbsp;149
+            Pedir o meu diagnóstico
           </a>
           <a class="btn btn-ghost" href="#combos">Ver os combos</a>
         </div>
+        <p class="note rise d4">Sem formulário. A conversa é direto comigo, no WhatsApp.</p>
+      </div>
+    </div>
+    <div class="side">
+      <div class="fotobox"><img class="foto" src="assets/leia-topo.jpg" width="1080" height="1349" alt="Léia Ribeiro, direção criativa do ACUBO."></div>
+      <div class="dark">
+        <ul class="mono-list">
+          <li><a href="#como">Como funciona</a></li>
+          <li><a href="#combos">Combos</a></li>
+          <li><a href="#leia">Direção</a></li>
+        </ul>
         <div class="meta"><span>Cada entrega com assinatura.</span><span id="tc">00:00:00:00</span></div>
       </div>
     </div>
+  </section>
+
+  <section class="seq" id="abertura" aria-label="Cenas do ACUBO">
+    <div class="seq-bg vframe" aria-hidden="true">
+      <video class="on" muted playsinline loop autoplay preload="auto" poster="cenas/cena-1-poster.jpg"><source src="cenas/cena-1.mp4" type="video/mp4"></video>
+      <video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg"><source src="cenas/cena-4.mp4" type="video/mp4"></video>
+    </div>
+    <div class="seq-shade" aria-hidden="true"></div>
+    <div class="wrap seq-cap"><span class="label slate-line">Cenas do ACUBO.</span></div>
   </section>
 
   <section class="scene dark" id="ao-cubo">
     <div class="wrap cubed">
       <div class="rv">
         <span class="label slate-line">O conceito</span>
-        <h2>Por que ao cubo.</h2>
-        <p style="margin:0 0 24px;font-size:19px;max-width:56ch">Três fornecedores somam três trabalhos. No ACUBO, a direção, o sistema e a sua marca entram juntos em cada peça. Por isso o nome é uma potência, e não uma soma.</p>
+        <h2>Por que ao <em>cubo.</em></h2>
         <div class="formula" aria-label="Visão vezes execução vezes conexão igual a marca ao cubo">
           <span>Visão</span><span class="x">×</span><span>Execução</span><span class="x">×</span><span>Conexão</span>
           <span class="eq">= Marca<sup class="cube spec-text">3</sup></span>
         </div>
-        <ul class="dims">
-          <li><b>Visão</b><span>A direção: o que a sua marca diz, para quem, e o que ela nunca diria.</span></li>
-          <li><b>Execução</b><span>O sistema de agentes que pesquisa, escreve, desenha, anima e publica.</span></li>
-          <li><b>Conexão</b><span>A sua marca configurada uma vez, para toda peça sair do mesmo lugar.</span></li>
-          <li><b>Saúde</b><span>Escopo fechado e um ritmo que se sustenta, para você e para mim.</span></li>
+        <ul class="dims dims-short">
+          <li><b>Visão</b><span>O que a sua marca diz, e o que ela nunca diria.</span></li>
+          <li><b>Execução</b><span>Um sistema de agentes que pesquisa, escreve, desenha e publica.</span></li>
+          <li><b>Conexão</b><span>Toda peça sai da mesma base.</span></li>
         </ul>
       </div>
       <div class="rv">
@@ -440,13 +597,14 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">O problema</span>
-        <h2>Cinco fornecedores, cinco vozes.</h2>
-        <p>Redes, tráfego, blog, identidade e site costumam vir de cinco pessoas diferentes. Cada uma entende a sua marca de um jeito, e quem sente a diferença é o seu cliente.</p>
+        <h2>Cinco fornecedores, <em>cinco vozes.</em></h2>
       </div>
-      <div class="versus rv">
-        <p>O post diz uma coisa, o anúncio diz outra, e o site parou no ano em que foi feito. Ninguém erra sozinho: falta alguém olhando o conjunto.</p>
-        <p><strong>Aqui, a sua marca é configurada uma vez</strong>, com voz, regras e público, e toda peça nasce dessa base, em qualquer formato. Mudou a estratégia? Muda em um lugar só.</p>
+      <div class="voices rv">
+        <span class="v v1">Redes</span><span class="v v2">Tráfego</span><span class="v v3">Blog</span><span class="v v4">Identidade</span><span class="v v5">Site</span>
+        <span class="arr" aria-hidden="true">→</span>
+        <span class="one">Uma marca</span>
       </div>
+      <p class="lead rv">Eu configuro a sua marca uma vez. Toda peça nasce dali.</p>
     </div>
   </section>
 
@@ -454,14 +612,13 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Cenas</span>
-        <h2>Imagem que parece dirigida, e não gerada.</h2>
-        <p>Detalhes feitos no ACUBO com o mesmo sistema que faz o conteúdo dos clientes. Luz e ritmo decididos antes de a câmera se mover.</p>
+        <h2>Imagem que parece <em>dirigida</em>, e não gerada.</h2>
       </div>
       <div class="reel rv">
-        <div class="vframe big"><video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg" data-inview><source src="cenas/cena-2.mp4" type="video/mp4"></video><span class="label tag">Produto</span></div>
+        <div class="vframe big"><video muted playsinline loop preload="none" poster="cenas/cena-5-poster.jpg" data-inview><source src="cenas/cena-5.mp4" type="video/mp4"></video><span class="label tag">Joia</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-1-poster.jpg" data-inview><source src="cenas/cena-1.mp4" type="video/mp4"></video><span class="label tag">Espaço</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg" data-inview><source src="cenas/cena-4.mp4" type="video/mp4"></video><span class="label tag">Moda</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-5-poster.jpg" data-inview><source src="cenas/cena-5.mp4" type="video/mp4"></video><span class="label tag">Joia</span></div>
+        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg" data-inview><source src="cenas/cena-2.mp4" type="video/mp4"></video><span class="label tag">Produto</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-5.jpg" data-inview><source src="cenas/som.mp4" type="video/mp4"></video><span class="label tag">Som</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-6.jpg" data-inview><source src="cenas/marca.mp4" type="video/mp4"></video><span class="label tag">Marca</span></div>
       </div>
@@ -472,14 +629,13 @@
     <div class="wrap cubed">
       <div class="rv">
         <span class="label slate-line">Bastidores</span>
-        <h2>Quem decide sou eu.</h2>
-        <p style="margin:0 0 24px;font-size:19px;max-width:56ch">Este vídeo foi feito com IA, e as decisões são minhas. Você vê o que a ferramenta fez, o que eu reprovei e o que ficou.</p>
+        <h2>Quem decide <em>sou eu.</em></h2>
+        <p style="margin:0 0 24px;font-size:19px;max-width:44ch">Este vídeo foi feito com IA. As decisões são minhas.</p>
         <ul class="dims">
           <li><b>A imagem</b><span>“Nada pode parecer sexy, precisa ser profissional.”</span></li>
           <li><b>O som</b><span>“A trilha está estourando, ajusta.”</span></li>
-          <li><b>A edição</b><span>“Esse é está duplicado, tira.”</span></li>
+          <li><b>A edição</b><span>“Esse aqui está duplicado, tira.”</span></li>
         </ul>
-        <p style="margin:24px 0 0;font-size:17px;max-width:52ch">O Claude executa. O ACUBO organiza o caminho. A direção é minha.</p>
       </div>
       <div class="rv">
         <div class="vframe">
@@ -495,32 +651,31 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Como funciona</span>
-        <h2>Do diagnóstico à peça publicada.</h2>
-        <p>Tudo começa pelo diagnóstico de marca, de R$&nbsp;149. Se fizer sentido, você segue para a Fundação e depois para um combo mensal. Em cada passo, você sabe o que faz e o que recebe.</p>
+        <h2>Do diagnóstico à <em>peça publicada.</em></h2>
       </div>
-    </div>
-    <div class="cards-head wrap">
-      <p class="label swipe">Deslize ou use as setas para ver os seis</p>
-      <div class="cards-nav" role="group" aria-label="Navegar pelos seis passos">
-        <button class="cn" type="button" data-dir="-1" aria-label="Passo anterior">←</button>
-        <button class="cn" type="button" data-dir="1" aria-label="Próximo passo">→</button>
-      </div>
-    </div>
-    <div class="cards rv" role="list" aria-label="Os seis passos">
-      <article class="card" role="listitem"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">01 · Comece aqui</span><h3>Diagnóstico de marca</h3><p><b>Você faz:</b> manda o seu perfil e o seu site.</p><p><b>Você recebe:</b> análise inicial, pesquisa breve dos concorrentes, oportunidades de diferenciação, orientação de prioridade e recomendação do serviço mais adequado. R$&nbsp;149.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="t"><span class="n">02 · Se fizer sentido</span><h3>Fundação</h3><p><b>Você faz:</b> responde a uma entrevista e a algumas perguntas.</p><p><b>Você recebe, em 15 dias úteis:</b> manual da marca, logo e kit, pesquisa de mercado, voz e linguagem, 3 meses planejados, um site simples no seu domínio e 6 posts prontos. A partir de R$&nbsp;3.900.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/cena-2-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">03 · No combo mensal</span><h3>Produção</h3><p><b>Você faz:</b> nada. É comigo e com o sistema.</p><p><b>Você recebe:</b> as peças do seu combo, todas saindo do seu manual.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/cena-5-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">04 · No combo mensal</span><h3>A minha leitura</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> só o que eu li e aprovei. O que não soa como a sua marca, eu refaço antes de chegar até você.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/detalhe-5.jpg" alt="" loading="lazy"><div class="t"><span class="n">05 · No combo mensal</span><h3>A sua aprovação</h3><p><b>Você faz:</b> aprova o mês inteiro de uma vez, em um ambiente só seu.</p><p><b>Você recebe:</b> todas as peças reunidas num só lugar e duas rodadas de ajuste, se precisar.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/cena-4-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">06 · No combo mensal</span><h3>Publicação e relatório</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> as peças publicadas automaticamente, nos dias agendados, nos seus canais e, no fim do mês, um relatório com o que funcionou e o que muda no seguinte.</p></div></article>
-    </div>
-    <div class="wrap">
-      <div class="principle rv">
-        <span class="bar" aria-hidden="true"></span>
-        <div>
-          <blockquote>Eu não coloco um sistema para fazer o que eu não faria na mão.</blockquote>
-          <p>Primeiro eu faço e meço. Só depois o sistema repete. É por isso que o volume cresce sem a marca virar genérica.</p>
+      <div class="tabs rv" data-tabs>
+        <div class="tab-list" role="tablist" aria-label="Os seis passos">
+          <button class="tab" role="tab" type="button" id="t1" aria-controls="p1" aria-selected="true"><span class="n">01</span><span class="tt">Diagnóstico de marca</span><span class="when">Comece aqui</span></button>
+          <button class="tab" role="tab" type="button" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><span class="n">02</span><span class="tt">Fundação</span><span class="when">Se fizer sentido</span></button>
+          <button class="tab" role="tab" type="button" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><span class="n">03</span><span class="tt">Produção</span><span class="when">No combo mensal</span></button>
+          <button class="tab" role="tab" type="button" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1"><span class="n">04</span><span class="tt">A minha leitura</span><span class="when">No combo mensal</span></button>
+          <button class="tab" role="tab" type="button" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1"><span class="n">05</span><span class="tt">A sua aprovação</span><span class="when">No combo mensal</span></button>
+          <button class="tab" role="tab" type="button" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1"><span class="n">06</span><span class="tt">Publicação e relatório</span><span class="when">No combo mensal</span></button>
         </div>
+        <div class="tab-panels">
+          <article class="panel" role="tabpanel" id="p1" aria-labelledby="t1"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>Diagnóstico de marca</h3><p><b>Você manda</b>perfil e site.</p><p><b>Você recebe</b>pesquisa curta e o meu conselho.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="pt"><h3>Fundação</h3><p><b>Você faz</b>uma entrevista.</p><p><b>Você recebe, em 15 dias úteis</b>a marca pronta, o site e 6 posts.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden><img src="cenas/cena-2-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>Produção</h3><p><b>Você faz</b>nada.</p><p><b>Você recebe</b>as peças do seu combo.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden><img src="cenas/cena-5-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>A minha leitura</h3><p><b>Você faz</b>nada.</p><p><b>Você recebe</b>só o que eu aprovei.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p5" aria-labelledby="t5" hidden><img src="cenas/detalhe-5.jpg" alt="" loading="lazy"><div class="pt"><h3>A sua aprovação</h3><p><b>Você faz</b>aprova o mês de uma vez.</p><p><b>Você recebe</b>tudo num só lugar, com 2 rodadas de ajuste.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p6" aria-labelledby="t6" hidden><img src="cenas/cena-4-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>Publicação e relatório</h3><p><b>Você faz</b>nada.</p><p><b>Você recebe</b>peças no ar e um relatório por mês.</p><button class="next" type="button">Voltar ao início ↺</button></div></article>
+        </div>
+      </div>
+    </div>
+    <div class="band rv" style="background-image:url(cenas/leia-cidade.jpg)">
+      <div class="wrap">
+        <span class="bar-s" aria-hidden="true"></span>
+        <blockquote>Eu não coloco um sistema para fazer o que eu não faria na mão.</blockquote>
       </div>
     </div>
   </section>
@@ -529,35 +684,36 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">O começo de todo cliente</span>
-        <h2>Fundação: em 15 dias úteis, a sua marca pronta para aparecer.</h2>
-        <p>É a etapa que eu não pulo: sem ela, conteúdo vira peça solta. Você sai com seis entregas e com a primeira semana de posts já feita.</p>
+        <h2>Fundação: em 15 dias úteis, a sua <em>marca pronta.</em></h2>
       </div>
       <div class="fd">
-        <ol class="fd-list rv">
-          <li><span class="fd-n">01</span><div><h3>Manual da marca</h3><p>Quem você é, para quem fala, como fala e o que nunca diz. Um documento que qualquer pessoa da sua equipe consegue seguir.</p></div></li>
-          <li><span class="fd-n">02</span><div><h3>Logo e kit de arquivos</h3><p>Logo nova ou revisão da atual, com versões para perfil, site e impressão.</p></div></li>
-          <li><span class="fd-n">03</span><div><h3>Pesquisa de mercado</h3><p>Um relatório sobre o que os seus concorrentes fazem, o que eles não fazem, e o espaço que sobra para você.</p></div></li>
-          <li><span class="fd-n">04</span><div><h3>A sua voz registrada</h3><p>Um documento com o seu jeito de falar, para os textos soarem como você, e não como uma máquina escrevendo por você.</p></div></li>
-          <li><span class="fd-n">05</span><div><h3>Os próximos 3 meses planejados</h3><p>Os temas de cada semana, em ordem, ligados ao que você vende.</p></div></li>
-          <li><span class="fd-n">06</span><div><h3>Site simples, no seu domínio</h3><p>Uma página com a sua apresentação, os seus serviços e o contato. O domínio fica no seu nome, e é você quem o paga e o controla: o endereço é seu, e nunca meu.</p></div></li>
-        </ol>
+        <div class="tiles rv">
+          <div class="tile"><span class="n">01</span><h3>Manual da marca</h3><p>Quem você é e o que nunca diz.</p></div>
+          <div class="tile"><span class="n">02</span><h3>Logo e kit</h3><p>Versões para perfil, site e impressão.</p></div>
+          <div class="tile"><span class="n">03</span><h3>Pesquisa de mercado</h3><p>O espaço que sobra para você.</p></div>
+          <div class="tile"><span class="n">04</span><h3>Voz registrada</h3><p>Textos que soam como você.</p></div>
+          <div class="tile"><span class="n">05</span><h3>3 meses planejados</h3><p>Os temas, semana a semana.</p></div>
+          <div class="tile"><span class="n">06</span><h3>Site no seu domínio</h3><p>O endereço é seu, nunca meu.</p></div>
+        </div>
         <aside class="fd-card rv">
           <div class="top"><span class="label">A base · pagamento único</span><span class="exp" style="color:var(--amber-light)" aria-hidden="true">a<sup>0</sup></span></div>
           <div class="fd-bonus">
             <span class="label" style="color:var(--amber-light)">Incluso</span>
-            <p><strong>6 posts prontos</strong> para a sua primeira semana, já com a marca nova. Você vê o sistema funcionando antes de decidir qualquer combo.</p>
+            <p><strong>6 posts prontos</strong> para a sua primeira semana.</p>
           </div>
           <div>
-            <span class="label">Investimento</span>
-          <div class="price-big" style="margin-top:10px">a partir de R$&nbsp;3.900</div>
+            <span class="label">Investimento de referência</span>
+            <div class="price-big" style="margin-top:10px">R$&nbsp;3.900</div>
+            <p class="stack">Identidade, site e pesquisa, à parte nesta página, partem de <strong>R$&nbsp;5.500</strong>. Aqui entram as três, mais voz, plano e 6 posts.</p>
+            <p class="price-note">O valor final fecha na conversa.</p>
           </div>
           <ul class="fd-promises">
-            <li><b>É seu.</b> Manual, logo, arquivos e site ficam com você, com ou sem combo.</li>
-            <li><b>Eu refaço.</b> Duas rodadas de ajuste no manual e na logo, até soar como a sua marca.</li>
-            <li><b>Bônus de R$&nbsp;500.</b> Contratou um combo mensal em menos de 30 dias depois da Fundação? Você ganha R$&nbsp;500 de desconto na primeira mensalidade.</li>
+            <li><b>É seu.</b> Tudo fica com você, com ou sem combo.</li>
+            <li><b>Eu refaço.</b> Duas rodadas de ajuste.</li>
+            <li><b>Bônus de R$&nbsp;500</b> na 1ª mensalidade, se fechar um combo em 30 dias.</li>
           </ul>
           <a class="btn btn-amber js-wa" href="#diagnostico" data-msg="Oi, Léia! Quero a Fundação para a minha marca.">Quero a Fundação</a>
-          <p class="label cap">Abro até duas Fundações por mês, porque cada uma passa inteira por mim.</p>
+          <p class="label cap">Até duas Fundações por mês: cada uma passa inteira por mim.</p>
         </aside>
       </div>
     </div>
@@ -567,57 +723,63 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Combos mensais</span>
-        <h2>Escolha até onde eu cuido.</h2>
-        <p>Cada combo inclui o anterior. O escopo é fechado e você aprova o mês inteiro de uma vez, em um ambiente só seu. O contrato mínimo é de três meses: conteúdo e SEO não mostram resultado em trinta dias, e eu prefiro dizer isso antes.</p>
+        <h2>Escolha até onde <em>eu cuido.</em></h2>
+        <p>Cada combo inclui os de baixo. Escopo fechado, contrato mínimo de 3 meses: conteúdo e SEO não dão resultado em 30 dias, e eu prefiro dizer isso antes.</p>
+      </div>
+      <div class="rv">
+        <article class="combo anchor">
+          <span class="tag">A direção inteira</span>
+          <div class="a-head">
+            <span class="exp" style="color:var(--violet)" aria-hidden="true">a<sup>3+</sup></span>
+            <h3>Empresa inteira</h3>
+            <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;7.500<small>mais a verba</small></div></div>
+            <p class="for">O departamento de marketing completo.</p>
+          </div>
+          <ul><li>Tudo do Crescimento</li><li>Cortes semanais das suas gravações</li><li>Roteiro de vídeo longo por mês</li><li>Filme de marca por semestre</li><li>Site mantido e atualizado</li><li>Revisão trimestral de estratégia</li></ul>
+          <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Empresa inteira.">Quero o Empresa inteira</a>
+        </article>
       </div>
       <div class="combos rv">
         <article class="combo">
           <span class="exp" style="color:var(--amber-light)" aria-hidden="true">a<sup>1</sup></span>
           <h3>Presença</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;1.800<small>por mês</small></div></div>
-          <p class="for">Para quem ainda não aparece com constância.</p>
-          <ul><li>Site novo, no seu domínio, pronto para receber o blog</li><li>12 posts de feed ou carrossel</li><li>4 reels curtos</li><li>Stories três vezes por semana</li><li>Legenda para cada canal</li><li>Você aprova tudo em um ambiente só seu</li><li>Publicação automática nos dias agendados</li><li>Relatório mensal: o que funcionou e o que muda</li></ul>
+          <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;1.800<small>escopo fechado</small></div></div>
+          <p class="for">Para aparecer com constância.</p>
+          <ul><li>Site novo no seu domínio</li><li>12 posts de feed ou carrossel</li><li>4 reels curtos</li><li>Stories 3 vezes por semana</li><li>Publicação automática</li><li>Relatório mensal</li></ul>
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Presença.">Quero o Presença</a>
         </article>
         <article class="combo">
           <span class="exp" style="color:var(--ember)" aria-hidden="true">a<sup>2</sup></span>
           <h3>Autoridade</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;2.900<small>por mês</small></div></div>
-          <p class="for">Para quem vende conhecimento e precisa ser encontrado.</p>
-          <ul><li>Tudo do Presença</li><li>4 artigos de blog com SEO, publicados no seu site</li><li>Newsletter mensal</li><li>Carrosséis derivados dos artigos</li></ul>
+          <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;2.900<small>escopo fechado</small></div></div>
+          <p class="for">Para ser encontrado.</p>
+          <ul><li>Tudo do Presença</li><li>4 artigos de blog com SEO</li><li>Newsletter mensal</li><li>Carrosséis dos artigos</li></ul>
           <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Autoridade.">Quero o Autoridade</a>
         </article>
         <article class="combo featured">
           <span class="tag">Ao cubo · recomendado</span>
           <span class="exp spec-text" aria-hidden="true">a<sup>3</sup></span>
           <h3>Crescimento</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;4.500<small>por mês, mais a verba</small></div></div>
-          <p class="for">Para quem já tem oferta e quer vender mais.</p>
-          <ul><li>Tudo do Autoridade</li><li>Criativos de anúncio para Meta, com variações</li><li>Montagem e acompanhamento das campanhas</li><li>Uma landing page por trimestre</li><li>Texto de oferta e sequência de e-mail</li></ul>
+          <div><span class="from">Investimento mensal</span><div class="price">R$&nbsp;4.500<small>mais a verba</small></div></div>
+          <p class="for">Para vender mais.</p>
+          <ul><li>Tudo do Autoridade</li><li>Anúncios para Meta, com variações</li><li>Campanhas montadas e acompanhadas</li><li>Landing page por trimestre</li><li>Oferta e sequência de e-mail</li></ul>
           <a class="btn btn-spec js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Crescimento.">Quero o Crescimento</a>
         </article>
-        <article class="combo">
-          <span class="exp" style="color:var(--violet)" aria-hidden="true">a<sup>3+</sup></span>
-          <h3>Empresa inteira</h3>
-          <div><span class="from">a partir de</span><div class="price">R$&nbsp;7.500<small>por mês, mais a verba</small></div></div>
-          <p class="for">O departamento de marketing completo.</p>
-          <ul><li>Tudo do Crescimento</li><li>Cortes semanais das suas gravações</li><li>Roteiro de vídeo longo por mês</li><li>Um filme de marca por semestre</li><li>Site mantido e atualizado</li><li>Revisão de estratégia a cada trimestre</li></ul>
-          <a class="btn btn-ghost js-wa" href="#diagnostico" data-msg="Oi, Léia! Tenho interesse no combo Empresa inteira.">Quero o Empresa inteira</a>
-        </article>
       </div>
-      <p class="fine">Todo combo começa pela Fundação. A verba de anúncio você paga direto à plataforma, na sua conta. Eu prometo entrega e método. Número de seguidores ou de vendas depende de muita coisa que não está na minha mão, e eu não prometo o que não controlo.</p>
+      <p class="fine">Todo combo começa pela Fundação. Valores de referência: o final fecha na conversa. A verba de anúncio você paga direto à plataforma. Eu prometo entrega e método, não número de seguidores ou de vendas.</p>
 
       <div class="extras-head rv">
         <span class="label slate-line">Sem contrato mensal</span>
-        <h3 style="font-size:30px;text-transform:uppercase">Projetos avulsos</h3>
+        <h3 style="font-size:34px">Projetos <em style="color:var(--amber)">avulsos</em></h3>
+        
       </div>
       <div class="extras rv">
         <div class="extra"><span><b>Identidade visual</b><span class="d">Manual, logo e kit</span></span><span class="p">R$&nbsp;2.500+</span></div>
         <div class="extra"><span><b>Site ou landing page</b><span class="d">Site ou página de campanha</span></span><span class="p">R$&nbsp;1.800+</span></div>
-        <div class="extra"><span><b>Pesquisa de mercado</b><span class="d">Relatório de concorrentes, público e oportunidades</span></span><span class="p">R$&nbsp;1.200+</span></div>
+        <div class="extra"><span><b>Pesquisa de mercado</b><span class="d">Concorrentes, público, oportunidades</span></span><span class="p">R$&nbsp;1.200+</span></div>
         <div class="extra"><span><b>Filme de marca</b><span class="d">Manifesto ou institucional</span></span><span class="p">R$&nbsp;3.500+</span></div>
-        <div class="extra"><span><b>Apresentação comercial ou investimento</b><span class="d">Deck comercial ou de investimento</span></span><span class="p">R$&nbsp;900+</span></div>
-        <div class="extra"><span><b>Assinatura sonora</b><span class="d">Som da marca, composto e com licença escrita</span></span><span class="p">R$&nbsp;1.200+</span></div>
+        <div class="extra"><span><b>Apresentação</b><span class="d">Deck comercial ou de investimento</span></span><span class="p">R$&nbsp;900+</span></div>
+        <div class="extra"><span><b>Assinatura sonora</b><span class="d">Som da marca, com licença</span></span><span class="p">R$&nbsp;1.200+</span></div>
       </div>
     </div>
   </section>
@@ -632,12 +794,12 @@
           <cite class="label">Léia Ribeiro · direção criativa</cite>
         </div>
         <div class="bio rv">
-          <p>Eu sou a <strong>Léia Ribeiro</strong>. Programei por seis anos antes de dirigir criação. Hoje eu opero um sistema de agentes que faz o trabalho de uma equipe, e fico com a parte que nenhum sistema faz: decidir o que a sua marca deve dizer, e o que ela nunca diria.</p>
-          <p>O meu método tem começo, meio e fim, nessa ordem: <strong>diagnóstico, arquitetura, execução.</strong></p>
-          <p>Também criei dois mundos musicais do zero, com som, imagem, letra e regra de conteúdo próprios. O som deste site é de um deles.</p>
+          <p>Eu sou a <strong>Léia Ribeiro</strong>. Programei por seis anos antes de dirigir criação. Hoje opero um sistema de agentes que faz o trabalho de uma equipe, e fico com o que nenhum sistema faz: decidir o que a sua marca diz, e o que ela nunca diria.</p>
+          <p>O meu método: <strong>diagnóstico, arquitetura, execução.</strong></p>
+          <p>Também criei dois mundos musicais do zero. O som deste site é de um deles.</p>
           <div class="works">
-            <a class="work" href="https://www.instagram.com/auryalya/" target="_blank" rel="noopener"><span class="label">Obra da casa</span><span class="t">Aurya Lya</span><span>Um multiverso sonoro, com som e regras próprias em cada álbum.</span></a>
-            <a class="work" href="https://www.instagram.com/zayrelanay/" target="_blank" rel="noopener"><span class="label">Obra da casa</span><span class="t">Zayre Lanay</span><span>Dark rock e trip-hop. A arquiteta da intuição.</span></a>
+            <a class="work" href="https://www.instagram.com/auryalya/" target="_blank" rel="noopener"><span class="label">Obra da casa</span><span class="t">Aurya Lya</span><span>Um multiverso sonoro.</span></a>
+            <a class="work" href="https://www.instagram.com/zayrelanay/" target="_blank" rel="noopener"><span class="label">Obra da casa</span><span class="t">Zayre Lanay</span><span>Dark rock e trip-hop.</span></a>
           </div>
         </div>
       </div>
@@ -649,18 +811,19 @@
     <div class="wrap diag">
       <div class="rv">
         <span class="label slate-line">Comece por aqui</span>
-        <h2>Diagnóstico de marca.</h2>
-        <p style="margin:0 0 28px;max-width:56ch"><strong>R$&nbsp;149</strong>. Me manda o seu perfil e o seu site pelo WhatsApp. Em poucos dias você recebe:</p>
+        <h2>Diagnóstico <em>de marca.</em></h2>
+        <p style="margin:0 0 28px;max-width:50ch">Me manda o seu perfil e o seu site. Em poucos dias você recebe:</p>
         <ol>
-          <li><span><b style="color:var(--cream);font-weight:500">Uma pesquisa curta:</b> o que os seus concorrentes fazem e onde a sua marca pode se diferenciar</span></li>
-          <li><span><b style="color:var(--cream);font-weight:500">O meu conselho:</b> o que eu faria primeiro, e qual combo faz sentido para você, ou se nenhum faz agora</span></li>
+          <li><span><b style="color:var(--cream);font-weight:500">Uma pesquisa curta</b> sobre os seus concorrentes</span></li>
+          <li><span><b style="color:var(--cream);font-weight:500">O meu conselho:</b> o que fazer primeiro, ou se nada faz sentido agora</span></li>
         </ol>
-        <p style="margin:28px 0 0"><a class="btn btn-ghost" href="diagnostico-exemplo" target="_blank" rel="noopener">Ver um exemplo: o diagnóstico do próprio ACUBO</a></p>
+        <p style="margin:28px 0 0"><a class="btn btn-ghost" href="diagnostico-exemplo" target="_blank" rel="noopener">Ver um exemplo</a></p>
       </div>
       <div class="box rv">
         <span class="label">WhatsApp</span>
         <p>Uma conversa comigo, sem formulário.</p>
-        <a class="btn btn-spec js-wa" href="https://www.instagram.com/acubo.studio/" data-msg="Oi, Léia! Quero o diagnóstico de marca (R$ 149). Meu perfil é: ">Pedir o diagnóstico</a>
+        <p style="font-family:var(--body);font-weight:300;text-transform:none;font-size:16.5px;line-height:1.5;color:var(--parchment)">O investimento a gente combina antes de eu começar.</p>
+        <a class="btn btn-spec js-wa" href="https://www.instagram.com/acubo.studio/" data-msg="Oi, Léia! Quero o diagnóstico de marca. Meu perfil é: ">Pedir o diagnóstico</a>
       </div>
     </div>
   </section>
@@ -669,15 +832,17 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Perguntas</span>
-        <h2>Antes de conversar.</h2>
+        <h2>Antes de <em>conversar.</em></h2>
       </div>
       <div class="faq rv">
-        <details><summary>O conteúdo é feito com inteligência artificial?</summary><p>Sim. A produção usa um sistema de agentes de IA, e é isso que entrega o volume de uma equipe. A direção e a revisão são minhas: nenhuma peça chega até você sem eu ter lido e aprovado.</p></details>
-        <details><summary>Preciso fazer contrato longo?</summary><p>Os combos mensais têm mínimo de três meses, porque conteúdo e SEO precisam desse tempo para mostrar resultado. Depois disso, é mês a mês. O diagnóstico, a Fundação e os projetos avulsos são pagamento único.</p></details>
-        <details><summary>A verba de anúncio está incluída?</summary><p>Não. Você paga a verba direto ao Meta ou ao Google, na sua conta. O combo cobre a criação dos anúncios, a montagem e o acompanhamento das campanhas.</p></details>
-        <details><summary>O site e o domínio ficam no meu nome?</summary><p>O domínio fica no seu nome, e é você quem o paga e o controla. Eu configuro o site nele, e o endereço nunca é meu.</p></details>
-        <details><summary>Quanto do meu tempo isso vai tomar?</summary><p>Na Fundação, uma entrevista e algumas respostas. Depois, uma rodada de aprovação por mês, em um ambiente só seu, com todas as peças do período juntas, e duas rodadas de ajuste se precisar. A publicação é automática, nos dias agendados.</p></details>
-        <details><summary>Você atende fora de Manaus?</summary><p>Sim. Eu trabalho de forma remota, e a gente conversa pelo WhatsApp e por chamada de vídeo.</p></details>
+        <details><summary>Quanto custa?</summary><p>Os valores desta página são referência, e o final fecha na conversa. O diagnóstico eu combino antes de começar.</p></details>
+        <details><summary>O conteúdo é feito com IA?</summary><p>Sim. O sistema de agentes dá o volume de uma equipe, e nenhuma peça chega até você sem eu ter lido.</p></details>
+        <details><summary>Qual a diferença para uma agência?</summary><p>Quem entende a sua marca é quem lê cada peça: eu. O sistema dá o volume.</p></details>
+        <details><summary>Preciso de contrato longo?</summary><p>Os combos têm mínimo de 3 meses, depois é mês a mês. Diagnóstico, Fundação e avulsos são pagamento único.</p></details>
+        <details><summary>A verba de anúncio está incluída?</summary><p>Não. Você paga direto ao Meta ou ao Google. O combo cobre criação, montagem e acompanhamento.</p></details>
+        <details><summary>O domínio fica no meu nome?</summary><p>Sim. Você paga e controla. O endereço nunca é meu.</p></details>
+        <details><summary>Quanto do meu tempo isso toma?</summary><p>Na Fundação, uma entrevista. Depois, uma aprovação por mês, com todas as peças juntas.</p></details>
+        <details><summary>Você atende fora de Manaus?</summary><p>Sim. Tudo remoto, por WhatsApp e vídeo.</p></details>
       </div>
     </div>
   </section>
@@ -696,7 +861,6 @@
       <li><span>Instagram</span><span><a href="https://www.instagram.com/acubo.studio/" target="_blank" rel="noopener">@acubo.studio</a></span></li>
     </ul>
     <div class="lines">
-      <p>Mais que projetos, realidades em construção.</p>
       <p>Velocidade de sistema. Curadoria de um.</p>
       <p>© 2026 ACUBO.</p>
     </div>
@@ -735,9 +899,10 @@
   };
   onScroll(); addEventListener('scroll', onScroll, { passive: true });
 
-  // Abertura: três cenas em sequência, com fusão.
-  (function heroReel() {
-    const vids = [...document.querySelectorAll('.hero .bg video')];
+  // Cenas em sequência, com fusão.
+  (function seqReel() {
+    const vids = [...document.querySelectorAll('.seq-bg video')];
+    if (vids.length < 2) return;
     if (reduce) { vids[0].pause(); return; }
     let i = 0;
     setInterval(() => {
@@ -800,6 +965,25 @@
   })();
 
   // Seis passos: setas e arrastar com o mouse (no celular continua o deslizar nativo).
+  // Como funciona: abas, uma de cada vez (setas do teclado e botão "próximo passo").
+  (function tabs() {
+    const root = document.querySelector('[data-tabs]'); if (!root) return;
+    const tabs = [...root.querySelectorAll('.tab')], panels = [...root.querySelectorAll('.panel')];
+    const open = (i, focus) => {
+      tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach((p, k) => { p.hidden = k !== i; });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => open(i));
+      t.addEventListener('keydown', (e) => {
+        const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (d) { e.preventDefault(); open((i + d + tabs.length) % tabs.length, true); }
+      });
+    });
+    panels.forEach((p, i) => p.querySelector('.next').addEventListener('click', () => open((i + 1) % tabs.length)));
+  })();
+
   (function cards() {
     const c = document.querySelector('.cards'); if (!c) return;
     const btns = [...document.querySelectorAll('.cn')];
