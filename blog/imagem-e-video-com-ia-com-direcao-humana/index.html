@@ -23,6 +23,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Imagem e vídeo com IA: onde eu entro no processo","description":"Como o ACUBO. faz imagem e vídeo com agentes de IA: uma cadeia de papéis, uma checagem visual contra o estilo da marca e a minha direção no meio, não só no fim.","datePublished":"2026-10-12","dateModified":"2026-10-12","mainEntityOfPage":"https://acubostudio.com/blog/imagem-e-video-com-ia-com-direcao-humana/","author":{"@type":"Person","name":"Léia Ribeiro"},"publisher":{"@type":"Organization","name":"ACUBO.","url":"https://acubostudio.com"},"image":"https://acubostudio.com/blog/imagem-e-video-com-ia-com-direcao-humana/img/detalhe-5.jpg"}</script>
 <style>
+  @font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; font-display: swap; src: url(/assets/fonts/fraunces-latin-600-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Fraunces"; font-weight: 600; font-style: italic; font-display: swap; src: url(/assets/fonts/fraunces-latin-600-italic.woff2) format("woff2"); }
   :root {
     color-scheme: dark;
     --black: #050403; --espresso: #0A0805; --surface: #110C08; --walnut: #1C1510;
@@ -36,7 +38,7 @@
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
-  body { margin: 0; overflow-x: hidden; background: var(--black); color: var(--parchment); font-family: var(--body); font-weight: 300; font-size: 18px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; overflow-x: hidden; background-color: var(--espresso); background-image: linear-gradient(rgba(245,240,232,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(245,240,232,.035) 1px, transparent 1px); background-size: 120px 120px; color: var(--parchment); font-family: var(--body); font-weight: 300; font-size: 18px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
   img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   :focus-visible { outline: 2px solid var(--amber-light); outline-offset: 4px; }
@@ -65,7 +67,6 @@
   footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 40px; align-items: center; justify-content: space-between; }
   footer p { margin: 0; font-size: 14px; color: var(--muted); }
   footer a { color: var(--parchment); }
-
   .cover { position: relative; margin-bottom: 8px; overflow: hidden; }
   .cover .hero { position: absolute; inset: 0; margin: 0; border: 0; }
   .cover .hero img { display: block; width: 100%; height: 100%; max-height: none; object-fit: cover; }
@@ -75,7 +76,7 @@
   .cover:has(.hero) .post-head h1 { text-shadow: 0 2px 24px rgba(10,8,5,.55); }
   .cover:not(:has(.hero)) .cover-text { padding-top: clamp(96px, 14vw, 150px); }
   .post-head { padding-block: 0; max-width: 720px; margin-inline: auto; position: relative; }
-  .post-head h1 { font-family: var(--display); font-weight: 800; text-transform: uppercase; color: var(--cream); font-size: clamp(22px, 6.4vw, 52px); line-height: 1.04; margin: 18px 0 22px; text-wrap: balance; overflow-wrap: break-word; hyphens: manual; }
+  .post-head h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; letter-spacing: -.02em; color: var(--cream); font-size: clamp(22px, 6.4vw, 52px); line-height: 1.04; margin: 18px 0 22px; text-wrap: balance; overflow-wrap: break-word; hyphens: manual; }
   @media (min-width: 900px) { .post-head h1 { font-size: clamp(40px, 4.2vw, 56px); } }
   .post-head .lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--parchment); margin: 0; max-width: 64ch; }
   .post-head .rule { height: 2px; width: 120px; background: var(--spec); margin-top: 34px; }
@@ -85,8 +86,8 @@
   .post-body > :is(img, figure, .article-image) + :not(h2) { margin-top: 2em; }
   .post-body > :is(img, figure, .article-image) + h2 { position: relative; z-index: 1; margin-top: calc(-1 * clamp(190px, 29vh, 290px)); margin-bottom: 1em; font-size: clamp(26px, 3.6vw, 40px); text-shadow: 0 2px 24px rgba(10,8,5,.6); }
   .post-body > * { margin-block: 0 1.15em; }
-  .post-body h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; color: var(--cream); font-size: clamp(22px, 3vw, 30px); line-height: 1.1; margin-top: 2.2em; }
-  .post-body h3 { font-family: var(--display); font-weight: 700; color: var(--cream); font-size: 20px; line-height: 1.25; margin-top: 1.8em; }
+  .post-body h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; letter-spacing: -.02em; color: var(--cream); font-size: clamp(22px, 3vw, 30px); line-height: 1.1; margin-top: 2.2em; }
+  .post-body h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; color: var(--cream); font-size: 20px; line-height: 1.25; margin-top: 1.8em; }
   .post-body a { color: var(--amber-light); text-underline-offset: 3px; }
   .post-body ul, .post-body ol { padding-left: 1.2em; }
   .post-body li { margin-bottom: .45em; }
@@ -105,7 +106,7 @@
   .post-body details { border-bottom: 1px solid var(--line); padding-block: 12px; }
   .post-body summary { color: var(--cream); font-weight: 400; cursor: pointer; }
   .fecho { max-width: 720px; margin-inline: auto; margin-top: 64px; border: 1px solid rgba(232,193,122,.35); background: var(--surface); padding: clamp(24px, 4vw, 40px); }
-  .fecho h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; color: var(--cream); font-size: clamp(22px, 3vw, 28px); line-height: 1.1; margin: 10px 0 12px; }
+  .fecho h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; letter-spacing: -.02em; color: var(--cream); font-size: clamp(22px, 3vw, 28px); line-height: 1.1; margin: 10px 0 12px; }
   .fecho p { margin: 0 0 22px; }
   .voltar { display: block; max-width: 720px; margin: 40px auto 0; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
   .voltar:hover { color: var(--amber-light); }
