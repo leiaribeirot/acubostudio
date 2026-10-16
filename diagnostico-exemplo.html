@@ -12,12 +12,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap">
 <style>
+  @font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; font-display: swap; src: url(assets/fonts/fraunces-latin-600-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Fraunces"; font-weight: 600; font-style: italic; font-display: swap; src: url(assets/fonts/fraunces-latin-600-italic.woff2) format("woff2"); }
+  h1 em, h2 em { font-style: italic; color: var(--amber); }
   :root { color-scheme: dark; --black: #050403; --espresso: #0A0805; --surface: #110C08; --card: #1C1510; --amber: #C9913A; --amber-light: #E8C17A; --copper: #A0633C; --cream: #F5F0E8; --text: #D9CBB4; --muted: #8A7A68; --line: #2A1F16;
     --spec: linear-gradient(90deg, #E8C17A 0%, #E2573B 32%, #C2186A 62%, #7B2FA0 84%, #4B2A8C 100%);
     --display: "Syne", "Arial Black", system-ui, sans-serif; --body: "Outfit", system-ui, sans-serif; --mono: "Space Mono", ui-monospace, Menlo, monospace; }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 76px; }
-  body { margin: 0; background: var(--black); color: var(--text); font-family: var(--body); font-weight: 300; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background-color: var(--espresso); background-image: linear-gradient(rgba(245,240,232,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(245,240,232,.035) 1px, transparent 1px); background-size: 120px 120px; color: var(--text); font-family: var(--body); font-weight: 300; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
   a { color: var(--amber-light); }
   p { margin: 0 0 14px; }
   .wrap { width: min(100% - 32px, 1000px); margin-inline: auto; }
@@ -31,10 +34,10 @@
   nav a:hover { opacity: 1; color: var(--amber-light); }
   @media (max-width: 760px) { nav a.sec { display: none; } }
 
-  h1, h2, h3 { font-family: var(--display); font-weight: 800; color: var(--cream); line-height: 1.05; margin: 0; }
-  h1 { text-transform: uppercase; font-size: clamp(24px, 5.2vw, 56px); margin: 18px 0 20px; overflow-wrap: break-word; }
-  h2 { text-transform: uppercase; font-size: clamp(20px, 3.2vw, 34px); margin: 8px 0 18px; overflow-wrap: break-word; }
-  h3 { font-weight: 700; font-size: 18px; margin: 0 0 6px; line-height: 1.2; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -.02em; color: var(--cream); line-height: 1.05; margin: 0; }
+  h1 { text-transform: none; font-size: clamp(24px, 5.2vw, 56px); margin: 18px 0 20px; overflow-wrap: break-word; }
+  h2 { text-transform: none; font-size: clamp(20px, 3.2vw, 34px); margin: 8px 0 18px; overflow-wrap: break-word; }
+  h3 { font-weight: 600; font-size: 21px; margin: 0 0 6px; line-height: 1.2; }
 
   .cover { position: relative; padding: 70px 0 56px; overflow: hidden; }
   .cover::before { content: ""; position: absolute; inset: 0; background: url("cenas/abertura-poster.jpg") center 30% / cover; opacity: .22; }
@@ -44,7 +47,7 @@
   .lead { font-size: 20px; max-width: 62ch; color: var(--text); }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 34px; }
   .stat { background: rgba(28,21,16,.75); border: 1px solid var(--line); padding: 18px 16px; }
-  .stat b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(26px, 4vw, 40px); color: var(--cream); line-height: 1; }
+  .stat b { display: block; font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(26px, 4vw, 40px); color: var(--cream); line-height: 1; }
   .stat span { display: block; margin-top: 8px; font-size: 14px; line-height: 1.35; }
   @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
 
@@ -74,7 +77,7 @@
   .st.ligar { color: var(--cream); border-color: var(--muted); }
 
   .mk { padding: 22px 0; border-top: 1px solid var(--line); }
-  .mk .big { font-family: var(--display); font-weight: 800; font-size: clamp(22px, 3.4vw, 34px); color: var(--cream); line-height: 1.15; margin: 4px 0 8px; }
+  .mk .big { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(22px, 3.4vw, 34px); color: var(--cream); line-height: 1.15; margin: 4px 0 8px; }
   .mk .big .hl { color: var(--amber-light); }
   .chip { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
   .chip b { color: var(--amber-light); font-weight: 400; }
@@ -145,7 +148,7 @@
   <div class="cover">
     <div class="wrap">
       <span class="label tag">Exemplo · diagnóstico de marca · 09/10/2026</span>
-      <h1>ACUBO.: matéria-prima de agência, alma de estúdio.</h1>
+      <h1>ACUBO.: matéria-prima de agência, <em>alma de estúdio.</em></h1>
       <p class="lead">Este é o diagnóstico do meu próprio estúdio. Mostra como o seu chega: uma pesquisa de mercado, uma leitura da marca, o potencial e um conselho. Tudo com fonte, e o que eu não consegui conferir vem marcado.</p>
       <div class="stats" role="list" aria-label="O sistema por trás do ACUBO, medido hoje">
         <div class="stat" role="listitem"><b>34</b><span>ateliers no Arcadia, o sistema que eu opero</span></div>
@@ -348,7 +351,7 @@
   <section class="end" id="seu" aria-labelledby="t-seu">
     <div class="wrap">
       <span class="label">O seu</span>
-      <h2 id="t-seu">Quer o diagnóstico da sua marca?</h2>
+      <h2 id="t-seu">Quer o diagnóstico <em>da sua marca?</em></h2>
       <p>Me manda o seu perfil e o seu site pelo WhatsApp. Você recebe uma pesquisa e um conselho. O investimento a gente combina na conversa, antes de eu começar.</p>
       <a class="btn js-wa" href="https://www.instagram.com/acubo.studio/" data-msg="Oi, Léia! Vi o exemplo e quero o diagnóstico de marca. Meu perfil é: ">Pedir o diagnóstico</a>
     </div>

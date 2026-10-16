@@ -450,10 +450,14 @@
   h3 { letter-spacing: -.01em; }
   .combo h3 { text-transform: none; letter-spacing: -.01em; font-size: 26px; }
   .work .t { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 22px; }
-  .band { background-position: 50% 15%; }
+  .band { background: var(--espresso); padding-block: clamp(56px, 8vw, 96px); }
+  .band::before { display: none; }
+  .band-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .band-foto { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 18%; display: block; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  .band-cite { margin: 26px 0 0; }
+  @media (max-width: 900px) { .band-grid { grid-template-columns: 1fr; } .band-foto { max-width: 360px; } }
   .vframe .vsound { color: #F5F0E8; border-color: rgba(245,240,232,.4); background: rgba(5,4,3,.55); }
   .scene:not(.dark):not(.invite) .cubed .vframe { box-shadow: 0 24px 50px rgba(10,8,5,.22); }
-  .band::before { background: linear-gradient(90deg, rgba(5,4,3,.92) 15%, rgba(5,4,3,.35)); }
   .band blockquote { letter-spacing: -.02em; }
 
   /* como funciona: abas, uma de cada vez */
@@ -672,10 +676,14 @@
         </div>
       </div>
     </div>
-    <div class="band rv" style="background-image:url(cenas/leia-cidade.jpg)">
-      <div class="wrap">
-        <span class="bar-s" aria-hidden="true"></span>
-        <blockquote>Eu não coloco um sistema para fazer o que eu não faria na mão.</blockquote>
+    <div class="band rv">
+      <div class="wrap band-grid">
+        <div>
+          <span class="bar-s" aria-hidden="true"></span>
+          <blockquote>Eu não coloco um sistema para fazer o que eu não faria na mão.</blockquote>
+          <p class="label band-cite">Léia Ribeiro · direção criativa</p>
+        </div>
+        <img class="band-foto" src="assets/leia-faixa.jpg" width="1080" height="1349" alt="Léia Ribeiro lendo uma carta à luz de vela." loading="lazy">
       </div>
     </div>
   </section>
