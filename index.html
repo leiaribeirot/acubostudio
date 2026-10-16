@@ -414,6 +414,17 @@
   .hero h1 sup.cube { font-style: normal; }
   .hero .tagline { font-family: var(--body); font-weight: 400; text-transform: none; font-size: clamp(19px, 2vw, 26px); color: var(--espresso); max-width: 30ch; line-height: 1.3; }
   .hero .sub { color: #5a4636; max-width: 46ch; }
+  /* cabe na altura da tela (notebook a 100%): tipo e respiros seguem a altura, não só a largura */
+  @media (min-width: 901px) {
+    .hero { height: 100svh; min-height: 560px; }
+    .hero .content { padding-block: clamp(16px, 3svh, 64px); }
+    .hero h1 { font-size: clamp(40px, min(7.8vw, 12.5svh), 112px); }
+    .hero .terminal { margin-bottom: clamp(12px, 2.4svh, 26px); }
+    .hero .tagline { font-size: clamp(17px, min(2vw, 3.4svh), 26px); margin: clamp(12px, 2.4svh, 26px) 0 clamp(8px, 1.6svh, 16px); }
+    .hero .sub { font-size: clamp(15px, min(1.5vw, 2.4svh), 19px); margin-bottom: clamp(16px, 3svh, 34px); }
+    .hero .btn { padding-block: clamp(12px, 1.8svh, 17px); }
+    .hero .note { margin-top: clamp(10px, 1.8svh, 20px); font-size: clamp(14px, 2svh, 15.5px); }
+  }
   .hero .note { color: #5a4636; }
   .hero .btn-ghost { color: var(--espresso); border-color: var(--espresso); background: transparent; }
   .hero .btn-ghost:hover { color: var(--copper); border-color: var(--copper); }
@@ -425,6 +436,53 @@
   .hero .mono-list a { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--amber-light); text-decoration: none; }
   .hero .mono-list a:hover { color: var(--cream); }
   .hero .meta { margin-top: 0; }
+  /* B+C no site todo: seções claras viram creme com grade (as variáveis viram só ali), as escuras seguem espresso */
+  .scene:not(.dark):not(.invite) { background-color: #F5F0E8; color: #5a4636; --cream: #0A0805; --surface: #ECE5D8; --line: rgba(10,8,5,.14); --muted: #6b5a48; --muted-ui: #6b5a48; --parchment: #5a4636; --amber-light: #8A5A22;
+    background-image: linear-gradient(rgba(10,8,5,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,8,5,.06) 1px, transparent 1px); background-size: 120px 120px; }
+  .scene.dark { background-image: linear-gradient(rgba(245,240,232,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(245,240,232,.035) 1px, transparent 1px); background-size: 120px 120px; }
+  .scene:not(.dark):not(.invite) .btn-ghost { border-color: rgba(10,8,5,.4); background: transparent; }
+  .scene:not(.dark):not(.invite) .btn-ghost:hover { border-color: var(--copper); color: var(--copper); }
+  .scene:not(.dark):not(.invite) .fd-card { --cream: #F5F0E8; --amber-light: #E8C17A; --muted-ui: #A8977F; --line: #2A1F16; --parchment: #D4C0A0; color: #D4C0A0; }
+  .scene:not(.dark):not(.invite) .work { background: var(--surface); }
+  h2, h3, summary, .lead, .formula, .band blockquote, .leia blockquote, .principle blockquote, .diag .box p, .combo .price, .price-big { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; }
+  h2 { font-size: clamp(32px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -.02em; }
+  h2 em { font-style: italic; color: var(--amber); }
+  h3 { letter-spacing: -.01em; }
+  .combo h3 { text-transform: none; letter-spacing: -.01em; font-size: 26px; }
+  .work .t { font-family: "Fraunces", Georgia, serif; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 22px; }
+  .band { background-position: 50% 15%; }
+  .vframe .vsound { color: #F5F0E8; border-color: rgba(245,240,232,.4); background: rgba(5,4,3,.55); }
+  .scene:not(.dark):not(.invite) .cubed .vframe { box-shadow: 0 24px 50px rgba(10,8,5,.22); }
+  .band::before { background: linear-gradient(90deg, rgba(5,4,3,.92) 15%, rgba(5,4,3,.35)); }
+  .band blockquote { letter-spacing: -.02em; }
+
+  /* como funciona: abas, uma de cada vez */
+  .tabs { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4vw, 56px); align-items: start; }
+  .tab-list { display: grid; border-top: 1px solid var(--line); }
+  .tab { display: grid; grid-template-columns: 48px 1fr; grid-template-areas: "n tt" "n when"; gap: 2px 12px; align-items: baseline; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 16px 10px; color: var(--cream); font: inherit; cursor: pointer; opacity: .55; transition: opacity .3s, background .3s; }
+  .tab:hover { opacity: .85; }
+  .tab[aria-selected="true"] { opacity: 1; background: rgba(201,145,58,.08); box-shadow: inset 3px 0 0 var(--amber); }
+  .tab .n { grid-area: n; font-family: var(--mono); font-size: 12px; letter-spacing: .18em; color: var(--amber); }
+  .tab .tt { grid-area: tt; font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.2; }
+  .tab .when { grid-area: when; font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-ui); }
+  .panel { background: var(--surface); border: 1px solid var(--line); animation: panelin .6s var(--ease) both; }
+  .panel[hidden] { display: none; }
+  @keyframes panelin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .panel img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+  .panel .pt { padding: clamp(20px, 2.4vw, 32px); display: grid; gap: 14px; }
+  .panel h3 { font-size: clamp(24px, 2.4vw, 32px); }
+  .panel p { margin: 0; font-size: 17px; }
+  .panel p b { display: block; font-family: var(--mono); font-weight: 700; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--amber-light); margin-bottom: 4px; }
+  .panel .next { justify-self: start; font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream); background: none; border: 1px solid var(--amber); padding: 12px 18px; cursor: pointer; }
+  .panel .next:hover { background: var(--amber); color: var(--black); }
+  @media (max-width: 900px) {
+    .tabs { grid-template-columns: 1fr; }
+    .tab-list { grid-auto-flow: column; grid-auto-columns: 1fr; border-top: 0; }
+    .tab { grid-template-columns: 1fr; grid-template-areas: "n"; justify-items: center; padding: 14px 4px; border: 1px solid var(--line); border-right-width: 0; }
+    .tab:last-child { border-right-width: 1px; }
+    .tab .tt, .tab .when { display: none; }
+  }
+
   /* faixa logo abaixo da hero: as três cenas em sequência, com fusão (eram o fundo da hero) */
   .seq { position: relative; background: var(--black); height: clamp(320px, 62svh, 640px); overflow: hidden; }
   .seq-bg { position: absolute; inset: 0; }
@@ -514,7 +572,7 @@
     <div class="wrap cubed">
       <div class="rv">
         <span class="label slate-line">O conceito</span>
-        <h2>Por que ao cubo.</h2>
+        <h2>Por que ao <em>cubo.</em></h2>
         <div class="formula" aria-label="Visão vezes execução vezes conexão igual a marca ao cubo">
           <span>Visão</span><span class="x">×</span><span>Execução</span><span class="x">×</span><span>Conexão</span>
           <span class="eq">= Marca<sup class="cube spec-text">3</sup></span>
@@ -539,7 +597,7 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">O problema</span>
-        <h2>Cinco fornecedores, cinco vozes.</h2>
+        <h2>Cinco fornecedores, <em>cinco vozes.</em></h2>
       </div>
       <div class="voices rv">
         <span class="v v1">Redes</span><span class="v v2">Tráfego</span><span class="v v3">Blog</span><span class="v v4">Identidade</span><span class="v v5">Site</span>
@@ -554,13 +612,13 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Cenas</span>
-        <h2>Imagem que parece dirigida, e não gerada.</h2>
+        <h2>Imagem que parece <em>dirigida</em>, e não gerada.</h2>
       </div>
       <div class="reel rv">
-        <div class="vframe big"><video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg" data-inview><source src="cenas/cena-2.mp4" type="video/mp4"></video><span class="label tag">Produto</span></div>
+        <div class="vframe big"><video muted playsinline loop preload="none" poster="cenas/cena-5-poster.jpg" data-inview><source src="cenas/cena-5.mp4" type="video/mp4"></video><span class="label tag">Joia</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-1-poster.jpg" data-inview><source src="cenas/cena-1.mp4" type="video/mp4"></video><span class="label tag">Espaço</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-4-poster.jpg" data-inview><source src="cenas/cena-4.mp4" type="video/mp4"></video><span class="label tag">Moda</span></div>
-        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-5-poster.jpg" data-inview><source src="cenas/cena-5.mp4" type="video/mp4"></video><span class="label tag">Joia</span></div>
+        <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/cena-2-poster.jpg" data-inview><source src="cenas/cena-2.mp4" type="video/mp4"></video><span class="label tag">Produto</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-5.jpg" data-inview><source src="cenas/som.mp4" type="video/mp4"></video><span class="label tag">Som</span></div>
         <div class="vframe"><video muted playsinline loop preload="none" poster="cenas/detalhe-6.jpg" data-inview><source src="cenas/marca.mp4" type="video/mp4"></video><span class="label tag">Marca</span></div>
       </div>
@@ -571,7 +629,7 @@
     <div class="wrap cubed">
       <div class="rv">
         <span class="label slate-line">Bastidores</span>
-        <h2>Quem decide sou eu.</h2>
+        <h2>Quem decide <em>sou eu.</em></h2>
         <p style="margin:0 0 24px;font-size:19px;max-width:44ch">Este vídeo foi feito com IA. As decisões são minhas.</p>
         <ul class="dims">
           <li><b>A imagem</b><span>“Nada pode parecer sexy, precisa ser profissional.”</span></li>
@@ -593,25 +651,28 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Como funciona</span>
-        <h2>Do diagnóstico à peça publicada.</h2>
+        <h2>Do diagnóstico à <em>peça publicada.</em></h2>
+      </div>
+      <div class="tabs rv" data-tabs>
+        <div class="tab-list" role="tablist" aria-label="Os seis passos">
+          <button class="tab" role="tab" type="button" id="t1" aria-controls="p1" aria-selected="true"><span class="n">01</span><span class="tt">Diagnóstico de marca</span><span class="when">Comece aqui</span></button>
+          <button class="tab" role="tab" type="button" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><span class="n">02</span><span class="tt">Fundação</span><span class="when">Se fizer sentido</span></button>
+          <button class="tab" role="tab" type="button" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><span class="n">03</span><span class="tt">Produção</span><span class="when">No combo mensal</span></button>
+          <button class="tab" role="tab" type="button" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1"><span class="n">04</span><span class="tt">A minha leitura</span><span class="when">No combo mensal</span></button>
+          <button class="tab" role="tab" type="button" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1"><span class="n">05</span><span class="tt">A sua aprovação</span><span class="when">No combo mensal</span></button>
+          <button class="tab" role="tab" type="button" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1"><span class="n">06</span><span class="tt">Publicação e relatório</span><span class="when">No combo mensal</span></button>
+        </div>
+        <div class="tab-panels">
+          <article class="panel" role="tabpanel" id="p1" aria-labelledby="t1"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>Diagnóstico de marca</h3><p><b>Você manda</b>perfil e site.</p><p><b>Você recebe</b>pesquisa curta e o meu conselho.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="pt"><h3>Fundação</h3><p><b>Você faz</b>uma entrevista.</p><p><b>Você recebe, em 15 dias úteis</b>a marca pronta, o site e 6 posts.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden><img src="cenas/cena-2-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>Produção</h3><p><b>Você faz</b>nada.</p><p><b>Você recebe</b>as peças do seu combo.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden><img src="cenas/cena-5-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>A minha leitura</h3><p><b>Você faz</b>nada.</p><p><b>Você recebe</b>só o que eu aprovei.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p5" aria-labelledby="t5" hidden><img src="cenas/detalhe-5.jpg" alt="" loading="lazy"><div class="pt"><h3>A sua aprovação</h3><p><b>Você faz</b>aprova o mês de uma vez.</p><p><b>Você recebe</b>tudo num só lugar, com 2 rodadas de ajuste.</p><button class="next" type="button">Próximo passo →</button></div></article>
+          <article class="panel" role="tabpanel" id="p6" aria-labelledby="t6" hidden><img src="cenas/cena-4-poster.jpg" alt="" loading="lazy"><div class="pt"><h3>Publicação e relatório</h3><p><b>Você faz</b>nada.</p><p><b>Você recebe</b>peças no ar e um relatório por mês.</p><button class="next" type="button">Voltar ao início ↺</button></div></article>
+        </div>
       </div>
     </div>
-    <div class="cards-head wrap">
-      <p class="label swipe">Deslize ou use as setas para ver os seis</p>
-      <div class="cards-nav" role="group" aria-label="Navegar pelos seis passos">
-        <button class="cn" type="button" data-dir="-1" aria-label="Passo anterior">←</button>
-        <button class="cn" type="button" data-dir="1" aria-label="Próximo passo">→</button>
-      </div>
-    </div>
-    <div class="cards rv" role="list" aria-label="Os seis passos">
-      <article class="card" role="listitem"><img src="cenas/cena-1-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">01 · Comece aqui</span><h3>Diagnóstico de marca</h3><p><b>Você manda:</b> perfil e site.</p><p><b>Você recebe:</b> pesquisa curta e o meu conselho.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/detalhe-6.jpg" alt="" loading="lazy"><div class="t"><span class="n">02 · Se fizer sentido</span><h3>Fundação</h3><p><b>Você faz:</b> uma entrevista.</p><p><b>Você recebe, em 15 dias úteis:</b> a marca pronta, o site e 6 posts.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/cena-2-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">03 · No combo mensal</span><h3>Produção</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> as peças do seu combo.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/cena-5-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">04 · No combo mensal</span><h3>A minha leitura</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> só o que eu aprovei.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/detalhe-5.jpg" alt="" loading="lazy"><div class="t"><span class="n">05 · No combo mensal</span><h3>A sua aprovação</h3><p><b>Você faz:</b> aprova o mês de uma vez.</p><p><b>Você recebe:</b> tudo num só lugar, com 2 rodadas de ajuste.</p></div></article>
-      <article class="card" role="listitem"><img src="cenas/cena-4-poster.jpg" alt="" loading="lazy"><div class="t"><span class="n">06 · No combo mensal</span><h3>Publicação e relatório</h3><p><b>Você faz:</b> nada.</p><p><b>Você recebe:</b> peças no ar e um relatório por mês.</p></div></article>
-    </div>
-    <div class="band rv" style="background-image:url(cenas/cena-2-poster.jpg)">
+    <div class="band rv" style="background-image:url(cenas/leia-cidade.jpg)">
       <div class="wrap">
         <span class="bar-s" aria-hidden="true"></span>
         <blockquote>Eu não coloco um sistema para fazer o que eu não faria na mão.</blockquote>
@@ -623,7 +684,7 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">O começo de todo cliente</span>
-        <h2>Fundação: em 15 dias úteis, a sua marca pronta.</h2>
+        <h2>Fundação: em 15 dias úteis, a sua <em>marca pronta.</em></h2>
       </div>
       <div class="fd">
         <div class="tiles rv">
@@ -662,7 +723,7 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Combos mensais</span>
-        <h2>Escolha até onde eu cuido.</h2>
+        <h2>Escolha até onde <em>eu cuido.</em></h2>
         <p>Cada combo inclui os de baixo. Escopo fechado, contrato mínimo de 3 meses: conteúdo e SEO não dão resultado em 30 dias, e eu prefiro dizer isso antes.</p>
       </div>
       <div class="rv">
@@ -709,7 +770,7 @@
 
       <div class="extras-head rv">
         <span class="label slate-line">Sem contrato mensal</span>
-        <h3 style="font-size:30px;text-transform:uppercase">Projetos avulsos</h3>
+        <h3 style="font-size:34px">Projetos <em style="color:var(--amber)">avulsos</em></h3>
         
       </div>
       <div class="extras rv">
@@ -750,7 +811,7 @@
     <div class="wrap diag">
       <div class="rv">
         <span class="label slate-line">Comece por aqui</span>
-        <h2>Diagnóstico de marca.</h2>
+        <h2>Diagnóstico <em>de marca.</em></h2>
         <p style="margin:0 0 28px;max-width:50ch">Me manda o seu perfil e o seu site. Em poucos dias você recebe:</p>
         <ol>
           <li><span><b style="color:var(--cream);font-weight:500">Uma pesquisa curta</b> sobre os seus concorrentes</span></li>
@@ -771,7 +832,7 @@
     <div class="wrap">
       <div class="head rv">
         <span class="label slate-line">Perguntas</span>
-        <h2>Antes de conversar.</h2>
+        <h2>Antes de <em>conversar.</em></h2>
       </div>
       <div class="faq rv">
         <details><summary>Quanto custa?</summary><p>Os valores desta página são referência, e o final fecha na conversa. O diagnóstico eu combino antes de começar.</p></details>
@@ -904,6 +965,25 @@
   })();
 
   // Seis passos: setas e arrastar com o mouse (no celular continua o deslizar nativo).
+  // Como funciona: abas, uma de cada vez (setas do teclado e botão "próximo passo").
+  (function tabs() {
+    const root = document.querySelector('[data-tabs]'); if (!root) return;
+    const tabs = [...root.querySelectorAll('.tab')], panels = [...root.querySelectorAll('.panel')];
+    const open = (i, focus) => {
+      tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach((p, k) => { p.hidden = k !== i; });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => open(i));
+      t.addEventListener('keydown', (e) => {
+        const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (d) { e.preventDefault(); open((i + d + tabs.length) % tabs.length, true); }
+      });
+    });
+    panels.forEach((p, i) => p.querySelector('.next').addEventListener('click', () => open((i + 1) % tabs.length)));
+  })();
+
   (function cards() {
     const c = document.querySelector('.cards'); if (!c) return;
     const btns = [...document.querySelectorAll('.cn')];
