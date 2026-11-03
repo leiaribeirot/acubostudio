@@ -126,6 +126,18 @@
   footer { padding: 30px 0 60px; border-top: 1px solid var(--line); }
   footer p { margin: 0; font-size: 14px; color: var(--muted); }
 </style>
+<!-- Microsoft Clarity: mapa de calor e gravação das visitas. Clique em link do WhatsApp vira o evento "whatsapp". -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z7u8hri11t");
+    document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a');
+        if (a && a.href.indexOf('wa.me/') !== -1) clarity('event', 'whatsapp');
+    });
+</script>
 </head>
 <body>
 
@@ -360,7 +372,7 @@
 </main>
 
 <footer>
-  <div class="wrap"><p>ACUBO. · Direção criativa: Léia Ribeiro · Manaus, Brasil</p></div>
+  <div class="wrap"><p>ACUBO. · Direção criativa: Léia Ribeiro · Manaus, Brasil · Este site usa o Microsoft Clarity para entender como as páginas são usadas.</p></div>
 </footer>
 
 <script>
